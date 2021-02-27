@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-elements";
-import ActivoItem from "../components/ActivoItem";
-import Title from "../components/Title";
+import ActivoItem from "./ActivoItem";
+import Title from "../../components/Title";
 
 const PortfolioScreen = () => {
   return (
