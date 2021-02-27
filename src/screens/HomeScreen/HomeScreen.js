@@ -40,6 +40,7 @@ const ScreenInicio = ({ navigation }) => {
           Estadísticas
         </Text>
       </TouchableOpacity>
+
       <CollapseItem title="inmediato" />
       <CollapseItem title="a 24hs" />
       <CollapseItem title="a 48hs" />

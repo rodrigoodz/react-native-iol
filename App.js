@@ -14,7 +14,7 @@ import BuySellScreen from "./src/screens/BuySellScreen";
 import PortfolioScreen from "./src/screens/PortfolioScreen/PortfolioScreen";
 import MarketsScreen from "./src/screens/MarketsScreen";
 import StatisticsScreen from "./src/screens/StatisticsScreen";
-import OperationsHistoryScreen from "./src/screens/OperationsHistoryScreen";
+import OperationsHistoryScreen from "./src/screens/OperationsHistoryScreen/OperationsHistoryScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { Text } from "react-native";
 

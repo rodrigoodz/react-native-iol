@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Input } from "react-native-elements";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Button } from "react-native-elements";
+import ButtonComponent from "../components/ButtonComponent";
 
 const ScreenLogin = () => {
   const [email, setEmail] = useState("");
@@ -68,12 +68,7 @@ const ScreenLogin = () => {
           value={password}
           onChangeText={(value) => setPassword(value)}
         />
-        <Button
-          title="Ingresar"
-          buttonStyle={styles.boton}
-          onPress={handleSubmit}
-          titleStyle={{ color: "rgba(255,255,255,0.8)" }}
-        />
+        <ButtonComponent handleButton={handleSubmit} title="Ingresar" />
       </View>
     </View>
   );
@@ -90,13 +85,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#686DE0",
     borderRadius: 4,
     borderWidth: 2,
-  },
-  boton: {
-    marginHorizontal: 10,
-    width: 100,
-    alignSelf: "center",
-    backgroundColor: "rgba(106,176,76,0.8)",
-    color: "red",
   },
 });
 
