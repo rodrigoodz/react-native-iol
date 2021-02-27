@@ -17,72 +17,74 @@ const ScreenLogin = () => {
   };
 
   return (
-    <View style={styles.formContainer}>
+    <>
       <Text style={styles.title} h2>
         Ingresá tus datos
       </Text>
-      <Input
-        autoCapitalize={"none"}
-        autoCorrect={false}
-        label="Usuario o email"
-        inputContainerStyle={styles.input}
-        placeholder="Ingresá tu usuario o mail"
-        leftIcon={
-          <MaterialIcons
-            name="email"
-            size={24}
-            color="rgba(255,255,255,0.5)"
-            style={{ marginLeft: 5 }}
-          />
-        }
-        rightIcon={
-          error ? (
-            <MaterialIcons name="error" size={24} color="rgba(255,0,0,.6)" />
-          ) : null
-        }
-        errorStyle={{ color: "rgba(255,0,0,.8)" }}
-        value={email}
-        onChangeText={(value) => setEmail(value)}
-      />
-      <Input
-        autoCapitalize={"none"}
-        autoCorrect={false}
-        secureTextEntry
-        label="Contraseña"
-        inputContainerStyle={styles.input}
-        placeholder="Ingresá tu contraseña"
-        leftIcon={
-          <MaterialIcons
-            name="lock"
-            size={24}
-            color="rgba(255,255,255,0.5)"
-            style={{ marginLeft: 5 }}
-          />
-        }
-        rightIcon={
-          error ? (
-            <MaterialIcons name="error" size={24} color="rgba(255,0,0,.6)" />
-          ) : null
-        }
-        value={password}
-        onChangeText={(value) => setPassword(value)}
-      />
-      <Button
-        title="Ingresar"
-        buttonStyle={styles.boton}
-        onPress={handleSubmit}
-        titleStyle={{ color: "rgba(255,255,255,0.8)" }}
-      />
-    </View>
+      <View style={styles.formContainer}>
+        <Input
+          autoCapitalize={"none"}
+          autoCorrect={false}
+          label="Usuario o email"
+          inputContainerStyle={styles.input}
+          placeholder="Ingresá tu usuario o mail"
+          leftIcon={
+            <MaterialIcons
+              name="email"
+              size={24}
+              color="rgba(255,255,255,0.5)"
+              style={{ marginLeft: 5 }}
+            />
+          }
+          rightIcon={
+            error ? (
+              <MaterialIcons name="error" size={24} color="rgba(255,0,0,.6)" />
+            ) : null
+          }
+          errorStyle={{ color: "rgba(255,0,0,.8)" }}
+          value={email}
+          onChangeText={(value) => setEmail(value)}
+        />
+        <Input
+          autoCapitalize={"none"}
+          autoCorrect={false}
+          secureTextEntry
+          label="Contraseña"
+          inputContainerStyle={styles.input}
+          placeholder="Ingresá tu contraseña"
+          leftIcon={
+            <MaterialIcons
+              name="lock"
+              size={24}
+              color="rgba(255,255,255,0.5)"
+              style={{ marginLeft: 5 }}
+            />
+          }
+          rightIcon={
+            error ? (
+              <MaterialIcons name="error" size={24} color="rgba(255,0,0,.6)" />
+            ) : null
+          }
+          value={password}
+          onChangeText={(value) => setPassword(value)}
+        />
+        <Button
+          title="Ingresar"
+          buttonStyle={styles.boton}
+          onPress={handleSubmit}
+          titleStyle={{ color: "rgba(255,255,255,0.8)" }}
+        />
+      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  formContainer: { flex: 1, justifyContent: "center" },
+  formContainer: { flex: 1, justifyContent: "center", margin: 10 },
   title: {
     color: "rgba(255,255,255,0.8)",
     alignSelf: "center",
-    marginBottom: 50,
+    marginTop: 30,
   },
   input: {
     backgroundColor: "#686DE0",
