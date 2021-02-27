@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native";
 
 import Title from "../../components/Title";
 import InfoSaldo from "./InfoSaldo";
 import CollapseItem from "../../components/CollapseItem";
+import { RefreshControl } from "react-native";
 
 const ScreenInicio = ({ navigation }) => {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
+
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <Title textTitle="Cuenta de inversión Argentina" />
       <InfoSaldo />
       <TouchableOpacity onPress={() => navigation.navigate("Estadisticas")}>
