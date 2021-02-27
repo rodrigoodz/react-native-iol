@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native";
 
 import Title from "../../components/Title";
-import InfoSaldo from "./InfoSaldo";
+import BalanceInfo from "./BalanceInfo";
 import CollapseItem from "../../components/CollapseItem";
 import { RefreshControl } from "react-native";
+import UpdateController from "./UpdateController";
 
 const ScreenInicio = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -26,7 +27,7 @@ const ScreenInicio = ({ navigation }) => {
       }
     >
       <Title textTitle="Cuenta de inversión Argentina" />
-      <InfoSaldo />
+      <BalanceInfo />
       <TouchableOpacity onPress={() => navigation.navigate("Estadisticas")}>
         <Text
           style={{
@@ -44,6 +45,7 @@ const ScreenInicio = ({ navigation }) => {
       <CollapseItem title="a 48hs" />
       <CollapseItem title="a 72hs" />
       <CollapseItem title="a +72hs" />
+      <UpdateController />
     </ScrollView>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-const ItemInfoSaldo = ({ font_size, text_info, text_amount }) => {
+const BalanceInfoItem = ({ font_size, text_info, text_amount }) => {
   return (
     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
       <Text
@@ -26,4 +26,4 @@ const ItemInfoSaldo = ({ font_size, text_info, text_amount }) => {
   );
 };
 
-export default ItemInfoSaldo;
+export default BalanceInfoItem;
