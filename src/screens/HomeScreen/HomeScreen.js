@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native";
 
 import Title from "../../components/Title";
-import InfoSaldo from "../ScreenInicio/InfoSaldo";
+import InfoSaldo from "./InfoSaldo";
 import CollapseItem from "../../components/CollapseItem";
 
 const ScreenInicio = () => {

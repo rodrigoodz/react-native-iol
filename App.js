@@ -1,14 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
-import ScreenInicio from "./src/screens/ScreenInicio/ScreenInicio";
-import ScreenLogin from "./src/screens/ScreenLogin";
+import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
+import LoginScreen from "./src/screens/LoginScreen";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      {/* <ScreenLogin /> */}
-      <ScreenInicio />
+      <LoginScreen />
+      {/* <HomeScreen /> */}
       <StatusBar style="auto" />
     </SafeAreaView>
   );
