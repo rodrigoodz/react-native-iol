@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import Title from "../components/Title";
 
 const BuySellScreen = () => {
   return (
-    <View>
-      <Text>BuySellScreen</Text>
+    <View style={{ flex: 1, padding: 10, backgroundColor: "#4834D4" }}>
+      <Title textTitle="Operar" />
     </View>
   );
 };

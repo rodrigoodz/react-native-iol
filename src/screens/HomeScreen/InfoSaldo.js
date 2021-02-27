@@ -9,17 +9,17 @@ const InfoSaldo = () => {
       <ItemInfoSaldo
         font_size={22}
         text_info="Saldo total"
-        text_amount="AR$ 959,52"
+        text_amount="AR$ 123959,52"
       />
       <ItemInfoSaldo
         font_size={14}
         text_info="Activos valorizados Pesos"
-        text_amount="AR$ 959,62"
+        text_amount="AR$ 1959,62"
       />
       <ItemInfoSaldo
         font_size={14}
         text_info="Total ganancia-perdida Pesos"
-        text_amount="AR$ -60,80"
+        text_amount="AR$ +12312,80"
       />
       <ItemInfoSaldo
         font_size={14}
