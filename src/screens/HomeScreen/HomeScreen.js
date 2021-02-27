@@ -5,12 +5,12 @@ import Title from "../../components/Title";
 import InfoSaldo from "./InfoSaldo";
 import CollapseItem from "../../components/CollapseItem";
 
-const ScreenInicio = () => {
+const ScreenInicio = ({ navigation }) => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Title textTitle="Cuenta de inversión Argentina" />
       <InfoSaldo />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("Estadisticas")}>
         <Text
           style={{
             marginLeft: 5,
@@ -34,7 +34,8 @@ const ScreenInicio = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
+    padding: 10,
+    backgroundColor: "#4834D4",
   },
 });
 

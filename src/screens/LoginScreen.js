@@ -17,7 +17,7 @@ const ScreenLogin = () => {
   };
 
   return (
-    <>
+    <View style={{ flex: 1, backgroundColor: "#4834D4" }}>
       <Text style={styles.title} h2>
         Ingresá tus datos
       </Text>
@@ -75,7 +75,7 @@ const ScreenLogin = () => {
           titleStyle={{ color: "rgba(255,255,255,0.8)" }}
         />
       </View>
-    </>
+    </View>
   );
 };
 
