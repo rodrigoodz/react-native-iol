@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import { Icon } from "react-native-elements";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
@@ -29,10 +35,11 @@ const DatePicker = ({ date, setDate, placeholder, maxDate }) => {
           <Text style={styles.datePickerPlaceholder}>{placeholder}</Text>
         ) : (
           <Text style={styles.datePickerText}>
-            {date.getDate()}/{date.getMonth()}/{date.getFullYear()}
+            {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
           </Text>
         )}
       </TouchableOpacity>
+
       {show && (
         <DateTimePicker
           testID="dateTimePicker"

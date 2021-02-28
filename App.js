@@ -17,7 +17,7 @@ import StatisticsScreen from "./src/screens/StatisticsScreen";
 import OperationsHistoryScreen from "./src/screens/OperationsHistoryScreen/OperationsHistoryScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { Text } from "react-native";
-import OperationScreen from "./src/screens/OperationScreen";
+import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();

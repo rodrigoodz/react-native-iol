@@ -7,6 +7,7 @@ const PickerComponent = ({ country, setCountry }) => {
     <View style={styles.containerPicker}>
       <Picker
         style={styles.picker}
+        itemStyle={styles.item}
         selectedValue={country}
         onValueChange={(itemValue) => setCountry(itemValue)}
       >
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
   picker: {
     color: "#30336B",
   },
+  item: { height: 44 },
 });
 
 export default PickerComponent;

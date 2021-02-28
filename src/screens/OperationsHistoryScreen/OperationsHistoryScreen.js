@@ -11,25 +11,52 @@ import OperationsItems from "./OperationsItems";
 
 const datos = [
   {
-    nro: 29351319,
-    date: new Date(),
-    tipo: "C",
-    simbolo: "GGAL",
+    numero: 29351319,
+    fechaOrden: "2020-12-17T12:07:12.147",
+    tipo: "Compra",
     estado: "terminada",
+    mercado: "BCBA",
+    simbolo: "GGAL",
+    cantidad: 3.0,
+    monto: 384.0,
+    modalidad: "precio_Limite",
+    precio: 128.0,
+    fechaOperada: "2020-12-17T12:08:23",
+    cantidadOperada: 3.0,
+    precioOperado: 128.0,
+    montoOperado: 384.0,
   },
   {
-    nro: 29351320,
-    date: new Date(),
-    tipo: "V",
-    simbolo: "GGAL",
+    numero: 28977883,
+    fechaOrden: "2020-12-02T16:53:56.763",
+    tipo: "Venta",
     estado: "cancelada",
+    mercado: "BCBA",
+    simbolo: "GGAL",
+    cantidad: 2.0,
+    monto: 266.0,
+    modalidad: "precio_Limite",
+    precio: 133.0,
+    fechaOperada: null,
+    cantidadOperada: null,
+    precioOperado: null,
+    montoOperado: null,
   },
   {
-    nro: 29351321,
-    date: new Date(),
-    tipo: "C",
+    numero: 28257187,
+    fechaOrden: "2020-11-09T11:40:04.063",
+    tipo: "Compra",
+    estado: "terminada",
+    mercado: "BCBA",
     simbolo: "GGAL",
-    estado: "pendiente",
+    cantidad: 2.0,
+    monto: 247.8,
+    modalidad: "precio_Limite",
+    precio: 123.9,
+    fechaOperada: "2020-11-09T11:48:21",
+    cantidadOperada: 2.0,
+    precioOperado: 123.9,
+    montoOperado: 247.8,
   },
 ];
 
@@ -76,9 +103,12 @@ const OperationsHistoryScreen = ({ navigation }) => {
       {datos.map((dato) => {
         return (
           <TouchableOpacity
-            onPress={() => navigation.navigate("Operacion", { nro: dato.nro })}
+            onPress={() =>
+              navigation.navigate("Operacion", { numero: dato.numero })
+            }
+            key={dato.numero}
           >
-            <OperationsItems data={dato} key={dato.nro} />
+            <OperationsItems data={dato} />
           </TouchableOpacity>
         );
       })}

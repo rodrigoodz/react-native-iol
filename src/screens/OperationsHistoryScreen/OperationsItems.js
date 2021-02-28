@@ -2,16 +2,30 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 const OperationsItems = ({ data }) => {
-  const { date, estado, nro, simbolo, tipo } = data;
+  const { estado, fechaOrden, numero, simbolo, tipo } = data;
+  // const {
+  //   cantidad,
+  //   cantidadOperada,
+  //   estado,
+  //   fechaOperada,
+  //   fechaOrden,
+  //   mercado,
+  //   modalidad,
+  //   monto,
+  //   montoOperado,
+  //   numero,
+  //   precio,
+  //   precioOperado,
+  //   simbolo,
+  //   tipo,
+  // } = data;
   return (
     <View style={styles.row}>
       <View style={styles.oddColumn}>
-        <Text style={styles.text}>{nro}</Text>
+        <Text style={styles.text}>{numero}</Text>
       </View>
       <View style={styles.evenColumn}>
-        <Text style={styles.text}>
-          {date.getDate()}/{date.getMonth()}/{date.getFullYear()}
-        </Text>
+        <Text style={styles.text}>{fechaOrden}</Text>
       </View>
       <View style={styles.oddColumn}>
         <Text style={styles.text}>{tipo}</Text>
