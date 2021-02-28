@@ -1,13 +1,39 @@
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 
 import Title from "../../components/Title";
 import SelectOperationStatus from "./SelectOperationStatus";
 import PickerComponent from "./PickerComponent";
 import DatePicker from "./DatePicker";
 import ButtonComponent from "../../components/ButtonComponent";
+import OperationsHeader from "./OperationsHeader";
+import OperationsItems from "./OperationsItems";
 
-const OperationsHistoryScreen = () => {
+const datos = [
+  {
+    nro: 29351319,
+    date: new Date(),
+    tipo: "C",
+    simbolo: "GGAL",
+    estado: "terminada",
+  },
+  {
+    nro: 29351320,
+    date: new Date(),
+    tipo: "V",
+    simbolo: "GGAL",
+    estado: "cancelada",
+  },
+  {
+    nro: 29351321,
+    date: new Date(),
+    tipo: "C",
+    simbolo: "GGAL",
+    estado: "pendiente",
+  },
+];
+
+const OperationsHistoryScreen = ({ navigation }) => {
   const [selection, setSelection] = useState("todas");
   const [country, setCountry] = useState("argentina");
   const [startDate, setStartDate] = useState(null);
@@ -46,6 +72,16 @@ const OperationsHistoryScreen = () => {
         handleButton={() => console.log("Working")}
         title="Buscar"
       />
+      <OperationsHeader />
+      {datos.map((dato) => {
+        return (
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Operacion", { nro: dato.nro })}
+          >
+            <OperationsItems data={dato} key={dato.nro} />
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };

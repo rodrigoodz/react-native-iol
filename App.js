@@ -17,6 +17,7 @@ import StatisticsScreen from "./src/screens/StatisticsScreen";
 import OperationsHistoryScreen from "./src/screens/OperationsHistoryScreen/OperationsHistoryScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { Text } from "react-native";
+import OperationScreen from "./src/screens/OperationScreen";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -32,6 +33,23 @@ const HomeNavigator = () => {
       <Stack.Screen
         name="Estadisticas"
         component={StatisticsScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const OperationNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Operaciones"
+        component={OperationsHistoryScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Operacion"
+        component={OperationScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
@@ -77,7 +95,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Inicio" component={HomeNavigator} />
       <Drawer.Screen name="Portafolio" component={PortfolioScreen} />
       <Drawer.Screen name="Operar" component={BuySellScreen} />
-      <Drawer.Screen name="Operaciones" component={OperationsHistoryScreen} />
+      <Drawer.Screen name="Operaciones" component={OperationNavigator} />
       <Drawer.Screen name="Cotizaciones" component={MarketsScreen} />
     </Drawer.Navigator>
   );
