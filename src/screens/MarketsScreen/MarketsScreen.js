@@ -1,9 +1,13 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, Text } from "react-native";
+import { ButtonGroup } from "react-native-elements";
+
 import { ScrollView } from "react-native-gesture-handler";
 import FourColumnHeader from "../../components/FourColumnHeader";
 import FourColumnItem from "../../components/FourColumnItem";
+import Selector from "../../components/Selector";
 import Title from "../../components/Title";
+import getPanelByInstrument from "../../helpers/getPanelByInstrument";
 
 const data = {
   titulos: [
@@ -471,9 +475,64 @@ const data = {
 };
 
 const MarketsScreen = () => {
+  const buttons = ["Argentina", "Estados Unidos", "Indices"];
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [instrumentSelected, setInstrumentSelected] = useState("Acciones");
+  const [allPanels, setAllPanels] = useState([]);
+  const [panelSelected, setPanelSelected] = useState("");
+
+  useEffect(() => {
+    const getPanel = getPanelByInstrument(instrumentSelected);
+    setAllPanels(getPanel);
+    return () => {};
+  }, [instrumentSelected]);
+
   return (
     <View style={{ flex: 1, padding: 10, backgroundColor: "#4834D4" }}>
       <Title textTitle="Cotizaciones" />
+      <View
+        style={{
+          backgroundColor: "rgba(255,255,255,0.5)",
+          padding: 10,
+          borderRadius: 10,
+          marginTop: 15,
+        }}
+      >
+        <ButtonGroup
+          onPress={setSelectedIndex}
+          containerStyle={{ height: 20 }}
+          selectedIndex={selectedIndex}
+          buttons={buttons}
+          containerStyle={{ height: 30 }}
+        />
+        <View style={{ flexDirection: "row" }}>
+          <View style={{ flex: 1 }}>
+            <Text>Instrumento</Text>
+            <Selector
+              options={[
+                { label: "Acciones", value: "Acciones" },
+                { label: "Bonos", value: "Bonos" },
+                { label: "Opciones", value: "Opciones" },
+                { label: "Cauciones", value: "Cauciones" },
+                { label: "Futuros", value: "Futuros" },
+                { label: "FCI", value: "FCI" },
+              ]}
+              selected={instrumentSelected}
+              setSelected={setInstrumentSelected}
+            />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text>Panel</Text>
+            <Selector
+              options={allPanels}
+              selected={panelSelected}
+              setSelected={setPanelSelected}
+            />
+          </View>
+        </View>
+      </View>
+
       <View style={styles.container}>
         <FourColumnHeader
           firstTitle={`Símbolo`}
@@ -489,6 +548,7 @@ const MarketsScreen = () => {
                 secondText={`$${e.ultimoPrecio.toFixed(2)}`}
                 thirdText={`${e.variacionPorcentual}%`}
                 fourthText={`${e.volumen} M`}
+                key={e.simbolo}
               />
             );
           })}
