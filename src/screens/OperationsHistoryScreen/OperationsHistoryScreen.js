@@ -3,11 +3,11 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 
 import Title from "../../components/Title";
 import SelectOperationStatus from "./SelectOperationStatus";
-import PickerComponent from "./PickerComponent";
 import DatePicker from "./DatePicker";
 import ButtonComponent from "../../components/ButtonComponent";
 import OperationsHeader from "./OperationsHeader";
 import OperationsItems from "./OperationsItems";
+import Selection from "../../components/Selector";
 
 const datos = [
   {
@@ -67,16 +67,20 @@ const OperationsHistoryScreen = ({ navigation }) => {
   const [endDate, setEndDate] = useState(null);
 
   // TODO cuando apriente el boton 'buscar' debo asegurarme que las fechas no esten vacias y que tampoco la fecha de inicio no sea mayor a la de fin
-
   return (
     <View style={styles.container}>
       <Title textTitle="Operaciones" />
       <View style={styles.formContainer}>
         <View style={styles.column}>
-          <PickerComponent
-            country={country}
-            setCountry={(e) => setCountry(e)}
+          <Selection
+            options={[
+              { label: "Argentina", value: "argentina" },
+              { label: "Estados Unidos", value: "estados_unidos" },
+            ]}
+            selected={country}
+            setSelected={setCountry}
           />
+
           <DatePicker
             date={startDate}
             setDate={(e) => setStartDate(e)}

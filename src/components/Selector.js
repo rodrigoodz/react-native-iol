@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-const PickerComponent = ({ country, setCountry }) => {
+const Selector = ({ options, selected, setSelected }) => {
   return (
     <View style={styles.containerPicker}>
       <Picker
         style={styles.picker}
         itemStyle={styles.item}
-        selectedValue={country}
-        onValueChange={(itemValue) => setCountry(itemValue)}
+        selectedValue={selected}
+        onValueChange={(itemValue) => setSelected(itemValue)}
       >
-        <Picker.Item label="Argentina" value="argentina" />
-        <Picker.Item label="Estados Unidos" value="estados_unidos" />
+        {options.map((option) => {
+          return (
+            <Picker.Item
+              label={option.label}
+              value={option.value}
+              key={option.value}
+            />
+          );
+        })}
       </Picker>
     </View>
   );
@@ -29,4 +36,4 @@ const styles = StyleSheet.create({
   item: { height: 44 },
 });
 
-export default PickerComponent;
+export default Selector;
