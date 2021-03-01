@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: "white",
     alignItems: "center",
+    borderRadius: 10,
+    marginBottom: 5,
   },
   text: {
     fontWeight: "bold",

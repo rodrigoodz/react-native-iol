@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: "white",
+    borderRadius: 10,
+    marginBottom: 5,
   },
   text: {
     fontWeight: "bold",
