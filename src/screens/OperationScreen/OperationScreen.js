@@ -1,5 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+import { Icon } from "react-native-elements";
+import GoBackButton from "../../components/GoBackButton";
 import Title from "../../components/Title";
 import Commisions from "./Commisions";
 import InfoOperation from "./InfoOperation";
@@ -58,7 +60,7 @@ const operation = {
   modalidad: "precio_Limite",
 };
 
-const OperationScreen = ({ route }) => {
+const OperationScreen = ({ route, navigation }) => {
   const { numero } = route.params;
 
   return (
@@ -74,10 +76,9 @@ const OperationScreen = ({ route }) => {
       />
       <TransactionStates estados={operation.estados} />
       <Commisions aranceles={operation.aranceles} />
+      <GoBackButton navigation={navigation} />
     </View>
   );
 };
 
 export default OperationScreen;
-
-const styles = StyleSheet.create({});
