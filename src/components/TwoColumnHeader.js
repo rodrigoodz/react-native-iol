@@ -1,21 +1,20 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const CommissionsHeader = () => {
+const TwoColumnHeader = ({ firstTitle, secondTitle }) => {
   return (
     <View style={styles.header}>
       <View style={{ flex: 1, alignItems: "center" }}>
-        <Text style={styles.text}>Arancel</Text>
+        <Text style={styles.text}>{firstTitle}</Text>
       </View>
       <View style={{ flex: 1, alignItems: "center" }}>
-        <Text style={styles.text}>Impuesto Neto</Text>
-      </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
-        <Text style={styles.text}>Impuesto IVA</Text>
+        <Text style={styles.text}>{secondTitle}</Text>
       </View>
     </View>
   );
 };
+
+export default TwoColumnHeader;
 
 const styles = StyleSheet.create({
   header: {
@@ -31,5 +30,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-export default CommissionsHeader;

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import CommissionsHeader from "./CommissionsHeader";
-import CommissionsItem from "./CommissionsItem";
+import ThreeColumnHeader from "../../components/ThreeColumnHeader";
+import ThreeColumnItem from "../../components/ThreeColumnItem";
 
 const Commisions = ({ aranceles }) => {
   return (
@@ -10,14 +10,18 @@ const Commisions = ({ aranceles }) => {
         Comisiones
       </Text>
       <View style={styles.container}>
-        <CommissionsHeader />
+        <ThreeColumnHeader
+          firstTitle="Arancel"
+          secondTitle="Impuesto Neto"
+          thirdTitle="Impuesto IVA"
+        />
 
         {aranceles.map((arancel) => {
           return (
-            <CommissionsItem
-              iva={arancel.iva}
-              neto={arancel.neto}
-              tipo={arancel.tipo}
+            <ThreeColumnItem
+              firstText={`${arancel.tipo}`}
+              secondText={`$${arancel.neto.toFixed(2)}`}
+              thirdText={`$${arancel.iva.toFixed(2)}`}
               key={arancel.tipo}
             />
           );

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import TransactionHeader from "./TransactionHeader";
-import TransactionItem from "./TransactionItem";
+import TwoColumnHeader from "../../components/TwoColumnHeader";
+import TwoColumnItem from "../../components/TwoColumnItem";
 
 //TODO  podria reutilizar transactionitem y hacer que el header salga de poner mayor tamaño y fontweight:bold
 const TransactionStates = ({ estados }) => {
@@ -11,13 +11,20 @@ const TransactionStates = ({ estados }) => {
         Estados de Transacción
       </Text>
       <View style={styles.container}>
-        <TransactionHeader />
+        <TwoColumnHeader firstTitle="Detalle" secondTitle="Fecha" />
 
         {estados.map((estado) => {
           return (
-            <TransactionItem
-              title={estado.detalle}
-              date={estado.fecha}
+            <TwoColumnItem
+              firstText={`${estado.detalle}`}
+              secondText={`${estado.fecha
+                .replace(/T.*/, "")
+                .split("-")
+                .reverse()
+                .join("-")} ${estado.fecha.replace(
+                /^[^:]*([0-2]\d:[0-5]\d:\d\d).*$/,
+                "$1"
+              )}hs`}
               key={estado.fecha}
             />
           );

@@ -1,8 +1,8 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { Icon } from "react-native-elements";
+import { View, StyleSheet } from "react-native";
 import GoBackButton from "../../components/GoBackButton";
 import Title from "../../components/Title";
+import TwoColumnItem from "../../components/TwoColumnItem";
 import Commisions from "./Commisions";
 import InfoOperation from "./InfoOperation";
 import TransactionStates from "./TransactionStates";
@@ -66,6 +66,7 @@ const OperationScreen = ({ route, navigation }) => {
   return (
     <View style={{ flex: 1, padding: 10, backgroundColor: "#4834D4" }}>
       <Title textTitle={`Operacion N° ${numero}`} />
+
       <InfoOperation
         simbolo={operation.simbolo}
         tipo={operation.tipo}
@@ -74,6 +75,7 @@ const OperationScreen = ({ route, navigation }) => {
         precio={operation.precio}
         cantidad={operation.cantidad}
       />
+
       <TransactionStates estados={operation.estados} />
       <Commisions aranceles={operation.aranceles} />
       <GoBackButton navigation={navigation} />
@@ -81,4 +83,12 @@ const OperationScreen = ({ route, navigation }) => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "rgba(235,255,255,0.8)",
+    padding: 10,
+    marginTop: 15,
+    borderRadius: 10,
+  },
+});
 export default OperationScreen;

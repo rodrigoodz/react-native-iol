@@ -1,17 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const TransactionItem = ({ title, date }) => {
+const ThreeColumnItem = ({ firstText, secondText, thirdText }) => {
   return (
     <View style={styles.row}>
-      <View style={{ flex: 1, alignItems: "center" }}>
-        <Text style={styles.text}>{title}</Text>
+      <View style={{ flex: 1, alignItems: "flex-start", paddingLeft: 10 }}>
+        <Text style={styles.text}>{firstText}</Text>
       </View>
       <View style={{ flex: 1, alignItems: "center" }}>
-        <Text style={styles.text}>
-          {date.replace(/T.*/, "").split("-").reverse().join("-") + " "}
-          {date.replace(/^[^:]*([0-2]\d:[0-5]\d:\d\d).*$/, "$1") + "hs"}
-        </Text>
+        <Text style={styles.text}>{secondText}</Text>
+      </View>
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <Text style={styles.text}>{thirdText}</Text>
       </View>
     </View>
   );
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TransactionItem;
+export default ThreeColumnItem;

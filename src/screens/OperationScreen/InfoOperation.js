@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import TwoColumnItem from "../../components/TwoColumnItem";
 
 const InfoOperation = ({
   simbolo,
@@ -11,36 +12,35 @@ const InfoOperation = ({
 }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
-        <Text>Simbolo</Text>
-        <Text>{simbolo}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text>Tipo de Operación</Text>
-        <Text>{tipo.toUpperCase()}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text>Cantidad/Monto</Text>
-        <Text>{cantidad}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text>Precio</Text>
-        <Text>${precio}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text>Fecha Alta</Text>
-        <Text>
-          {fechaAlta.replace(/T.*/, "").split("-").reverse().join("-") + " "}
-          {fechaAlta.replace(/^[^:]*([0-2]\d:[0-5]\d:\d\d).*$/, "$1") + "hs"}
-        </Text>
-      </View>
-      <View style={styles.row}>
-        <Text>Validez:</Text>
-        <Text>
-          {validez.replace(/T.*/, "").split("-").reverse().join("-") + " "}
-          {validez.replace(/^[^:]*([0-2]\d:[0-5]\d:\d\d).*$/, "$1") + "hs"}
-        </Text>
-      </View>
+      <TwoColumnItem firstText="Simbolo" secondText={`${simbolo}`} />
+      <TwoColumnItem
+        firstText="Tipo de Operación"
+        secondText={`${tipo.toUpperCase()}`}
+      />
+      <TwoColumnItem firstText="Cantidad/Monto" secondText={`${cantidad}`} />
+      <TwoColumnItem firstText="Precio" secondText={`${precio}`} />
+      <TwoColumnItem
+        firstText="Fecha Alta"
+        secondText={`${fechaAlta
+          .replace(/T.*/, "")
+          .split("-")
+          .reverse()
+          .join("-")} ${fechaAlta.replace(
+          /^[^:]*([0-2]\d:[0-5]\d:\d\d).*$/,
+          "$1"
+        )}hs`}
+      />
+      <TwoColumnItem
+        firstText="Validez"
+        secondText={`${validez
+          .replace(/T.*/, "")
+          .split("-")
+          .reverse()
+          .join("-")} ${validez.replace(
+          /^[^:]*([0-2]\d:[0-5]\d:\d\d).*$/,
+          "$1"
+        )}hs`}
+      />
     </View>
   );
 };
