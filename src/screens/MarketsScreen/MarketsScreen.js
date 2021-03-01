@@ -7,7 +7,8 @@ import FourColumnHeader from "../../components/FourColumnHeader";
 import FourColumnItem from "../../components/FourColumnItem";
 import Selector from "../../components/Selector";
 import Title from "../../components/Title";
-import getPanelByInstrument from "../../helpers/getPanelByInstrument";
+import getInstrumentsByCountry from "../../helpers/getInstrumentsByCountry";
+import getPanelByInstrumentAndCountry from "../../helpers/getPanelByInstrumentAndCountry";
 
 const data = {
   titulos: [
@@ -475,18 +476,34 @@ const data = {
 };
 
 const MarketsScreen = () => {
-  const buttons = ["Argentina", "Estados Unidos", "Indices"];
+  const buttons = ["Argentina", "Estados Unidos"];
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [instrumentSelected, setInstrumentSelected] = useState("Acciones");
-  const [allPanels, setAllPanels] = useState([]);
-  const [panelSelected, setPanelSelected] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(0);
+  const [selectedInstrument, setSelectedInstrument] = useState("Acciones");
+  const [selectedPanel, setSelectedPanel] = useState("Merval");
+
+  const [allInstruments, setAllInstruments] = useState([
+    { label: "", value: "" },
+  ]);
+  const [allPanels, setAllPanels] = useState([{ label: "", value: "" }]);
 
   useEffect(() => {
-    const getPanel = getPanelByInstrument(instrumentSelected);
+    const getInstruments = getInstrumentsByCountry(selectedCountry);
+    setAllInstruments(getInstruments);
+    const getPanel = getPanelByInstrumentAndCountry(
+      getInstruments[0].value,
+      selectedCountry
+    );
     setAllPanels(getPanel);
-    return () => {};
-  }, [instrumentSelected]);
+  }, [selectedCountry]);
+
+  useEffect(() => {
+    const getPanel = getPanelByInstrumentAndCountry(
+      selectedInstrument,
+      selectedCountry
+    );
+    setAllPanels(getPanel);
+  }, [selectedInstrument]);
 
   return (
     <View style={{ flex: 1, padding: 10, backgroundColor: "#4834D4" }}>
@@ -500,9 +517,9 @@ const MarketsScreen = () => {
         }}
       >
         <ButtonGroup
-          onPress={setSelectedIndex}
+          onPress={setSelectedCountry}
           containerStyle={{ height: 20 }}
-          selectedIndex={selectedIndex}
+          selectedIndex={selectedCountry}
           buttons={buttons}
           containerStyle={{ height: 30 }}
         />
@@ -510,24 +527,17 @@ const MarketsScreen = () => {
           <View style={{ flex: 1 }}>
             <Text>Instrumento</Text>
             <Selector
-              options={[
-                { label: "Acciones", value: "Acciones" },
-                { label: "Bonos", value: "Bonos" },
-                { label: "Opciones", value: "Opciones" },
-                { label: "Cauciones", value: "Cauciones" },
-                { label: "Futuros", value: "Futuros" },
-                { label: "FCI", value: "FCI" },
-              ]}
-              selected={instrumentSelected}
-              setSelected={setInstrumentSelected}
+              options={allInstruments}
+              selected={selectedInstrument}
+              setSelected={setSelectedInstrument}
             />
           </View>
           <View style={{ flex: 1 }}>
             <Text>Panel</Text>
             <Selector
               options={allPanels}
-              selected={panelSelected}
-              setSelected={setPanelSelected}
+              selected={selectedPanel}
+              setSelected={setSelectedPanel}
             />
           </View>
         </View>
