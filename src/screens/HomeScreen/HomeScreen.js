@@ -155,7 +155,6 @@ const ScreenInicio = ({ navigation }) => {
     ],
   } = data;
 
-  console.log(estadisticas);
   return (
     <ScrollView
       style={styles.container}
