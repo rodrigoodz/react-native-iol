@@ -37,6 +37,122 @@ const HomeScreen = ({ navigation }) => {
     }, 2000);
   };
 
+  // const data = {
+  //   cuentas: [
+  //     {
+  //       numero: "200003",
+  //       tipo: "inversion_Argentina_Pesos",
+  //       moneda: "peso_Argentino",
+  //       disponible: 404.64,
+  //       comprometido: 0.0,
+  //       saldo: 404.64,
+  //       titulosValorizados: 572.5,
+  //       total: 977.14,
+  //       margenDescubierto: 0.0,
+  //       saldos: [
+  //         {
+  //           liquidacion: "inmediato",
+  //           saldo: 404.64,
+  //           comprometido: 0.0,
+  //           disponible: 404.64,
+  //           disponibleOperar: 404.64,
+  //         },
+  //         {
+  //           liquidacion: "hrs24",
+  //           saldo: 0.0,
+  //           comprometido: 0.0,
+  //           disponible: 0.0,
+  //           disponibleOperar: 404.64,
+  //         },
+  //         {
+  //           liquidacion: "hrs48",
+  //           saldo: 0.0,
+  //           comprometido: 0.0,
+  //           disponible: 0.0,
+  //           disponibleOperar: 404.64,
+  //         },
+  //         {
+  //           liquidacion: "hrs72",
+  //           saldo: 0.0,
+  //           comprometido: 0.0,
+  //           disponible: 0.0,
+  //           disponibleOperar: 404.64,
+  //         },
+  //         {
+  //           liquidacion: "masHrs72",
+  //           saldo: 0.0,
+  //           comprometido: 0.0,
+  //           disponible: 0.0,
+  //           disponibleOperar: 0.0,
+  //         },
+  //       ],
+  //       estado: "operable",
+  //     },
+  //     {
+  //       numero: "200003",
+  //       tipo: "inversion_Argentina_Dolares",
+  //       moneda: "dolar_Estadounidense",
+  //       disponible: 0.0,
+  //       comprometido: 0.0,
+  //       saldo: 0.0,
+  //       titulosValorizados: 0.0,
+  //       total: 0.0,
+  //       margenDescubierto: 0.0,
+  //       saldos: [
+  //         {
+  //           liquidacion: "inmediato",
+  //           saldo: 0.0,
+  //           comprometido: 0.0,
+  //           disponible: 0.0,
+  //           disponibleOperar: 0.0,
+  //         },
+  //         {
+  //           liquidacion: "hrs24",
+  //           saldo: 0.0,
+  //           comprometido: 0.0,
+  //           disponible: 0.0,
+  //           disponibleOperar: 0.0,
+  //         },
+  //         {
+  //           liquidacion: "hrs48",
+  //           saldo: 0.0,
+  //           comprometido: 0.0,
+  //           disponible: 0.0,
+  //           disponibleOperar: 0.0,
+  //         },
+  //         {
+  //           liquidacion: "hrs72",
+  //           saldo: 0.0,
+  //           comprometido: 0.0,
+  //           disponible: 0.0,
+  //           disponibleOperar: 0.0,
+  //         },
+  //         {
+  //           liquidacion: "masHrs72",
+  //           saldo: 0.0,
+  //           comprometido: 0.0,
+  //           disponible: 0.0,
+  //           disponibleOperar: 0.0,
+  //         },
+  //       ],
+  //       estado: "operable",
+  //     },
+  //   ],
+  //   estadisticas: [
+  //     {
+  //       descripcion: "Anterior",
+  //       cantidad: 0,
+  //       volumen: 0.0,
+  //     },
+  //     {
+  //       descripcion: "Actual",
+  //       cantidad: 0,
+  //       volumen: 0.0,
+  //     },
+  //   ],
+  //   totalEnPesos: 977.14,
+  // };
+
   if (data) {
     const {
       totalEnPesos,

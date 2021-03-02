@@ -2,14 +2,28 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const ActivoItem = () => {
+const ActivoItem = ({
+  data: {
+    simbolo,
+    cantidad,
+    valorizado,
+    ultimoPrecio,
+    variacionDiaria,
+    gananciaPorcentaje,
+    gananciaDinero,
+    ppc,
+  },
+}) => {
   return (
     <TouchableOpacity>
       <View
         style={{
           height: 80,
           flexDirection: "row",
-          backgroundColor: "rgba(235,77,75,0.8)",
+          backgroundColor:
+            Number(gananciaPorcentaje) < 0
+              ? "rgba(235,77,75,0.7)"
+              : "rgba(106,176,76,0.7)",
           borderRadius: 10,
           alignItems: "center",
         }}
@@ -22,7 +36,7 @@ const ActivoItem = () => {
             marginLeft: 20,
           }}
         >
-          <Text style={{ fontWeight: "bold", color: "black" }}>GGAL</Text>
+          <Text style={{ fontWeight: "bold", color: "black" }}>{simbolo}</Text>
           <Text style={{ color: "black" }}>Ult. Precio</Text>
           <Text style={{ color: "black" }}>PPC</Text>
         </View>
@@ -33,9 +47,11 @@ const ActivoItem = () => {
             justifyContent: "center",
           }}
         >
-          <Text style={{ fontWeight: "bold", color: "black" }}>5/0</Text>
-          <Text style={{ color: "black" }}>$112,250</Text>
-          <Text style={{ color: "black" }}>$126,36</Text>
+          <Text style={{ fontWeight: "bold", color: "black" }}>{cantidad}</Text>
+          <Text style={{ color: "black" }}>{`$${ultimoPrecio.toFixed(
+            2
+          )}`}</Text>
+          <Text style={{ color: "black" }}>{`$${ppc.toFixed(2)}`}</Text>
         </View>
         <View
           style={{
@@ -55,9 +71,13 @@ const ActivoItem = () => {
             justifyContent: "center",
           }}
         >
-          <Text style={{ fontWeight: "bold", color: "black" }}>$561,25</Text>
-          <Text style={{ color: "black" }}>-2,720%</Text>
-          <Text style={{ color: "black" }}>-11,17% </Text>
+          <Text
+            style={{ fontWeight: "bold", color: "black" }}
+          >{`$${valorizado.toFixed(2)}`}</Text>
+          <Text style={{ color: "black" }}>{`${variacionDiaria}%`}</Text>
+          <Text
+            style={{ color: "black" }}
+          >{`${gananciaPorcentaje}%$${gananciaDinero}`}</Text>
         </View>
       </View>
     </TouchableOpacity>
