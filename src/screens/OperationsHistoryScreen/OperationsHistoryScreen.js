@@ -5,9 +5,9 @@ import Title from "../../components/Title";
 import SelectOperationStatus from "./SelectOperationStatus";
 import DatePicker from "./DatePicker";
 import ButtonComponent from "../../components/ButtonComponent";
-import OperationsHeader from "./OperationsHeader";
-import OperationsItems from "./OperationsItems";
 import Selector from "../../components/Selector";
+import FiveColumnHeader from "../../components/FiveColumnHeader";
+import FiveColumnItem from "../../components/FiveColumnItem";
 
 const datos = [
   {
@@ -71,6 +71,8 @@ const OperationsHistoryScreen = ({ navigation }) => {
   const { operationType, country, startDate, endDate } = formValues;
   // TODO cuando apriente el boton 'buscar' debo asegurarme que las fechas no esten vacias y que tampoco la fecha de inicio no sea mayor a la de fin
 
+  // console.log("objeto: ", formValues);
+
   const handleButton = (e) => {
     e.preventDefault();
   };
@@ -116,19 +118,39 @@ const OperationsHistoryScreen = ({ navigation }) => {
         />
       </View>
       <ButtonComponent handleButton={handleButton} title="Buscar" />
-      <OperationsHeader />
-      {datos.map((dato) => {
-        return (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("Operacion", { numero: dato.numero })
-            }
-            key={dato.numero}
-          >
-            <OperationsItems data={dato} />
-          </TouchableOpacity>
-        );
-      })}
+      <View style={styles.listContainer}>
+        <FiveColumnHeader
+          firstTitle="Nro. de Trans"
+          secondTitle="Fecha Orden"
+          thirdTitle="Tipo"
+          fourthTitle="Simbolo"
+          fifthTitle="Estado"
+        />
+        {true
+          ? datos.map((dato) => {
+              return (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Operacion", { numero: dato.numero })
+                  }
+                  key={dato.numero}
+                >
+                  <FiveColumnItem
+                    firstText={dato.numero}
+                    secondText={dato.fechaOrden
+                      .replace(/T.*/, "")
+                      .split("-")
+                      .reverse()
+                      .join("-")}
+                    thirdText={dato.tipo}
+                    fourthText={dato.simbolo}
+                    fifthText={dato.estado}
+                  />
+                </TouchableOpacity>
+              );
+            })
+          : null}
+      </View>
     </View>
   );
 };
@@ -147,6 +169,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 5,
     padding: 12,
+  },
+  listContainer: {
+    backgroundColor: "rgba(235,255,255,0.8)",
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 15,
   },
 });
 
