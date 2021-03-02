@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,6 +13,7 @@ import BalanceInfo from "./BalanceInfo";
 import CollapseItem from "../../components/CollapseItem";
 import { RefreshControl } from "react-native";
 import UpdateController from "./UpdateController";
+import { Context as AuthContext } from "../../context/AuthContext";
 
 const data = {
   cuentas: [
@@ -132,6 +133,8 @@ const data = {
 
 const ScreenInicio = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
+  const context = useContext(AuthContext);
+  console.log(context);
 
   const onRefresh = () => {
     setRefreshing(true);

@@ -18,6 +18,7 @@ import OperationsHistoryScreen from "./src/screens/OperationsHistoryScreen/Opera
 import { AntDesign } from "@expo/vector-icons";
 import { Text } from "react-native";
 import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
+import { Provider as AuthProvider } from "./src/context/AuthContext";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -103,23 +104,25 @@ const DrawerNavigator = () => {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {false ? (
-          <Stack.Screen
-            name="SignIn"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
-        ) : (
-          <Stack.Screen
-            name="Home"
-            component={DrawerNavigator}
-            options={{ headerShown: false }}
-          />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {false ? (
+            <Stack.Screen
+              name="SignIn"
+              component={LoginScreen}
+              options={{ headerShown: false }}
+            />
+          ) : (
+            <Stack.Screen
+              name="Home"
+              component={DrawerNavigator}
+              options={{ headerShown: false }}
+            />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
   );
 };
 
