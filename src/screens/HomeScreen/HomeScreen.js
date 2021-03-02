@@ -15,43 +15,19 @@ import CollapseItem from "../../components/CollapseItem";
 import { RefreshControl } from "react-native";
 import UpdateController from "./UpdateController";
 import { Context as AuthContext } from "../../context/AuthContext";
+import { useFetch } from "../../hooks/useFetch";
 
-const ScreenInicio = ({ navigation }) => {
+const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
-
-  const [accountStatus, setAccountStatus] = useState(null);
   const {
     state: { access_token },
   } = useContext(AuthContext);
 
-  useEffect(() => {
-    const fetchAccountStatus = async () => {
-      try {
-        const response = await fetch(
-          "https://api.invertironline.com/api/v2/estadocuenta",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${access_token}`,
-            },
-          }
-        );
-        let data = await response.json();
-        if (!data.message) {
-          setAccountStatus(data);
-        } else {
-          // console.log("Error");
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "SignIn" }],
-          });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchAccountStatus();
-  }, []);
+  const { data, error } = useFetch(
+    "https://api.invertironline.com/api/v2/estadocuenta",
+    access_token,
+    "GET"
+  );
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -61,7 +37,7 @@ const ScreenInicio = ({ navigation }) => {
     }, 2000);
   };
 
-  if (accountStatus) {
+  if (data) {
     const {
       totalEnPesos,
       estadisticas,
@@ -74,7 +50,7 @@ const ScreenInicio = ({ navigation }) => {
           saldos: [, hrs24, hrs48, hrs72, masHrs72],
         },
       ],
-    } = accountStatus;
+    } = data;
     return (
       <ScrollView
         style={styles.container}
@@ -140,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScreenInicio;
+export default HomeScreen;
