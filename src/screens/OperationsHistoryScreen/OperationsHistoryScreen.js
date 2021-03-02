@@ -7,7 +7,7 @@ import DatePicker from "./DatePicker";
 import ButtonComponent from "../../components/ButtonComponent";
 import OperationsHeader from "./OperationsHeader";
 import OperationsItems from "./OperationsItems";
-import Selection from "../../components/Selector";
+import Selector from "../../components/Selector";
 
 const datos = [
   {
@@ -61,48 +61,61 @@ const datos = [
 ];
 
 const OperationsHistoryScreen = ({ navigation }) => {
-  const [selection, setSelection] = useState("todas");
-  const [country, setCountry] = useState("argentina");
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [formValues, setFormValues] = useState({
+    operationType: "todas",
+    country: "argentina",
+    startDate: null,
+    endDate: null,
+  });
 
+  const { operationType, country, startDate, endDate } = formValues;
   // TODO cuando apriente el boton 'buscar' debo asegurarme que las fechas no esten vacias y que tampoco la fecha de inicio no sea mayor a la de fin
+
+  const handleButton = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <View style={styles.container}>
       <Title textTitle="Operaciones" />
       <View style={styles.formContainer}>
         <View style={styles.column}>
-          <Selection
+          <Selector
             options={[
               { label: "Argentina", value: "argentina" },
               { label: "Estados Unidos", value: "estados_unidos" },
             ]}
             selected={country}
-            setSelected={setCountry}
+            setSelected={(value) =>
+              setFormValues({ ...formValues, country: value })
+            }
           />
 
           <DatePicker
             date={startDate}
-            setDate={(e) => setStartDate(e)}
+            setDate={(value) =>
+              setFormValues({ ...formValues, startDate: value })
+            }
             placeholder="desde"
             maxDate={endDate}
           />
           <DatePicker
             date={endDate}
-            setDate={(e) => setEndDate(e)}
+            setDate={(value) =>
+              setFormValues({ ...formValues, endDate: value })
+            }
             placeholder="hasta"
             maxDate={null}
           />
         </View>
         <SelectOperationStatus
-          selection={selection}
-          setSelection={(e) => setSelection(e)}
+          selection={operationType}
+          setSelection={(value) =>
+            setFormValues({ ...formValues, operationType: value })
+          }
         />
       </View>
-      <ButtonComponent
-        handleButton={() => console.log("Working")}
-        title="Buscar"
-      />
+      <ButtonComponent handleButton={handleButton} title="Buscar" />
       <OperationsHeader />
       {datos.map((dato) => {
         return (
