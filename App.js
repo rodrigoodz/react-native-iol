@@ -19,6 +19,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Text } from "react-native";
 import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
+import { navigationRef } from "./RootNavigation";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -105,21 +106,19 @@ const DrawerNavigator = () => {
 const App = () => {
   return (
     <AuthProvider>
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator>
-          {false ? (
-            <Stack.Screen
-              name="SignIn"
-              component={LoginScreen}
-              options={{ headerShown: false }}
-            />
-          ) : (
-            <Stack.Screen
-              name="Home"
-              component={DrawerNavigator}
-              options={{ headerShown: false }}
-            />
-          )}
+          <Stack.Screen
+            name="SignIn"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            name="Home"
+            component={DrawerNavigator}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>

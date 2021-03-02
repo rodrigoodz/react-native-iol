@@ -1,19 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Input } from "react-native-elements";
 import { MaterialIcons } from "@expo/vector-icons";
 import ButtonComponent from "../components/ButtonComponent";
+import { Context as AuthContext } from "../context/AuthContext";
 
 const ScreenLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
+  const {
+    state: { errorMessage },
+    startSignIn,
+    tryLocalSignIn,
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    tryLocalSignIn();
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email.length === 0 || password.length === 0) {
       return setError(true);
     }
+    setError(false);
+    startSignIn({ email, password });
   };
 
   return (
@@ -69,6 +82,9 @@ const ScreenLogin = () => {
           onChangeText={(value) => setPassword(value)}
         />
         <ButtonComponent handleButton={handleSubmit} title="Ingresar" />
+        {errorMessage.length < 0 ? null : (
+          <Text style={{ fontSize: 28, color: "red" }}>{errorMessage}</Text>
+        )}
       </View>
     </View>
   );

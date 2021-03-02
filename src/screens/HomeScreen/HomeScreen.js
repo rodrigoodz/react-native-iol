@@ -133,8 +133,9 @@ const data = {
 
 const ScreenInicio = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
-  const context = useContext(AuthContext);
-  console.log(context);
+  const { state } = useContext(AuthContext);
+
+  console.log(state);
 
   const onRefresh = () => {
     setRefreshing(true);
