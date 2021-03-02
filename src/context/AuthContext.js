@@ -1,6 +1,6 @@
 import createDataContext from "./createDataContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { navigate } from "../../RootNavigation";
+import { navigate, reset } from "../../RootNavigation";
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -20,8 +20,7 @@ const authReducer = (state, action) => {
       return state;
   }
 };
-//TODO tendria que llamar a esto en un useEffect en LoginScreen, leo con ASYNC STORAGE y si el token es utilizable lo mando
-//hacia la "HOME", si el token esta expirado, PERO NO EL REFRESH TOKEN, vuelvo a solicitar otro y lo guardo
+
 const tryLocalSignIn = (dispatch) => {
   return async () => {
     const deviceData = await AsyncStorage.getItem("data");
@@ -30,28 +29,32 @@ const tryLocalSignIn = (dispatch) => {
 
       if (new Date(jsonData[".expires"]) < new Date()) {
         try {
+          console.log("va a solicitar otro token");
           const response = await fetch("https://api.invertironline.com/token", {
             method: "POST",
             body: `refresh_token=${jsonData.refresh_token}&grant_type=refresh_token`,
           });
           let data = await response.json();
           if (!data.error) {
+            console.log("token solicitado con exito");
             await AsyncStorage.setItem("data", JSON.stringify(data));
             dispatch({
               type: "signin",
               payload: data,
             });
-            navigate("Home");
+
+            reset(0, "Home");
           }
         } catch (error) {
           console.log(error);
         }
       } else {
+        console.log("el token sigue siendo valido");
         dispatch({
           type: "signin",
           payload: jsonData,
         });
-        navigate("Home");
+        reset(0, "Home");
       }
     } else {
       console.log("no hay nada guardado o fallo");

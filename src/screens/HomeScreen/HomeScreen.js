@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import Constants from "expo-constants";
 
 import Title from "../../components/Title";
 import BalanceInfo from "./BalanceInfo";
