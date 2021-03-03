@@ -75,7 +75,7 @@ const OperationScreen = ({ route, navigation }) => {
 
   if (data) {
     return (
-      <View style={{ flex: 1, padding: 10, backgroundColor: "#4834D4" }}>
+      <View style={{ flex: 1, padding: 10, backgroundColor: "#646ecb" }}>
         <Title textTitle={`Operacion N° ${numero}`} />
         <InfoOperation
           simbolo={data.simbolo}
@@ -97,7 +97,7 @@ const OperationScreen = ({ route, navigation }) => {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#4834D4",
+          backgroundColor: "#646ecb",
         }}
       >
         <ActivityIndicator size={60} color="white" />

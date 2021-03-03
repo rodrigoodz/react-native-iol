@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: "#4834D4",
+    backgroundColor: "#646ecb",
   },
   formContainer: {
     flexDirection: "row",

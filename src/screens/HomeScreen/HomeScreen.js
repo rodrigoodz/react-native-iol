@@ -209,7 +209,7 @@ const HomeScreen = ({ navigation }) => {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#4834D4",
+          backgroundColor: "#646ecb",
         }}
       >
         <ActivityIndicator size={60} color="white" />
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: "#4834D4",
+    backgroundColor: "#646ecb",
   },
   buttonStyle: {
     marginLeft: 5,

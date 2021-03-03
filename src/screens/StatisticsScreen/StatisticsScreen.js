@@ -13,7 +13,7 @@ const StatisticsScreen = ({ route, navigation }) => {
   console.log("actual", actual);
 
   return (
-    <View style={{ flex: 1, padding: 10, backgroundColor: "#4834D4" }}>
+    <View style={{ flex: 1, padding: 10, backgroundColor: "#646ecb" }}>
       <Title textTitle="Estadisticas" />
       <View style={styles.container}>
         <ThreeColumnHeader
