@@ -37,7 +37,7 @@ export const useFetch = (url, token, method) => {
         }
       } catch (error) {
         console.log(error);
-        setState({ error: error.message, data });
+        setState({ error: error.message, data: null });
       }
     };
 
