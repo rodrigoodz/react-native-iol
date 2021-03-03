@@ -12,6 +12,14 @@ const authReducer = (state, action) => {
         expires: action.payload[".expires"],
         refresh_expires: action.payload[".refreshexpires"],
       };
+    case "logout":
+      return {
+        access_token: null,
+        refresh_token: null,
+        expires: null,
+        refresh_expires: null,
+        errorMessage: "",
+      };
     case "setError":
       return { ...state, errorMessage: action.payload };
     case "clearError":
@@ -89,9 +97,17 @@ const startSignIn = (dispatch) => {
   };
 };
 
+const logOut = (dispatch) => {
+  return async () => {
+    await AsyncStorage.clear();
+    dispatch({ type: "logout" });
+    reset(0, "SignIn");
+  };
+};
+
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { startSignIn, tryLocalSignIn },
+  { startSignIn, tryLocalSignIn, logOut },
   {
     access_token: null,
     refresh_token: null,

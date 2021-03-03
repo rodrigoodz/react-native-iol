@@ -20,6 +20,7 @@ import { Text } from "react-native";
 import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { navigationRef } from "./RootNavigation";
+import LogoutScreen from "./src/screens/LogoutScreen";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -60,7 +61,12 @@ const OperationNavigator = () => {
 
 const CustomDrawerContent = (props) => {
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView
+      {...props}
+      contentContainerStyle={{
+        flex: 1,
+      }}
+    >
       <DrawerItemList {...props} />
       <DrawerItem
         label={() => (
@@ -71,8 +77,11 @@ const CustomDrawerContent = (props) => {
         )}
         style={{
           backgroundColor: "rgba(235,77,75,0.8)",
+          position: "absolute",
+          bottom: 10,
+          width: "90%",
         }}
-        onPress={() => alert("Logged out")}
+        onPress={() => props.navigation.navigate("Salir")}
       />
     </DrawerContentScrollView>
   );
@@ -117,6 +126,11 @@ const App = () => {
           <Stack.Screen
             name="Home"
             component={DrawerNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Salir"
+            component={LogoutScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
