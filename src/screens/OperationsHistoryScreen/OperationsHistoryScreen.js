@@ -119,6 +119,7 @@ const OperationsHistoryScreen = ({ navigation }) => {
             }
             placeholder="hasta"
             maxDate={null}
+            minDate={startDate}
           />
         </View>
         <SelectOperationStatus

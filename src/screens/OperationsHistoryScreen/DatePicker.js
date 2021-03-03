@@ -18,7 +18,7 @@ const calendar_icon = (
   />
 );
 
-const DatePicker = ({ date, setDate, placeholder, maxDate }) => {
+const DatePicker = ({ date, setDate, placeholder, maxDate, minDate }) => {
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
@@ -49,6 +49,7 @@ const DatePicker = ({ date, setDate, placeholder, maxDate }) => {
           display="default"
           onChange={onChange}
           maximumDate={maxDate === null ? new Date() : maxDate}
+          minimumDate={minDate}
         />
       )}
     </View>
