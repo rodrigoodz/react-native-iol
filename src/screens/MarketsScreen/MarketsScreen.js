@@ -9,6 +9,7 @@ import {
 import { ButtonGroup } from "react-native-elements";
 import FourColumnHeader from "../../components/FourColumnHeader";
 import FourColumnItem from "../../components/FourColumnItem";
+import GradientContainer from "../../components/GradientContainer";
 import Selector from "../../components/Selector";
 import Title from "../../components/Title";
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -139,53 +140,82 @@ const MarketsScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, padding: 10, backgroundColor: "#646ecb" }}>
-      <Title textTitle="Cotizaciones" />
-      <View
-        style={{
-          backgroundColor: "rgba(255,255,255,0.5)",
-          padding: 10,
-          borderRadius: 10,
-          marginTop: 15,
-        }}
+    <View style={{ flex: 1, backgroundColor: "#131e31" }}>
+      <GradientContainer
+        firstColor="#2b5a7f"
+        secondColor="#193952"
+        padding={10}
+        borderBottomLeftRadius={30}
+        borderBottomRightRadius={30}
+        marginBottom={20}
       >
-        <ButtonGroup
-          onPress={handleCountrySelection}
-          containerStyle={{ height: 20 }}
-          selectedIndex={selectedCountry}
-          buttons={buttons}
-          containerStyle={{ height: 30 }}
-        />
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ flex: 1 }}>
-            <Text>Instrumento</Text>
-            <Selector
-              options={allInstruments}
-              selected={selectedInstrument}
-              setSelected={handleInstrumentSelection}
-            />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Text>Panel</Text>
-            <Selector
-              options={allPanels}
-              selected={selectedPanel}
-              setSelected={(value) =>
-                setSelectedValues({ ...selectedValues, selectedPanel: value })
-              }
-            />
+        <Title textTitle="Cotizaciones" />
+        <View
+          style={{
+            padding: 10,
+          }}
+        >
+          <ButtonGroup
+            onPress={handleCountrySelection}
+            containerStyle={{ height: 20 }}
+            selectedIndex={selectedCountry}
+            buttons={buttons}
+            containerStyle={{
+              height: 40,
+              backgroundColor: "#131e31",
+              borderRadius: 10,
+            }}
+            selectedButtonStyle={{
+              backgroundColor: "#212f49",
+            }}
+            textStyle={{
+              fontFamily: "SairaThin",
+            }}
+          />
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ flex: 1 }}>
+              <Text
+                style={{
+                  color: "white",
+                  fontFamily: "SairaBold",
+                  alignSelf: "center",
+                }}
+              >
+                Instrumento
+              </Text>
+              <Selector
+                options={allInstruments}
+                selected={selectedInstrument}
+                setSelected={handleInstrumentSelection}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text
+                style={{
+                  color: "white",
+                  fontFamily: "SairaBold",
+                  alignSelf: "center",
+                }}
+              >
+                Panel
+              </Text>
+              <Selector
+                options={allPanels}
+                selected={selectedPanel}
+                setSelected={(value) =>
+                  setSelectedValues({ ...selectedValues, selectedPanel: value })
+                }
+              />
+            </View>
           </View>
         </View>
-      </View>
-
-      <View
-        style={{
-          backgroundColor: "rgba(235,255,255,0.8)",
-          padding: 10,
-          marginTop: 15,
-          borderRadius: 10,
-          flex: data ? 1 : 0,
-        }}
+      </GradientContainer>
+      <GradientContainer
+        firstColor="#132b38"
+        secondColor="#050f17"
+        padding={10}
+        borderRadius={20}
+        marginHorizontal={15}
       >
         <FourColumnHeader
           firstTitle={`Símbolo`}
@@ -212,10 +242,10 @@ const MarketsScreen = () => {
         ) : (
           <View>
             {error ? <Text>{error}</Text> : null}
-            <ActivityIndicator size="small" color="#0000ff" />
+            <ActivityIndicator size="small" color="#fff" />
           </View>
         )}
-      </View>
+      </GradientContainer>
     </View>
   );
 };
