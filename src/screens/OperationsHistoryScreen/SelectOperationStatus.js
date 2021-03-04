@@ -9,7 +9,8 @@ const SelectOperationStatus = ({ selection, setSelection }) => {
         title="Todas"
         checked={selection === "todas"}
         key={"todas"}
-        checkedColor="green"
+        textStyle={styles.textStyle}
+        checkedColor="rgba(255,255,255,0.5)"
         containerStyle={styles.checkboxContainer}
         onPress={() => setSelection("todas")}
       />
@@ -17,7 +18,8 @@ const SelectOperationStatus = ({ selection, setSelection }) => {
         title="Pendientes"
         checked={selection === "pendientes"}
         key={"pendientes"}
-        checkedColor="green"
+        textStyle={styles.textStyle}
+        checkedColor="rgba(255,255,255,0.5)"
         containerStyle={styles.checkboxContainer}
         onPress={() => setSelection("pendientes")}
       />
@@ -25,7 +27,8 @@ const SelectOperationStatus = ({ selection, setSelection }) => {
         title="Finalizadas"
         checked={selection === "finalizadas"}
         key={"finalizadas"}
-        checkedColor="green"
+        textStyle={styles.textStyle}
+        checkedColor="rgba(255,255,255,0.5)"
         containerStyle={styles.checkboxContainer}
         onPress={() => setSelection("finalizadas")}
       />
@@ -36,9 +39,13 @@ const SelectOperationStatus = ({ selection, setSelection }) => {
 const styles = StyleSheet.create({
   container: { flex: 1, paddingTop: 6 },
   checkboxContainer: {
-    backgroundColor: "rgba(255,255,255,0.5)",
+    backgroundColor: "#131e31",
     padding: 12,
     borderRadius: 10,
+    borderColor: "rgba(255,255,255,0.5)",
+  },
+  textStyle: {
+    color: "white",
   },
 });
 

@@ -9,6 +9,7 @@ import FiveColumnHeader from "../../components/FiveColumnHeader";
 import FiveColumnItem from "../../components/FiveColumnItem";
 import { useFetch } from "../../hooks/useFetch";
 import { Context as AuthContext } from "../../context/AuthContext";
+import GradientContainer from "../../components/GradientContainer";
 
 // const datos = [
 //   {
@@ -90,46 +91,62 @@ const OperationsHistoryScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Title textTitle="Operaciones" />
-      <View style={styles.formContainer}>
-        <View style={styles.column}>
-          <Selector
-            options={[
-              { label: "Argentina", value: "argentina" },
-              { label: "Estados Unidos", value: "estados_unidos" },
-            ]}
-            selected={country}
-            setSelected={(value) =>
-              setFormValues({ ...formValues, country: value })
-            }
-          />
+      <GradientContainer
+        firstColor="#2b5a7f"
+        secondColor="#193952"
+        padding={10}
+        borderBottomLeftRadius={30}
+        borderBottomRightRadius={30}
+        marginBottom={20}
+      >
+        <Title textTitle="Operaciones" />
+        <View style={styles.formContainer}>
+          <View style={styles.column}>
+            <Selector
+              options={[
+                { label: "Argentina", value: "argentina" },
+                { label: "Estados Unidos", value: "estados_unidos" },
+              ]}
+              selected={country}
+              setSelected={(value) =>
+                setFormValues({ ...formValues, country: value })
+              }
+            />
 
-          <DatePicker
-            date={startDate}
-            setDate={(value) =>
-              setFormValues({ ...formValues, startDate: value })
+            <DatePicker
+              date={startDate}
+              setDate={(value) =>
+                setFormValues({ ...formValues, startDate: value })
+              }
+              placeholder="desde"
+              maxDate={endDate}
+            />
+            <DatePicker
+              date={endDate}
+              setDate={(value) =>
+                setFormValues({ ...formValues, endDate: value })
+              }
+              placeholder="hasta"
+              maxDate={null}
+              minDate={startDate}
+            />
+          </View>
+
+          <SelectOperationStatus
+            selection={operationType}
+            setSelection={(value) =>
+              setFormValues({ ...formValues, operationType: value })
             }
-            placeholder="desde"
-            maxDate={endDate}
-          />
-          <DatePicker
-            date={endDate}
-            setDate={(value) =>
-              setFormValues({ ...formValues, endDate: value })
-            }
-            placeholder="hasta"
-            maxDate={null}
-            minDate={startDate}
           />
         </View>
-        <SelectOperationStatus
-          selection={operationType}
-          setSelection={(value) =>
-            setFormValues({ ...formValues, operationType: value })
-          }
-        />
-      </View>
-      <View style={styles.listContainer}>
+      </GradientContainer>
+      <GradientContainer
+        firstColor="#132b38"
+        secondColor="#050f17"
+        padding={10}
+        borderRadius={20}
+        marginHorizontal={8}
+      >
         <FiveColumnHeader
           firstTitle="Nro. de Trans"
           secondTitle="Fecha Orden"
@@ -161,7 +178,7 @@ const OperationsHistoryScreen = ({ navigation }) => {
               );
             })
           : null}
-      </View>
+      </GradientContainer>
     </View>
   );
 };
@@ -169,8 +186,7 @@ const OperationsHistoryScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    backgroundColor: "#646ecb",
+    backgroundColor: "#131e31",
   },
   formContainer: {
     flexDirection: "row",

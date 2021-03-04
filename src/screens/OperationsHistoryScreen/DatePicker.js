@@ -14,7 +14,8 @@ const calendar_icon = (
     type="ant-design"
     name="calendar"
     size={24}
-    style={{ color: "black", marginHorizontal: 10 }}
+    color="rgba(255,255,255,0.5)"
+    style={{ marginHorizontal: 10 }}
   />
 );
 
@@ -31,13 +32,9 @@ const DatePicker = ({ date, setDate, placeholder, maxDate, minDate }) => {
     <View>
       <TouchableOpacity style={styles.datePicker} onPress={() => setShow(true)}>
         {calendar_icon}
-        {date === null ? (
-          <Text style={styles.datePickerPlaceholder}>{placeholder}</Text>
-        ) : (
-          <Text style={styles.datePickerText}>
-            {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
-          </Text>
-        )}
+        <Text style={styles.datePickerText}>
+          {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
+        </Text>
       </TouchableOpacity>
 
       {show && (
@@ -59,13 +56,15 @@ const DatePicker = ({ date, setDate, placeholder, maxDate, minDate }) => {
 const styles = StyleSheet.create({
   datePicker: {
     flexDirection: "row",
-    backgroundColor: "rgba(255,255,255,0.5)",
+    backgroundColor: "#131e31",
     borderRadius: 10,
     height: 50,
     alignItems: "center",
     marginTop: 10,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.5)",
   },
-  datePickerText: { fontSize: 18, color: "black" },
+  datePickerText: { fontSize: 18, color: "white" },
   datePickerPlaceholder: {
     fontSize: 16,
     color: "grey",

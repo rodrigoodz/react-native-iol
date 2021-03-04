@@ -28,10 +28,13 @@ const Selector = ({ options, selected, setSelected }) => {
 const styles = StyleSheet.create({
   containerPicker: {
     borderRadius: 10,
-    backgroundColor: "rgba(255,255,255,0.5)",
+    backgroundColor: "#131e31",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.5)",
+    justifyContent: "center",
   },
   picker: {
-    color: "#30336B",
+    color: "white",
   },
   item: { height: 44 },
 });
