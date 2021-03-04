@@ -1,18 +1,33 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
+import GradientContainer from "../../components/GradientContainer";
 import ThreeColumnHeader from "../../components/ThreeColumnHeader";
 import ThreeColumnItem from "../../components/ThreeColumnItem";
 
 const Commisions = ({ aranceles }) => {
   return (
     <View>
-      <Text style={{ color: "white", alignSelf: "center", marginTop: 30 }}>
+      <Text
+        style={{
+          color: "white",
+          alignSelf: "center",
+          marginTop: 30,
+          fontFamily: "SairaSemiBold",
+          fontSize: 18,
+        }}
+      >
         Comisiones
       </Text>
-      <View style={styles.container}>
+      <GradientContainer
+        firstColor="#132b38"
+        secondColor="#050f17"
+        padding={10}
+        borderRadius={20}
+        marginHorizontal={15}
+      >
         <ThreeColumnHeader
           firstTitle="Arancel"
-          secondTitle="Impuesto Neto"
+          secondTitle="Imp. Neto"
           thirdTitle="Impuesto IVA"
         />
 
@@ -26,17 +41,9 @@ const Commisions = ({ aranceles }) => {
             />
           );
         })}
-      </View>
+      </GradientContainer>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "rgba(235,255,255,0.8)",
-    padding: 10,
-    borderRadius: 10,
-  },
-});
 
 export default Commisions;

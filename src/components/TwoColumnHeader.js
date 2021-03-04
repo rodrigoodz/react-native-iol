@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   text: {
-    fontWeight: "bold",
     fontSize: 16,
+    color: "black",
+    fontFamily: "SairaBold",
   },
 });

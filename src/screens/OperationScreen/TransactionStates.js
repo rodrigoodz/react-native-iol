@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import GradientContainer from "../../components/GradientContainer";
 import TwoColumnHeader from "../../components/TwoColumnHeader";
 import TwoColumnItem from "../../components/TwoColumnItem";
 
@@ -7,10 +8,23 @@ import TwoColumnItem from "../../components/TwoColumnItem";
 const TransactionStates = ({ estados }) => {
   return (
     <View>
-      <Text style={{ color: "white", alignSelf: "center", marginTop: 30 }}>
+      <Text
+        style={{
+          color: "white",
+          alignSelf: "center",
+          fontFamily: "SairaSemiBold",
+          fontSize: 18,
+        }}
+      >
         Estados de Transacción
       </Text>
-      <View style={styles.container}>
+      <GradientContainer
+        firstColor="#132b38"
+        secondColor="#050f17"
+        padding={10}
+        borderRadius={20}
+        marginHorizontal={15}
+      >
         <TwoColumnHeader firstTitle="Detalle" secondTitle="Fecha" />
 
         {estados.map((estado) => {
@@ -29,7 +43,7 @@ const TransactionStates = ({ estados }) => {
             />
           );
         })}
-      </View>
+      </GradientContainer>
     </View>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import GoBackButton from "../../components/GoBackButton";
+import GradientContainer from "../../components/GradientContainer";
 import Title from "../../components/Title";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
@@ -75,16 +76,25 @@ const OperationScreen = ({ route, navigation }) => {
 
   if (data) {
     return (
-      <View style={{ flex: 1, padding: 10, backgroundColor: "#646ecb" }}>
-        <Title textTitle={`Operacion N° ${numero}`} />
-        <InfoOperation
-          simbolo={data.simbolo}
-          tipo={data.tipo}
-          fechaAlta={data.fechaAlta}
-          validez={data.validez}
-          precio={data.precio}
-          cantidad={data.cantidad}
-        />
+      <View style={{ flex: 1, backgroundColor: "#131e31" }}>
+        <GradientContainer
+          firstColor="#2b5a7f"
+          secondColor="#193952"
+          padding={10}
+          borderBottomLeftRadius={30}
+          borderBottomRightRadius={30}
+          marginBottom={20}
+        >
+          <Title textTitle={`Operacion N° ${numero}`} />
+          <InfoOperation
+            simbolo={data.simbolo}
+            tipo={data.tipo}
+            fechaAlta={data.fechaAlta}
+            validez={data.validez}
+            precio={data.precio}
+            cantidad={data.cantidad}
+          />
+        </GradientContainer>
         <TransactionStates estados={data.estados} />
         <Commisions aranceles={data.aranceles} />
         <GoBackButton navigation={navigation} />
