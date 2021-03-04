@@ -115,13 +115,8 @@ const DrawerNavigator = () => {
 
 const App = () => {
   const [loaded] = useFonts({
-    SairaBlack: require("./assets/fonts/Saira-Black.ttf"),
     SairaBold: require("./assets/fonts/Saira-Bold.ttf"),
-    SairaExtraBold: require("./assets/fonts/Saira-ExtraBold.ttf"),
-    SairaExtraLight: require("./assets/fonts/Saira-ExtraLight.ttf"),
     SairaLight: require("./assets/fonts/Saira-Light.ttf"),
-    SairaMedium: require("./assets/fonts/Saira-Medium.ttf"),
-    SairaRegular: require("./assets/fonts/Saira-Regular.ttf"),
     SairaSemiBold: require("./assets/fonts/Saira-SemiBold.ttf"),
     SairaThin: require("./assets/fonts/Saira-Thin.ttf"),
   });
