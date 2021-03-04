@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import GoBackButton from "../../components/GoBackButton";
+import GradientContainer from "../../components/GradientContainer";
 import ThreeColumnHeader from "../../components/ThreeColumnHeader";
 import ThreeColumnItem from "../../components/ThreeColumnItem";
 import Title from "../../components/Title";
@@ -9,13 +10,27 @@ const StatisticsScreen = ({ route, navigation }) => {
   const {
     statistics: [anterior, actual],
   } = route.params;
-  console.log("anterior", anterior);
-  console.log("actual", actual);
 
   return (
-    <View style={{ flex: 1, padding: 10, backgroundColor: "#646ecb" }}>
-      <Title textTitle="Estadisticas" />
-      <View style={styles.container}>
+    <View style={{ flex: 1, backgroundColor: "#131e31" }}>
+      <GradientContainer
+        firstColor="#2b5a7f"
+        secondColor="#193952"
+        padding={10}
+        borderBottomLeftRadius={30}
+        borderBottomRightRadius={30}
+        marginBottom={40}
+      >
+        <Title textTitle="Estadisticas" />
+      </GradientContainer>
+
+      <GradientContainer
+        firstColor="#132b38"
+        secondColor="#050f17"
+        padding={10}
+        borderRadius={20}
+        marginHorizontal={15}
+      >
         <ThreeColumnHeader
           firstTitle=""
           secondTitle="Mes Anterior"
@@ -31,19 +46,10 @@ const StatisticsScreen = ({ route, navigation }) => {
           secondText={`AR$ ${anterior.volumen.toFixed(2)}`}
           thirdText={`AR$ ${actual.volumen.toFixed(2)}`}
         />
-      </View>
+      </GradientContainer>
       <GoBackButton navigation={navigation} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "rgba(235,255,255,0.8)",
-    padding: 10,
-    borderRadius: 10,
-    marginTop: 15,
-  },
-});
 
 export default StatisticsScreen;

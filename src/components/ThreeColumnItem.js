@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  text: { color: "white", fontFamily: "SairaThin" },
 });
 
 export default ThreeColumnItem;

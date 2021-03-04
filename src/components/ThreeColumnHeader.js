@@ -23,13 +23,14 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "white",
+    backgroundColor: "#254f70",
     alignItems: "center",
-    borderRadius: 10,
+    borderRadius: 3,
     marginBottom: 5,
   },
   text: {
-    fontWeight: "bold",
     fontSize: 16,
+    color: "white",
+    fontFamily: "SairaBold",
   },
 });
