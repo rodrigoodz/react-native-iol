@@ -33,14 +33,14 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#254f70",
+    backgroundColor: "white",
     alignItems: "center",
     borderRadius: 10,
     marginBottom: 5,
   },
   text: {
     fontSize: 16,
-    color: "white",
+    color: "black",
     fontFamily: "SairaBold",
   },
 });
