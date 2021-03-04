@@ -9,6 +9,8 @@ const BalanceInfoItem = ({ font_size, text_info, text_amount }) => {
           color: "rgba(255,255,255,0.8)",
           fontSize: font_size,
           padding: 5,
+          fontSize: 15,
+          fontFamily: "SairaLight",
         }}
       >
         {text_info}
@@ -18,6 +20,8 @@ const BalanceInfoItem = ({ font_size, text_info, text_amount }) => {
           color: "rgba(255,255,255,0.8)",
           fontSize: font_size,
           padding: 5,
+          fontSize: 15,
+          fontFamily: "SairaLight",
         }}
       >
         {text_amount}

@@ -16,6 +16,7 @@ import { RefreshControl } from "react-native";
 import UpdateController from "./UpdateController";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
+import GradientContainer from "../../components/GradientContainer";
 
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -175,30 +176,41 @@ const HomeScreen = ({ navigation }) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <Title textTitle="Cuenta de inversión Argentina" />
-        <BalanceInfo
-          data={{
-            totalEnPesos,
-            titulosValorizados,
-            disponible,
-            comprometido,
-            margenDescubierto,
-          }}
-        />
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("Estadisticas", { statistics: estadisticas })
-          }
-          style={{ alignSelf: "flex-start" }}
+        <GradientContainer
+          firstColor="#2b5a7f"
+          secondColor="#193952"
+          padding={10}
+          borderBottomLeftRadius={30}
+          borderBottomRightRadius={30}
+          marginBottom={40}
         >
-          <Text style={styles.buttonStyle}>Estadísticas</Text>
-        </TouchableOpacity>
+          <Title textTitle="Cuenta de inversión Argentina" />
+          <BalanceInfo
+            data={{
+              totalEnPesos,
+              titulosValorizados,
+              disponible,
+              comprometido,
+              margenDescubierto,
+            }}
+          />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Estadisticas", { statistics: estadisticas })
+            }
+            style={{ alignSelf: "flex-start" }}
+          >
+            <Text style={styles.buttonStyle}>Estadísticas</Text>
+          </TouchableOpacity>
+        </GradientContainer>
 
-        <CollapseItem title="a 24hs" data={hrs24} />
-        <CollapseItem title="a 48hs" data={hrs48} />
-        <CollapseItem title="a 72hs" data={hrs72} />
-        <CollapseItem title="a +72hs" data={masHrs72} />
-        <UpdateController />
+        <View style={{ marginHorizontal: 15 }}>
+          <CollapseItem title="a 24hs" data={hrs24} />
+          <CollapseItem title="a 48hs" data={hrs48} />
+          <CollapseItem title="a 72hs" data={hrs72} />
+          <CollapseItem title="a +72hs" data={masHrs72} />
+        </View>
+        {/* <UpdateController /> */}
         <StatusBar />
       </ScrollView>
     );
@@ -221,14 +233,14 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    backgroundColor: "#646ecb",
+    backgroundColor: "#131e31",
   },
   buttonStyle: {
     marginLeft: 5,
     fontSize: 18,
     marginVertical: 10,
-    color: "#fff",
+    color: "#0091c8",
+    fontFamily: "SairaSemiBold",
   },
 });
 
