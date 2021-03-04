@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.5)",
     justifyContent: "center",
+    height: 50,
   },
   picker: {
     color: "white",
   },
-  item: { height: 44 },
+  item: { height: 30 },
 });
 
 export default Selector;
