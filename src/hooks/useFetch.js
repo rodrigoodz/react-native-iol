@@ -1,8 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { reset } from "../../RootNavigation";
+import { Context as AuthContext } from "../context/AuthContext";
 
 export const useFetch = (url, token, method) => {
   const isMounted = useRef(true);
+  const { logOutWithError } = useContext(AuthContext);
 
   const [state, setState] = useState({
     data: null,
@@ -31,9 +33,8 @@ export const useFetch = (url, token, method) => {
             setState({ error: null, data });
           }
         } else {
-          console.log("Error");
-          reset(0, "SignIn");
-          //TODO deberia ver si vale la pena borrar la data y el context antes de ir a signin (sino quizas puedo entrar en un bucle infinito)
+          logOutWithError({ error: data.message });
+          setState({ error: data.message, data: null });
         }
       } catch (error) {
         console.log(error);

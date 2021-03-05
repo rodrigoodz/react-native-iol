@@ -20,6 +20,14 @@ const authReducer = (state, action) => {
         refresh_expires: null,
         errorMessage: "",
       };
+    case "logoutwitherror":
+      return {
+        access_token: null,
+        refresh_token: null,
+        expires: null,
+        refresh_expires: null,
+        errorMessage: action.payload,
+      };
     case "setError":
       return { ...state, errorMessage: action.payload };
     case "clearError":
@@ -105,9 +113,20 @@ const logOut = (dispatch) => {
   };
 };
 
+const logOutWithError = (dispatch) => {
+  return async ({ error }) => {
+    await AsyncStorage.clear();
+    dispatch({
+      type: "logoutwitherror",
+      payload: error,
+    });
+    reset(0, "SignIn");
+  };
+};
+
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { startSignIn, tryLocalSignIn, logOut },
+  { startSignIn, tryLocalSignIn, logOut, logOutWithError },
   {
     access_token: null,
     refresh_token: null,
