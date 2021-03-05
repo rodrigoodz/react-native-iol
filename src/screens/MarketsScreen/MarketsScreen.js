@@ -17,7 +17,6 @@ import getInstrumentsByCountry from "../../helpers/getInstrumentsByCountry";
 import getPanelByInstrumentAndCountry from "../../helpers/getPanelByInstrumentAndCountry";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFetch } from "../../hooks/useFetch";
-import FilterInput from "../../components/FilterInput";
 import { TextInput } from "react-native-gesture-handler";
 
 const MarketsScreen = () => {
