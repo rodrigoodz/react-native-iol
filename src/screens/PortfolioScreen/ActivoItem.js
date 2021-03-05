@@ -2,16 +2,14 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 const ActivoItem = ({
-  data: {
-    simbolo,
-    cantidad,
-    valorizado,
-    ultimoPrecio,
-    variacionDiaria,
-    gananciaPorcentaje,
-    gananciaDinero,
-    ppc,
-  },
+  simbolo = null,
+  cantidad = null,
+  valorizado = null,
+  ultimoPrecio = null,
+  variacionDiaria = null,
+  gananciaPorcentaje = null,
+  gananciaDinero = null,
+  ppc = null,
 }) => {
   return (
     <TouchableOpacity>

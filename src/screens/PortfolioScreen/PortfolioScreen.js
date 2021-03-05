@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import React, { useContext, useState } from "react";
+import { View, ScrollView, RefreshControl } from "react-native";
 import { Text } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -12,6 +12,8 @@ import LoadingComponent from "../../components/LoadingComponent";
 import Title from "../../components/Title";
 
 const PortfolioScreen = () => {
+  const [refreshing, setRefreshing] = useState(false);
+  const [doFetch, setDoFetch] = useState(0);
   const {
     state: { access_token },
   } = useContext(AuthContext);
@@ -19,35 +21,20 @@ const PortfolioScreen = () => {
   const { data, error } = useFetch(
     "https://api.invertironline.com/api/v2/portafolio/{{pais}}",
     access_token,
-    "GET"
+    "GET",
+    doFetch
   );
-  // console.log("data account", data);
 
-  // const data = {
-  //   pais: "argentina",
-  //   activos: [
-  //     {
-  //       cantidad: 5.0,
-  //       comprometido: 0.0,
-  //       puntosVariacion: -0.8,
-  //       variacionDiaria: -0.69,
-  //       ultimoPrecio: 114.5,
-  //       ppc: 126.36,
-  //       gananciaPorcentaje: -9.38,
-  //       gananciaDinero: -59.3,
-  //       valorizado: 572.5,
-  //       titulo: {
-  //         simbolo: "GGAL",
-  //         descripcion: "Grupo Financiero Galicia S.A",
-  //         pais: "argentina",
-  //         mercado: "bcba",
-  //         tipo: "ACCIONES",
-  //         plazo: "t0",
-  //         moneda: "peso_Argentino",
-  //       },
-  //     },
-  //   ],
-  // };
+  const onRefresh = () => {
+    setRefreshing(true);
+
+    setDoFetch(doFetch + 1);
+    setRefreshing(false);
+  };
+
+  if (!data && doFetch == 0) {
+    return <LoadingComponent />;
+  }
 
   if (data) {
     return (
@@ -82,7 +69,12 @@ const PortfolioScreen = () => {
             flex: 1,
           }}
         >
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          >
             {data.activos.map((activo) => {
               const {
                 titulo: { simbolo },
@@ -96,16 +88,14 @@ const PortfolioScreen = () => {
               } = activo;
               return (
                 <ActivoItem
-                  data={{
-                    simbolo,
-                    cantidad,
-                    valorizado,
-                    ultimoPrecio,
-                    variacionDiaria,
-                    gananciaPorcentaje,
-                    gananciaDinero,
-                    ppc,
-                  }}
+                  simbolo={simbolo}
+                  cantidad={cantidad}
+                  valorizado={valorizado}
+                  ultimoPrecio={ultimoPrecio}
+                  variacionDiaria={variacionDiaria}
+                  gananciaPorcentaje={gananciaPorcentaje}
+                  gananciaDinero={gananciaDinero}
+                  ppc={ppc}
                   key={simbolo}
                 />
               );
@@ -115,10 +105,41 @@ const PortfolioScreen = () => {
       </View>
     );
   } else {
-    return <LoadingComponent />;
+    return (
+      <View style={{ flex: 1, backgroundColor: "#131e31" }}>
+        <GradientContainer
+          firstColor="#2b5a7f"
+          secondColor="#193952"
+          padding={10}
+          borderBottomLeftRadius={30}
+          borderBottomRightRadius={30}
+          marginBottom={20}
+        >
+          <Title textTitle="Portafolio Argentina" />
+        </GradientContainer>
+        <Text
+          style={{
+            color: "rgba(235,255,255,0.8)",
+            alignSelf: "center",
+            fontFamily: "SairaBold",
+            fontSize: 24,
+          }}
+        >
+          Activos
+        </Text>
+        <LinearGradient
+          colors={["#132b38", "#050f17"]}
+          style={{
+            padding: 10,
+            borderRadius: 20,
+            marginHorizontal: 15,
+            marginBottom: 5,
+            flex: 1,
+          }}
+        ></LinearGradient>
+      </View>
+    );
   }
 };
-
-const styles = StyleSheet.create({});
 
 export default PortfolioScreen;
