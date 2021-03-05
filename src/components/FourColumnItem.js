@@ -18,22 +18,25 @@ const FourColumnItem = ({ firstText, secondText, thirdText, fourthText }) => {
         overflow: "hidden",
       }}
     >
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{firstText}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{secondText}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{thirdText}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{fourthText}</Text>
       </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({ text: { fontFamily: "SairaLight" } });
+const styles = StyleSheet.create({
+  text: { fontFamily: "SairaLight" },
+  column: { flex: 1, alignItems: "center" },
+});
 
 export default FourColumnItem;

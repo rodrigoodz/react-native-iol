@@ -9,16 +9,16 @@ const FourColumnHeader = ({
 }) => {
   return (
     <View style={styles.header}>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{firstTitle}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{secondTitle}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{thirdTitle}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{fourthTitle}</Text>
       </View>
     </View>
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+  column: { flex: 1, alignItems: "center" },
 });
 
 export default FourColumnHeader;

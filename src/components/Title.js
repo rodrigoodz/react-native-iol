@@ -9,9 +9,7 @@ const Title = ({ textTitle }) => {
         {textTitle}
       </Text>
 
-      <Divider
-        style={{ color: "rgba(255,255,255,0.8)", marginHorizontal: 10 }}
-      />
+      <Divider style={styles.dividerStyle} />
     </View>
   );
 };
@@ -22,6 +20,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 10,
   },
+  dividerStyle: { color: "rgba(255,255,255,0.8)", marginHorizontal: 10 },
 });
 
 export default Title;

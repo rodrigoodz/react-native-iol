@@ -10,19 +10,19 @@ const FiveColumnHeader = ({
 }) => {
   return (
     <View style={styles.header}>
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{firstTitle}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{secondTitle}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{thirdTitle}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{fourthTitle}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{fifthTitle}</Text>
       </View>
     </View>
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontFamily: "SairaBold",
   },
+  column: { flex: 1, alignItems: "flex-start" },
 });
 
 export default FiveColumnHeader;

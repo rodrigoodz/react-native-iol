@@ -4,13 +4,13 @@ import { StyleSheet, Text, View } from "react-native";
 const ThreeColumnHeader = ({ firstTitle, secondTitle, thirdTitle }) => {
   return (
     <View style={styles.header}>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{firstTitle}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{secondTitle}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "center" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{thirdTitle}</Text>
       </View>
     </View>
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 5,
   },
+  column: { flex: 1, alignItems: "center" },
   text: {
     fontSize: 16,
     color: "black",

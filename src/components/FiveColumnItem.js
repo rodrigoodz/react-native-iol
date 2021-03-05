@@ -20,19 +20,19 @@ const FiveColumnItem = ({
         borderRadius: 5,
       }}
     >
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{firstText}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{secondText}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{thirdText}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{fourthText}</Text>
       </View>
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
+      <View style={styles.column}>
         <Text style={styles.text}>{fifthText}</Text>
       </View>
     </View>
@@ -41,6 +41,7 @@ const FiveColumnItem = ({
 
 const styles = StyleSheet.create({
   text: { color: "white", fontFamily: "SairaThin", fontSize: 12 },
+  column: { flex: 1, alignItems: "flex-start" },
 });
 
 export default FiveColumnItem;
