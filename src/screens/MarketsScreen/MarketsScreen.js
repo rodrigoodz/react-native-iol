@@ -15,6 +15,7 @@ import Title from "../../components/Title";
 import { Context as AuthContext } from "../../context/AuthContext";
 import getInstrumentsByCountry from "../../helpers/getInstrumentsByCountry";
 import getPanelByInstrumentAndCountry from "../../helpers/getPanelByInstrumentAndCountry";
+import { LinearGradient } from "expo-linear-gradient";
 import { useFetch } from "../../hooks/useFetch";
 
 const MarketsScreen = () => {
@@ -140,7 +141,12 @@ const MarketsScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#131e31" }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#131e31",
+      }}
+    >
       <GradientContainer
         firstColor="#2b5a7f"
         secondColor="#193952"
@@ -203,19 +209,25 @@ const MarketsScreen = () => {
                 options={allPanels}
                 selected={selectedPanel}
                 setSelected={(value) =>
-                  setSelectedValues({ ...selectedValues, selectedPanel: value })
+                  setSelectedValues({
+                    ...selectedValues,
+                    selectedPanel: value,
+                  })
                 }
               />
             </View>
           </View>
         </View>
       </GradientContainer>
-      <GradientContainer
-        firstColor="#132b38"
-        secondColor="#050f17"
-        padding={10}
-        borderRadius={20}
-        marginHorizontal={15}
+      <LinearGradient
+        colors={["#132b38", "#050f17"]}
+        style={{
+          padding: 10,
+          borderRadius: 20,
+          marginHorizontal: 15,
+          marginBottom: 5,
+          flex: 1,
+        }}
       >
         <FourColumnHeader
           firstTitle={`Símbolo`}
@@ -224,28 +236,26 @@ const MarketsScreen = () => {
           fourthTitle={`Volumen`}
         />
         {data ? (
-          <>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {data.titulos.map((e) => {
-                return (
-                  <FourColumnItem
-                    firstText={`${e.simbolo}`}
-                    secondText={`$${e.ultimoPrecio.toFixed(2)}`}
-                    thirdText={`${e.variacionPorcentual}%`}
-                    fourthText={`${e.volumen} M`}
-                    key={e.simbolo}
-                  />
-                );
-              })}
-            </ScrollView>
-          </>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {data.titulos.map((e) => {
+              return (
+                <FourColumnItem
+                  firstText={`${e.simbolo}`}
+                  secondText={`$${e.ultimoPrecio.toFixed(2)}`}
+                  thirdText={`${e.variacionPorcentual}%`}
+                  fourthText={`${e.volumen} M`}
+                  key={e.simbolo}
+                />
+              );
+            })}
+          </ScrollView>
         ) : (
           <View>
             {error ? <Text>{error}</Text> : null}
             <ActivityIndicator size="small" color="#fff" />
           </View>
         )}
-      </GradientContainer>
+      </LinearGradient>
     </View>
   );
 };
