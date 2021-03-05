@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { Text, Input } from "react-native-elements";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { Text, Input, Overlay, Button } from "react-native-elements";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { Context as AuthContext } from "../context/AuthContext";
+import { Context as AuthContext } from "../../context/AuthContext";
 
-import ButtonComponent from "../components/ButtonComponent";
+import ButtonComponent from "../../components/ButtonComponent";
+import OverlayText from "./OverlayText";
 
 const ScreenLogin = () => {
+  const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -89,6 +91,42 @@ const ScreenLogin = () => {
         {errorMessage.length < 0 ? null : (
           <Text style={{ fontSize: 28, color: "red" }}>{errorMessage}</Text>
         )}
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }}
+        >
+          <TouchableOpacity
+            title="Open Overlay"
+            onPress={() => setVisible(!visible)}
+          >
+            <Text style={{ color: "green", fontSize: 20 }}>¿Cómo empezar?</Text>
+          </TouchableOpacity>
+          <Overlay
+            isVisible={visible}
+            backdropStyle={{ backgroundColor: "rgba(0,0,0,.6)" }}
+            overlayStyle={{
+              backgroundColor: "rgba(255,255,255,0.9)",
+            }}
+            onBackdropPress={() => setVisible(!visible)}
+          >
+            <View
+              style={{ alignItems: "center", marginVertical: 20, padding: 10 }}
+            >
+              <OverlayText />
+              <Button
+                title="Aceptar"
+                buttonStyle={{
+                  backgroundColor: "black",
+                  width: 120,
+                  marginVertical: 15,
+                }}
+                onPress={() => setVisible(!visible)}
+              />
+            </View>
+          </Overlay>
+        </View>
       </View>
     </View>
   );
