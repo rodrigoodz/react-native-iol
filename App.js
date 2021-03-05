@@ -94,11 +94,10 @@ const DrawerNavigator = () => {
       initialRouteName="Home"
       hideStatusBar={false}
       drawerStyle={{
-        backgroundColor: "#130F40",
+        backgroundColor: "#2b5a7f",
       }}
       drawerContentOptions={{
-        activeTintColor: "white",
-        activeBackgroundColor: "black",
+        activeBackgroundColor: "#193952",
         labelStyle: { color: "white", fontSize: 22 },
         itemStyle: { borderRadius: 10 },
       }}
