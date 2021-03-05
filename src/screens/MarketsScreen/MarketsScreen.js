@@ -6,7 +6,7 @@ import {
   ScrollView,
   ActivityIndicator,
 } from "react-native";
-import { ButtonGroup } from "react-native-elements";
+import { ButtonGroup, Icon, Input } from "react-native-elements";
 import FourColumnHeader from "../../components/FourColumnHeader";
 import FourColumnItem from "../../components/FourColumnItem";
 import GradientContainer from "../../components/GradientContainer";
@@ -17,6 +17,8 @@ import getInstrumentsByCountry from "../../helpers/getInstrumentsByCountry";
 import getPanelByInstrumentAndCountry from "../../helpers/getPanelByInstrumentAndCountry";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFetch } from "../../hooks/useFetch";
+import FilterInput from "../../components/FilterInput";
+import { TextInput } from "react-native-gesture-handler";
 
 const MarketsScreen = () => {
   const {
@@ -82,7 +84,8 @@ const MarketsScreen = () => {
       },
     ],
   });
-  const [dofetch, setDofetch] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   const {
     selectedInstrument,
@@ -116,6 +119,8 @@ const MarketsScreen = () => {
       country
     );
 
+    setInputValue("");
+    setFilteredData([]);
     setSelectedValues({
       ...selectedValues,
       allInstruments: getInstruments,
@@ -132,12 +137,23 @@ const MarketsScreen = () => {
       selectedCountry
     );
 
+    setInputValue("");
+    setFilteredData([]);
+
     setSelectedValues({
       ...selectedValues,
       allPanels: getPanel,
       selectedPanel: getPanel[0].value,
       selectedInstrument: instrument,
     });
+  };
+
+  const handleChange = (text) => {
+    setInputValue(text);
+    const result = data.titulos.filter(
+      (titulo) => titulo.simbolo.slice(0, text.length) === text.toUpperCase()
+    );
+    setFilteredData(result);
   };
 
   return (
@@ -218,7 +234,37 @@ const MarketsScreen = () => {
             </View>
           </View>
         </View>
+        {data ? (
+          <View
+            style={{
+              flexDirection: "row",
+              alignSelf: "center",
+              justifyContent: "center",
+              backgroundColor: "rgba(255,255,255,0.5)",
+              borderRadius: 5,
+              width: 100,
+            }}
+          >
+            <Icon
+              type="ant-design"
+              name="search1"
+              size={18}
+              color="rgba(255,255,255,0.5)"
+              style={{ marginHorizontal: 10 }}
+            />
+            <TextInput
+              style={{
+                height: 20,
+                color: "rgba(255,255,255,0.5)",
+              }}
+              placeholder="Buscar"
+              onChangeText={(text) => handleChange(text)}
+              value={inputValue}
+            />
+          </View>
+        ) : null}
       </GradientContainer>
+
       <LinearGradient
         colors={["#132b38", "#050f17"]}
         style={{
@@ -236,19 +282,35 @@ const MarketsScreen = () => {
           fourthTitle={`Volumen`}
         />
         {data ? (
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {data.titulos.map((e) => {
-              return (
-                <FourColumnItem
-                  firstText={`${e.simbolo}`}
-                  secondText={`$${e.ultimoPrecio.toFixed(2)}`}
-                  thirdText={`${e.variacionPorcentual}%`}
-                  fourthText={`${e.volumen} M`}
-                  key={e.simbolo}
-                />
-              );
-            })}
-          </ScrollView>
+          filteredData.length > 0 ? (
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {filteredData.map((e) => {
+                return (
+                  <FourColumnItem
+                    firstText={`${e.simbolo}`}
+                    secondText={`$${e.ultimoPrecio.toFixed(2)}`}
+                    thirdText={`${e.variacionPorcentual}%`}
+                    fourthText={`${e.volumen} M`}
+                    key={e.simbolo}
+                  />
+                );
+              })}
+            </ScrollView>
+          ) : (
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {data.titulos.map((e) => {
+                return (
+                  <FourColumnItem
+                    firstText={`${e.simbolo}`}
+                    secondText={`$${e.ultimoPrecio.toFixed(2)}`}
+                    thirdText={`${e.variacionPorcentual}%`}
+                    fourthText={`${e.volumen} M`}
+                    key={e.simbolo}
+                  />
+                );
+              })}
+            </ScrollView>
+          )
         ) : (
           <View>
             {error ? <Text>{error}</Text> : null}
