@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
+import { StyleSheet, View, ActivityIndicator, ScrollView } from "react-native";
 import { Text } from "react-native-elements";
 import ActivoItem from "./ActivoItem";
 import Title from "../../components/Title";
 import { useFetch } from "../../hooks/useFetch";
 import { Context as AuthContext } from "../../context/AuthContext";
+import GradientContainer from "../../components/GradientContainer";
+import { LinearGradient } from "expo-linear-gradient";
 
 const PortfolioScreen = () => {
   const {
@@ -46,27 +48,41 @@ const PortfolioScreen = () => {
 
   if (data) {
     return (
-      <View style={{ flex: 1, padding: 10, backgroundColor: "#131e31" }}>
-        <Title textTitle="Portafolio Argentina" />
-        <Text h3 style={{ color: "rgba(235,255,255,0.8)" }}>
+      <View style={{ flex: 1, backgroundColor: "#131e31" }}>
+        <GradientContainer
+          firstColor="#2b5a7f"
+          secondColor="#193952"
+          padding={10}
+          borderBottomLeftRadius={30}
+          borderBottomRightRadius={30}
+          marginBottom={20}
+        >
+          <Title textTitle="Portafolio Argentina" />
+        </GradientContainer>
+        <Text
+          style={{
+            color: "rgba(235,255,255,0.8)",
+            alignSelf: "center",
+            fontFamily: "SairaBold",
+            fontSize: 24,
+          }}
+        >
           Activos
         </Text>
-        {/* <ActivoItem /> */}
-        {data.activos.map((activo) => {
-          const {
-            titulo: { simbolo },
-            cantidad,
-            valorizado,
-            ultimoPrecio,
-            variacionDiaria,
-            gananciaPorcentaje,
-            gananciaDinero,
-            ppc,
-          } = activo;
-          return (
-            <ActivoItem
-              data={{
-                simbolo,
+        <LinearGradient
+          colors={["#132b38", "#050f17"]}
+          style={{
+            padding: 10,
+            borderRadius: 20,
+            marginHorizontal: 15,
+            marginBottom: 5,
+            flex: 1,
+          }}
+        >
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {data.activos.map((activo) => {
+              const {
+                titulo: { simbolo },
                 cantidad,
                 valorizado,
                 ultimoPrecio,
@@ -74,11 +90,25 @@ const PortfolioScreen = () => {
                 gananciaPorcentaje,
                 gananciaDinero,
                 ppc,
-              }}
-              key={simbolo}
-            />
-          );
-        })}
+              } = activo;
+              return (
+                <ActivoItem
+                  data={{
+                    simbolo,
+                    cantidad,
+                    valorizado,
+                    ultimoPrecio,
+                    variacionDiaria,
+                    gananciaPorcentaje,
+                    gananciaDinero,
+                    ppc,
+                  }}
+                  key={simbolo}
+                />
+              );
+            })}
+          </ScrollView>
+        </LinearGradient>
       </View>
     );
   } else {

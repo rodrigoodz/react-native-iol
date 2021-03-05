@@ -19,6 +19,7 @@ const ActivoItem = ({
       <View
         style={{
           height: 80,
+          padding: 10,
           flexDirection: "row",
           backgroundColor:
             Number(gananciaPorcentaje) < 0
@@ -33,57 +34,57 @@ const ActivoItem = ({
             flex: 1,
             alignSelf: "stretch",
             justifyContent: "center",
-            marginLeft: 20,
+            alignItems: "flex-start",
           }}
         >
-          <Text style={{ fontWeight: "bold", color: "black" }}>{simbolo}</Text>
-          <Text style={{ color: "black" }}>Ult. Precio</Text>
-          <Text style={{ color: "black" }}>PPC</Text>
+          <Text style={styles.boldTitle}>{simbolo}</Text>
+          <Text style={styles.text}>Ult. Precio</Text>
+          <Text style={styles.text}>PPC</Text>
         </View>
         <View
           style={{
             flex: 1,
             alignSelf: "stretch",
             justifyContent: "center",
+            alignItems: "flex-start",
           }}
         >
-          <Text style={{ fontWeight: "bold", color: "black" }}>{cantidad}</Text>
-          <Text style={{ color: "black" }}>{`$${ultimoPrecio.toFixed(
-            2
-          )}`}</Text>
-          <Text style={{ color: "black" }}>{`$${ppc.toFixed(2)}`}</Text>
+          <Text style={styles.boldTitle}>{cantidad}</Text>
+          <Text style={styles.text}>{`$${ultimoPrecio.toFixed(2)}`}</Text>
+          <Text style={styles.text}>{`$${ppc.toFixed(2)}`}</Text>
         </View>
         <View
           style={{
             flex: 1,
             alignSelf: "stretch",
             justifyContent: "center",
+            alignItems: "flex-start",
           }}
         >
-          <Text style={{ fontWeight: "bold", color: "black" }}>Total</Text>
-          <Text style={{ color: "black" }}>Var. Diaria</Text>
-          <Text style={{ color: "black" }}>Gan-Perd:</Text>
+          <Text style={styles.boldTitle}>Total</Text>
+          <Text style={styles.text}>Var. Diaria</Text>
+          <Text style={styles.text}>Gan-Perd:</Text>
         </View>
         <View
           style={{
             flex: 1,
             alignSelf: "stretch",
             justifyContent: "center",
+            alignItems: "flex-end",
           }}
         >
-          <Text
-            style={{ fontWeight: "bold", color: "black" }}
-          >{`$${valorizado.toFixed(2)}`}</Text>
-          <Text style={{ color: "black" }}>{`${variacionDiaria}%`}</Text>
-          <Text
-            style={{ color: "black" }}
-          >{`${gananciaPorcentaje}%$${gananciaDinero}`}</Text>
+          <Text style={styles.boldTitle}>{`$${valorizado.toFixed(2)}`}</Text>
+          <Text style={styles.text}>{`${variacionDiaria}%`}</Text>
+          <Text style={styles.text}>{`${gananciaPorcentaje}%`}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  boldTitle: { color: "black", fontFamily: "SairaBold" },
+  text: { color: "black", fontFamily: "SairaLight" },
+});
 
 export default ActivoItem;
