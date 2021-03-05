@@ -15,9 +15,10 @@ const FourColumnItem = ({ firstText, secondText, thirdText, fourthText }) => {
         alignItems: "center",
         marginVertical: 5,
         borderRadius: 5,
+        overflow: "hidden",
       }}
     >
-      <View style={{ flex: 1, alignItems: "center", paddingLeft: 10 }}>
+      <View style={{ flex: 1, alignItems: "center" }}>
         <Text style={styles.text}>{firstText}</Text>
       </View>
       <View style={{ flex: 1, alignItems: "center" }}>
@@ -33,6 +34,6 @@ const FourColumnItem = ({ firstText, secondText, thirdText, fourthText }) => {
   );
 };
 
-const styles = StyleSheet.create({ text: {} });
+const styles = StyleSheet.create({ text: { fontFamily: "SairaLight" } });
 
 export default FourColumnItem;
