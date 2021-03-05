@@ -5,6 +5,7 @@ import {
   ScrollView,
   ActivityIndicator,
   TextInput,
+  RefreshControl,
 } from "react-native";
 import { ButtonGroup, Icon } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
@@ -21,7 +22,11 @@ import GradientContainer from "../../components/GradientContainer";
 import Selector from "../../components/Selector";
 import Title from "../../components/Title";
 
+//TODO hacer que cada item sea TouchableOpacity, me lleve a otra pantalla  (le mando algunos params) y muestro toda la info de cierto ticker pero mucho mas detallado, en esa nueva pantalla puedo poner un botton que diga MAS INFO y traer la caja de puntas completa y otro boton, ver grafico, y ahi llamo a getTickerBetweenDates
+
 const MarketsScreen = () => {
+  const [refreshing, setRefreshing] = useState(false);
+  const [doFetch, setDoFetch] = useState(0);
   const {
     state: { access_token },
   } = useContext(AuthContext);
@@ -109,7 +114,8 @@ const MarketsScreen = () => {
   const { data, error } = useFetch(
     `https://api.invertironline.com/api/v2/Cotizaciones/${selectedInstrument}/${formattedPanel}/${formattedCountry}`,
     access_token,
-    "GET"
+    "GET",
+    doFetch
   );
 
   const handleCountrySelection = (country) => {
@@ -155,6 +161,13 @@ const MarketsScreen = () => {
       (titulo) => titulo.simbolo.slice(0, text.length) === text.toUpperCase()
     );
     setFilteredData(result);
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+
+    setDoFetch(doFetch + 1);
+    setRefreshing(false);
   };
 
   return (
@@ -298,7 +311,12 @@ const MarketsScreen = () => {
               })}
             </ScrollView>
           ) : (
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
+            >
               {data.titulos.map((e) => {
                 return (
                   <FourColumnItem
