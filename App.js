@@ -23,40 +23,46 @@ import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
 
 import { navigationRef } from "./RootNavigation";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
+import { Easing } from "react-native-reanimated";
+import { View } from "react-native";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+const navigatorOptions = {
+  headerShown: false,
+  cardStyle: { backgroundColor: "transparent" },
+  cardStyleInterpolator: ({ current: { progress } }) => ({
+    cardStyle: {
+      opacity: progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+      }),
+    },
+    overlayStyle: {
+      opacity: progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 0.5],
+        extrapolate: "clamp",
+      }),
+    },
+  }),
+};
+
 const HomeNavigator = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Inicio"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Estadisticas"
-        component={StatisticsScreen}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator screenOptions={navigatorOptions}>
+      <Stack.Screen name="Inicio" component={HomeScreen} />
+      <Stack.Screen name="Estadisticas" component={StatisticsScreen} />
     </Stack.Navigator>
   );
 };
 
 const OperationNavigator = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Operaciones"
-        component={OperationsHistoryScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Operacion"
-        component={OperationScreen}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator screenOptions={navigatorOptions}>
+      <Stack.Screen name="Operaciones" component={OperationsHistoryScreen} />
+      <Stack.Screen name="Operacion" component={OperationScreen} />
     </Stack.Navigator>
   );
 };
@@ -124,26 +130,14 @@ const App = () => {
   if (!loaded) {
     return null;
   }
+
   return (
     <AuthProvider>
       <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="SignIn"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
-
-          <Stack.Screen
-            name="Home"
-            component={DrawerNavigator}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Salir"
-            component={LogoutScreen}
-            options={{ headerShown: false }}
-          />
+        <Stack.Navigator screenOptions={navigatorOptions}>
+          <Stack.Screen name="SignIn" component={LoginScreen} />
+          <Stack.Screen name="Home" component={DrawerNavigator} />
+          <Stack.Screen name="Salir" component={LogoutScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
