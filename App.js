@@ -20,11 +20,10 @@ import MarketsScreen from "./src/screens/MarketsScreen/MarketsScreen";
 import StatisticsScreen from "./src/screens/StatisticsScreen/StatisticsScreen";
 import LogoutScreen from "./src/screens/LogoutScreen";
 import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
+import TickerScreen from "./src/screens/TickerScreen/TickerScreen";
 
 import { navigationRef } from "./RootNavigation";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
-import { Easing } from "react-native-reanimated";
-import { View } from "react-native";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -63,6 +62,15 @@ const OperationNavigator = () => {
     <Stack.Navigator screenOptions={navigatorOptions}>
       <Stack.Screen name="Operaciones" component={OperationsHistoryScreen} />
       <Stack.Screen name="Operacion" component={OperationScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const MarketNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={navigatorOptions}>
+      <Stack.Screen name="Cotizaciones" component={MarketsScreen} />
+      <Stack.Screen name="Ticker" component={TickerScreen} />
     </Stack.Navigator>
   );
 };
@@ -114,7 +122,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Portafolio" component={PortfolioScreen} />
       <Drawer.Screen name="Operar" component={BuySellScreen} />
       <Drawer.Screen name="Operaciones" component={OperationNavigator} />
-      <Drawer.Screen name="Cotizaciones" component={MarketsScreen} />
+      <Drawer.Screen name="Cotizaciones" component={MarketNavigator} />
     </Drawer.Navigator>
   );
 };
