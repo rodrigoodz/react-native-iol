@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+
 import GradientContainer from "../components/GradientContainer";
 import Title from "../components/Title";
 

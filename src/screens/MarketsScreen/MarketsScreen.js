@@ -1,23 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
-  StyleSheet,
   Text,
   View,
   ScrollView,
   ActivityIndicator,
+  TextInput,
 } from "react-native";
-import { ButtonGroup, Icon, Input } from "react-native-elements";
+import { ButtonGroup, Icon } from "react-native-elements";
+import { LinearGradient } from "expo-linear-gradient";
+
+import { Context as AuthContext } from "../../context/AuthContext";
+import { useFetch } from "../../hooks/useFetch";
+
+import getInstrumentsByCountry from "../../helpers/getInstrumentsByCountry";
+import getPanelByInstrumentAndCountry from "../../helpers/getPanelByInstrumentAndCountry";
+
 import FourColumnHeader from "../../components/FourColumnHeader";
 import FourColumnItem from "../../components/FourColumnItem";
 import GradientContainer from "../../components/GradientContainer";
 import Selector from "../../components/Selector";
 import Title from "../../components/Title";
-import { Context as AuthContext } from "../../context/AuthContext";
-import getInstrumentsByCountry from "../../helpers/getInstrumentsByCountry";
-import getPanelByInstrumentAndCountry from "../../helpers/getPanelByInstrumentAndCountry";
-import { LinearGradient } from "expo-linear-gradient";
-import { useFetch } from "../../hooks/useFetch";
-import { TextInput } from "react-native-gesture-handler";
 
 const MarketsScreen = () => {
   const {

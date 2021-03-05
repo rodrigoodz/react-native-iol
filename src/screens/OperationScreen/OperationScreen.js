@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
-import GoBackButton from "../../components/GoBackButton";
-import GradientContainer from "../../components/GradientContainer";
-import LoadingComponent from "../../components/LoadingComponent";
-import Title from "../../components/Title";
+import { View, StyleSheet } from "react-native";
+
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
+
 import Commisions from "./Commisions";
+import GoBackButton from "../../components/GoBackButton";
+import GradientContainer from "../../components/GradientContainer";
 import InfoOperation from "./InfoOperation";
+import LoadingComponent from "../../components/LoadingComponent";
+import Title from "../../components/Title";
 import TransactionStates from "./TransactionStates";
 
 // const operation = {

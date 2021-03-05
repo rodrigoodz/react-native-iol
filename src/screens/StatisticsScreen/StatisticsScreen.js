@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+
 import GoBackButton from "../../components/GoBackButton";
 import GradientContainer from "../../components/GradientContainer";
 import ThreeColumnHeader from "../../components/ThreeColumnHeader";

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,18 +6,17 @@ import {
   ScrollView,
   TouchableOpacity,
   StatusBar,
-  ActivityIndicator,
+  RefreshControl,
 } from "react-native";
 
-import Title from "../../components/Title";
-import BalanceInfo from "./BalanceInfo";
-import CollapseItem from "../../components/CollapseItem";
-import { RefreshControl } from "react-native";
-import UpdateController from "./UpdateController";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
+
+import BalanceInfo from "./BalanceInfo";
+import CollapseItem from "../../components/CollapseItem";
 import GradientContainer from "../../components/GradientContainer";
 import LoadingComponent from "../../components/LoadingComponent";
+import Title from "../../components/Title";
 
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);

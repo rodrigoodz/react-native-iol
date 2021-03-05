@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
+
 import GradientContainer from "../../components/GradientContainer";
 import ThreeColumnHeader from "../../components/ThreeColumnHeader";
 import ThreeColumnItem from "../../components/ThreeColumnItem";

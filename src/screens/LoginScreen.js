@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Input } from "react-native-elements";
 import { MaterialIcons } from "@expo/vector-icons";
-import ButtonComponent from "../components/ButtonComponent";
+
 import { Context as AuthContext } from "../context/AuthContext";
+
+import ButtonComponent from "../components/ButtonComponent";
 
 const ScreenLogin = () => {
   const [email, setEmail] = useState("");

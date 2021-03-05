@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import { Text } from "react-native-elements";
-import ActivoItem from "./ActivoItem";
-import Title from "../../components/Title";
-import { useFetch } from "../../hooks/useFetch";
-import { Context as AuthContext } from "../../context/AuthContext";
-import GradientContainer from "../../components/GradientContainer";
 import { LinearGradient } from "expo-linear-gradient";
+
+import { Context as AuthContext } from "../../context/AuthContext";
+import { useFetch } from "../../hooks/useFetch";
+
+import ActivoItem from "./ActivoItem";
+import GradientContainer from "../../components/GradientContainer";
 import LoadingComponent from "../../components/LoadingComponent";
+import Title from "../../components/Title";
 
 const PortfolioScreen = () => {
   const {

@@ -1,27 +1,28 @@
 import React from "react";
-import { useFonts } from "expo-font";
-import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-
+import { Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useFonts } from "expo-font";
+import { AntDesign } from "@expo/vector-icons";
 import {
   createDrawerNavigator,
   DrawerItem,
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
+
+import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
+import LoginScreen from "./src/screens/LoginScreen";
 import BuySellScreen from "./src/screens/BuySellScreen";
+import OperationsHistoryScreen from "./src/screens/OperationsHistoryScreen/OperationsHistoryScreen";
 import PortfolioScreen from "./src/screens/PortfolioScreen/PortfolioScreen";
 import MarketsScreen from "./src/screens/MarketsScreen/MarketsScreen";
 import StatisticsScreen from "./src/screens/StatisticsScreen/StatisticsScreen";
-import OperationsHistoryScreen from "./src/screens/OperationsHistoryScreen/OperationsHistoryScreen";
-import { AntDesign } from "@expo/vector-icons";
-import { Text } from "react-native";
-import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
-import { Provider as AuthProvider } from "./src/context/AuthContext";
-import { navigationRef } from "./RootNavigation";
 import LogoutScreen from "./src/screens/LogoutScreen";
+import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
+
+import { navigationRef } from "./RootNavigation";
+import { Provider as AuthProvider } from "./src/context/AuthContext";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();

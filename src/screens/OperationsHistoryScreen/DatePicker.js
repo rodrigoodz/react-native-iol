@@ -7,6 +7,7 @@ import {
   Platform,
 } from "react-native";
 import { Icon } from "react-native-elements";
+
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 const calendar_icon = (

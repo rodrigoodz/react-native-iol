@@ -1,15 +1,16 @@
 import React, { useContext, useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 
-import Title from "../../components/Title";
-import SelectOperationStatus from "./SelectOperationStatus";
+import { Context as AuthContext } from "../../context/AuthContext";
+import { useFetch } from "../../hooks/useFetch";
+
 import DatePicker from "./DatePicker";
-import Selector from "../../components/Selector";
 import FiveColumnHeader from "../../components/FiveColumnHeader";
 import FiveColumnItem from "../../components/FiveColumnItem";
-import { useFetch } from "../../hooks/useFetch";
-import { Context as AuthContext } from "../../context/AuthContext";
 import GradientContainer from "../../components/GradientContainer";
+import SelectOperationStatus from "./SelectOperationStatus";
+import Selector from "../../components/Selector";
+import Title from "../../components/Title";
 
 // const datos = [
 //   {
