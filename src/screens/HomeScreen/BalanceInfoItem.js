@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
 
 const BalanceInfoItem = ({ font_size, text_info, text_amount }) => {
   return (
@@ -7,9 +7,13 @@ const BalanceInfoItem = ({ font_size, text_info, text_amount }) => {
       <Text style={[styles.textStyle, { fontSize: font_size }]}>
         {text_info}
       </Text>
-      <Text style={[styles.textStyle, { fontSize: font_size }]}>
-        {text_amount}
-      </Text>
+      {text_amount !== null ? (
+        <Text style={[styles.textStyle, { fontSize: font_size }]}>
+          AR$ {text_amount.toFixed(2)}
+        </Text>
+      ) : (
+        <ActivityIndicator size="small" color="#fff" />
+      )}
     </View>
   );
 };

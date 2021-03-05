@@ -5,10 +5,15 @@ import {
   CollapseHeader,
   CollapseBody,
 } from "accordion-collapse-react-native";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import GradientContainer from "./GradientContainer";
 
-const CollapseItem = ({ title, data: { comprometido, disponible, saldo } }) => {
+const CollapseItem = ({
+  title = "",
+  comprometido = null,
+  disponible = null,
+  saldo = null,
+}) => {
   return (
     <>
       <Collapse>
@@ -37,19 +42,33 @@ const CollapseItem = ({ title, data: { comprometido, disponible, saldo } }) => {
             <View style={styles.column}>
               <View style={styles.row}>
                 <Text style={styles.rowText}>Saldo</Text>
-                <Text style={styles.rowText}>{`AR$ ${saldo.toFixed(2)}`}</Text>
+                {saldo !== null ? (
+                  <Text style={styles.rowText}>{`AR$ ${saldo.toFixed(
+                    2
+                  )}`}</Text>
+                ) : (
+                  <ActivityIndicator size="small" color="#fff" />
+                )}
               </View>
               <View style={styles.row}>
                 <Text style={styles.rowText}>Comprometido</Text>
-                <Text style={styles.rowText}>{`AR$ ${comprometido.toFixed(
-                  2
-                )}`}</Text>
+                {comprometido !== null ? (
+                  <Text style={styles.rowText}>{`AR$ ${comprometido.toFixed(
+                    2
+                  )}`}</Text>
+                ) : (
+                  <ActivityIndicator size="small" color="#fff" />
+                )}
               </View>
               <View style={styles.row}>
                 <Text style={styles.rowText}>Disponible</Text>
-                <Text style={styles.rowText}>{`AR$ ${disponible.toFixed(
-                  2
-                )}`}</Text>
+                {disponible !== null ? (
+                  <Text style={styles.rowText}>{`AR$ ${disponible.toFixed(
+                    2
+                  )}`}</Text>
+                ) : (
+                  <ActivityIndicator size="small" color="#fff" />
+                )}
               </View>
             </View>
           </GradientContainer>

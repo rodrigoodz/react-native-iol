@@ -20,139 +20,30 @@ import Title from "../../components/Title";
 
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
+  const [doFetch, setDoFetch] = useState(0);
   const {
     state: { access_token },
   } = useContext(AuthContext);
 
+  // when 'doFetch' changes, the hook will do a fetch to the url...
   const { data, error } = useFetch(
     "https://api.invertironline.com/api/v2/estadocuenta",
     access_token,
-    "GET"
+    "GET",
+    doFetch
   );
 
   const onRefresh = () => {
     setRefreshing(true);
 
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
+    setDoFetch(doFetch + 1);
+    setRefreshing(false);
+    
   };
 
-  // const data = {
-  //   cuentas: [
-  //     {
-  //       numero: "200003",
-  //       tipo: "inversion_Argentina_Pesos",
-  //       moneda: "peso_Argentino",
-  //       disponible: 404.64,
-  //       comprometido: 0.0,
-  //       saldo: 404.64,
-  //       titulosValorizados: 572.5,
-  //       total: 977.14,
-  //       margenDescubierto: 0.0,
-  //       saldos: [
-  //         {
-  //           liquidacion: "inmediato",
-  //           saldo: 404.64,
-  //           comprometido: 0.0,
-  //           disponible: 404.64,
-  //           disponibleOperar: 404.64,
-  //         },
-  //         {
-  //           liquidacion: "hrs24",
-  //           saldo: 0.0,
-  //           comprometido: 0.0,
-  //           disponible: 0.0,
-  //           disponibleOperar: 404.64,
-  //         },
-  //         {
-  //           liquidacion: "hrs48",
-  //           saldo: 0.0,
-  //           comprometido: 0.0,
-  //           disponible: 0.0,
-  //           disponibleOperar: 404.64,
-  //         },
-  //         {
-  //           liquidacion: "hrs72",
-  //           saldo: 0.0,
-  //           comprometido: 0.0,
-  //           disponible: 0.0,
-  //           disponibleOperar: 404.64,
-  //         },
-  //         {
-  //           liquidacion: "masHrs72",
-  //           saldo: 0.0,
-  //           comprometido: 0.0,
-  //           disponible: 0.0,
-  //           disponibleOperar: 0.0,
-  //         },
-  //       ],
-  //       estado: "operable",
-  //     },
-  //     {
-  //       numero: "200003",
-  //       tipo: "inversion_Argentina_Dolares",
-  //       moneda: "dolar_Estadounidense",
-  //       disponible: 0.0,
-  //       comprometido: 0.0,
-  //       saldo: 0.0,
-  //       titulosValorizados: 0.0,
-  //       total: 0.0,
-  //       margenDescubierto: 0.0,
-  //       saldos: [
-  //         {
-  //           liquidacion: "inmediato",
-  //           saldo: 0.0,
-  //           comprometido: 0.0,
-  //           disponible: 0.0,
-  //           disponibleOperar: 0.0,
-  //         },
-  //         {
-  //           liquidacion: "hrs24",
-  //           saldo: 0.0,
-  //           comprometido: 0.0,
-  //           disponible: 0.0,
-  //           disponibleOperar: 0.0,
-  //         },
-  //         {
-  //           liquidacion: "hrs48",
-  //           saldo: 0.0,
-  //           comprometido: 0.0,
-  //           disponible: 0.0,
-  //           disponibleOperar: 0.0,
-  //         },
-  //         {
-  //           liquidacion: "hrs72",
-  //           saldo: 0.0,
-  //           comprometido: 0.0,
-  //           disponible: 0.0,
-  //           disponibleOperar: 0.0,
-  //         },
-  //         {
-  //           liquidacion: "masHrs72",
-  //           saldo: 0.0,
-  //           comprometido: 0.0,
-  //           disponible: 0.0,
-  //           disponibleOperar: 0.0,
-  //         },
-  //       ],
-  //       estado: "operable",
-  //     },
-  //   ],
-  //   estadisticas: [
-  //     {
-  //       descripcion: "Anterior",
-  //       cantidad: 0,
-  //       volumen: 0.0,
-  //     },
-  //     {
-  //       descripcion: "Actual",
-  //       cantidad: 0,
-  //       volumen: 0.0,
-  //     },
-  //   ],
-  //   totalEnPesos: 977.14,
-  // };
+  if (!data && doFetch == 0) {
+    return <LoadingComponent />;
+  }
 
   if (data) {
     const {
@@ -186,13 +77,11 @@ const HomeScreen = ({ navigation }) => {
         >
           <Title textTitle="Cuenta de inversión Argentina" />
           <BalanceInfo
-            data={{
-              totalEnPesos,
-              titulosValorizados,
-              disponible,
-              comprometido,
-              margenDescubierto,
-            }}
+            totalEnPesos={totalEnPesos}
+            titulosValorizados={titulosValorizados}
+            disponible={disponible}
+            comprometido={comprometido}
+            margenDescubierto={margenDescubierto}
           />
           <TouchableOpacity
             onPress={() =>
@@ -205,17 +94,68 @@ const HomeScreen = ({ navigation }) => {
         </GradientContainer>
 
         <View style={{ marginHorizontal: 15 }}>
-          <CollapseItem title="a 24hs" data={hrs24} />
-          <CollapseItem title="a 48hs" data={hrs48} />
-          <CollapseItem title="a 72hs" data={hrs72} />
-          <CollapseItem title="a +72hs" data={masHrs72} />
+          <CollapseItem
+            title="a 24hs"
+            comprometido={hrs24.comprometido}
+            disponible={hrs24.disponible}
+            saldo={hrs24.disponible}
+          />
+          <CollapseItem
+            title="a 48hs"
+            comprometido={hrs48.comprometido}
+            disponible={hrs48.disponible}
+            saldo={hrs48.disponible}
+          />
+          <CollapseItem
+            title="a 72hs"
+            comprometido={hrs72.comprometido}
+            disponible={hrs72.disponible}
+            saldo={hrs72.disponible}
+          />
+          <CollapseItem
+            title="a +72hs"
+            comprometido={masHrs72.comprometido}
+            disponible={masHrs72.disponible}
+            saldo={masHrs72.disponible}
+          />
         </View>
         {/* <UpdateController /> */}
         <StatusBar />
       </ScrollView>
     );
   } else {
-    return <LoadingComponent />;
+    return (
+      <ScrollView
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <GradientContainer
+          firstColor="#2b5a7f"
+          secondColor="#193952"
+          padding={10}
+          borderBottomLeftRadius={30}
+          borderBottomRightRadius={30}
+          marginBottom={40}
+        >
+          <Title textTitle="Cuenta de inversión Argentina" />
+          <BalanceInfo />
+          <TouchableOpacity style={{ alignSelf: "flex-start" }}>
+            <Text style={styles.buttonStyle}>Estadísticas</Text>
+          </TouchableOpacity>
+        </GradientContainer>
+
+        <View style={{ marginHorizontal: 15 }}>
+          <CollapseItem title="a 24hs" />
+          <CollapseItem title="a 48hs" />
+          <CollapseItem title="a 72hs" />
+          <CollapseItem title="a +72hs" />
+        </View>
+        <StatusBar />
+      </ScrollView>
+    );
   }
 };
 
