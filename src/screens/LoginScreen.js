@@ -39,6 +39,7 @@ const ScreenLogin = () => {
           autoCapitalize={"none"}
           autoCorrect={false}
           label="Usuario o email"
+          style={{ color: "black" }}
           inputContainerStyle={styles.input}
           placeholder="Ingresá tu usuario o mail"
           leftIcon={
@@ -63,6 +64,7 @@ const ScreenLogin = () => {
           autoCorrect={false}
           secureTextEntry
           label="Contraseña"
+          style={{ color: "black" }}
           inputContainerStyle={styles.input}
           placeholder="Ingresá tu contraseña"
           leftIcon={
@@ -98,9 +100,9 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   input: {
-    backgroundColor: "#686DE0",
-    borderRadius: 4,
-    borderWidth: 2,
+    backgroundColor: "#rgba(255,255,255,0.2)",
+    borderRadius: 10,
+    borderWidth: 1,
   },
 });
 
