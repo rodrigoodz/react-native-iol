@@ -14,7 +14,7 @@ const LogoutScreen = () => {
       style={{
         flex: 1,
         padding: 10,
-        backgroundColor: "#646ecb",
+        backgroundColor: "#131e31",
         justifyContent: "center",
         alignItems: "center",
       }}

@@ -4,7 +4,7 @@ import Title from "../components/Title";
 
 const BuySellScreen = () => {
   return (
-    <View style={{ flex: 1, padding: 10, backgroundColor: "#646ecb" }}>
+    <View style={{ flex: 1, padding: 10, backgroundColor: "#131e31" }}>
       <Title textTitle="Operar" />
     </View>
   );

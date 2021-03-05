@@ -30,7 +30,7 @@ const ScreenLogin = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#646ecb" }}>
+    <View style={{ flex: 1, backgroundColor: "#131e31" }}>
       <Text style={styles.title} h2>
         Ingresá tus datos
       </Text>

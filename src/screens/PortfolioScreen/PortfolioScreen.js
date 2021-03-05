@@ -46,7 +46,7 @@ const PortfolioScreen = () => {
 
   if (data) {
     return (
-      <View style={{ flex: 1, padding: 10, backgroundColor: "#646ecb" }}>
+      <View style={{ flex: 1, padding: 10, backgroundColor: "#131e31" }}>
         <Title textTitle="Portafolio Argentina" />
         <Text h3 style={{ color: "rgba(235,255,255,0.8)" }}>
           Activos
@@ -88,7 +88,7 @@ const PortfolioScreen = () => {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#646ecb",
+          backgroundColor: "#131e31",
         }}
       >
         <ActivityIndicator size={60} color="white" />

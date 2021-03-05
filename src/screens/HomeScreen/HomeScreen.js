@@ -221,7 +221,7 @@ const HomeScreen = ({ navigation }) => {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#646ecb",
+          backgroundColor: "#131e31",
         }}
       >
         <ActivityIndicator size={60} color="white" />
