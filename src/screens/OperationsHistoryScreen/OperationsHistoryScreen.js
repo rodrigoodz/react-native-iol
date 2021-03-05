@@ -1,5 +1,10 @@
 import React, { useContext, useState } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
@@ -155,30 +160,34 @@ const OperationsHistoryScreen = ({ navigation }) => {
           fourthTitle="Simbolo"
           fifthTitle="Estado"
         />
-        {data
-          ? data.map((d) => {
-              return (
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate("Operacion", { numero: d.numero })
-                  }
-                  key={d.numero}
-                >
-                  <FiveColumnItem
-                    firstText={d.numero}
-                    secondText={d.fechaOrden
-                      .replace(/T.*/, "")
-                      .split("-")
-                      .reverse()
-                      .join("-")}
-                    thirdText={d.tipo}
-                    fourthText={d.simbolo}
-                    fifthText={d.estado}
-                  />
-                </TouchableOpacity>
-              );
-            })
-          : null}
+        {data ? (
+          data.map((d) => {
+            return (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Operacion", { numero: d.numero })
+                }
+                key={d.numero}
+              >
+                <FiveColumnItem
+                  firstText={d.numero}
+                  secondText={d.fechaOrden
+                    .replace(/T.*/, "")
+                    .split("-")
+                    .reverse()
+                    .join("-")}
+                  thirdText={d.tipo}
+                  fourthText={d.simbolo}
+                  fifthText={d.estado}
+                />
+              </TouchableOpacity>
+            );
+          })
+        ) : (
+          <View>
+            <ActivityIndicator size="small" color="#fff" />
+          </View>
+        )}
       </GradientContainer>
     </View>
   );
