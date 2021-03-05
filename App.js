@@ -12,7 +12,7 @@ import {
 } from "@react-navigation/drawer";
 
 import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
-import LoginScreen from "./src/screens/LoginScreen";
+import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
 import BuySellScreen from "./src/screens/BuySellScreen";
 import OperationsHistoryScreen from "./src/screens/OperationsHistoryScreen/OperationsHistoryScreen";
 import PortfolioScreen from "./src/screens/PortfolioScreen/PortfolioScreen";
