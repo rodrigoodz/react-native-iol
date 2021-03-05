@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import GoBackButton from "../../components/GoBackButton";
 import GradientContainer from "../../components/GradientContainer";
+import LoadingComponent from "../../components/LoadingComponent";
 import Title from "../../components/Title";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
@@ -101,18 +102,7 @@ const OperationScreen = ({ route, navigation }) => {
       </View>
     );
   } else {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#131e31",
-        }}
-      >
-        <ActivityIndicator size={60} color="white" />
-      </View>
-    );
+    return <LoadingComponent />;
   }
 };
 

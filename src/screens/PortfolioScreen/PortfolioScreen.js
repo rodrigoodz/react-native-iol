@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, ActivityIndicator, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import { Text } from "react-native-elements";
 import ActivoItem from "./ActivoItem";
 import Title from "../../components/Title";
@@ -7,6 +7,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { Context as AuthContext } from "../../context/AuthContext";
 import GradientContainer from "../../components/GradientContainer";
 import { LinearGradient } from "expo-linear-gradient";
+import LoadingComponent from "../../components/LoadingComponent";
 
 const PortfolioScreen = () => {
   const {
@@ -112,18 +113,7 @@ const PortfolioScreen = () => {
       </View>
     );
   } else {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#131e31",
-        }}
-      >
-        <ActivityIndicator size={60} color="white" />
-      </View>
-    );
+    return <LoadingComponent />;
   }
 };
 

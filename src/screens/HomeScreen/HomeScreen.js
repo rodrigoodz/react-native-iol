@@ -17,6 +17,7 @@ import UpdateController from "./UpdateController";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
 import GradientContainer from "../../components/GradientContainer";
+import LoadingComponent from "../../components/LoadingComponent";
 
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -215,18 +216,7 @@ const HomeScreen = ({ navigation }) => {
       </ScrollView>
     );
   } else {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#131e31",
-        }}
-      >
-        <ActivityIndicator size={60} color="white" />
-      </View>
-    );
+    return <LoadingComponent />;
   }
 };
 
