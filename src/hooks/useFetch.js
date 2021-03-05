@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import { reset } from "../../RootNavigation";
 import { Context as AuthContext } from "../context/AuthContext";
 
-export const useFetch = (url, token, method) => {
+// this hook will be called everytime i change 'url' or the variable 'doFetch'
+export const useFetch = (url, token, method, doFetch) => {
   const isMounted = useRef(true);
   const { logOutWithError } = useContext(AuthContext);
 
@@ -20,6 +20,7 @@ export const useFetch = (url, token, method) => {
   useEffect(() => {
     setState({ data: null, error: null });
     const getData = async () => {
+      console.log("se hizo una peticion");
       try {
         const response = await fetch(url, {
           method: method,
@@ -43,7 +44,7 @@ export const useFetch = (url, token, method) => {
     };
 
     getData();
-  }, [url]);
+  }, [url, doFetch]);
 
   return state;
 };
