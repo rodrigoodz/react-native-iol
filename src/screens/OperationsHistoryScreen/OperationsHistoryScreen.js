@@ -69,14 +69,17 @@ import DatePicker from "../../components/DatePicker";
 // ];
 
 const OperationsHistoryScreen = ({ navigation }) => {
+  const start = new Date();
+  start.setDate(start.getDate() - 15);
+  const end = new Date();
   const {
     state: { access_token },
   } = useContext(AuthContext);
   const [formValues, setFormValues] = useState({
     operationType: "todas",
     country: "argentina",
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: start,
+    endDate: end,
   });
 
   const { operationType, country, startDate, endDate } = formValues;
