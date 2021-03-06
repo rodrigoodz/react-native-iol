@@ -9,13 +9,13 @@ import {
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
 
-import DatePicker from "./DatePicker";
 import FiveColumnHeader from "../../components/FiveColumnHeader";
 import FiveColumnItem from "../../components/FiveColumnItem";
 import GradientContainer from "../../components/GradientContainer";
 import SelectOperationStatus from "./SelectOperationStatus";
 import Selector from "../../components/Selector";
 import Title from "../../components/Title";
+import DatePicker from "../../components/DatePicker";
 
 // const datos = [
 //   {
