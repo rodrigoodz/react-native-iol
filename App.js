@@ -21,6 +21,7 @@ import StatisticsScreen from "./src/screens/StatisticsScreen/StatisticsScreen";
 import LogoutScreen from "./src/screens/LogoutScreen";
 import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
 import TickerScreen from "./src/screens/TickerScreen/TickerScreen";
+import ChartsScreen from "./src/screens/ChartsScreen/ChartsScreen";
 
 import { navigationRef } from "./RootNavigation";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
@@ -71,6 +72,7 @@ const MarketNavigator = () => {
     <Stack.Navigator screenOptions={navigatorOptions}>
       <Stack.Screen name="Cotizaciones" component={MarketsScreen} />
       <Stack.Screen name="Ticker" component={TickerScreen} />
+      <Stack.Screen name="Grafico" component={ChartsScreen} />
     </Stack.Navigator>
   );
 };
