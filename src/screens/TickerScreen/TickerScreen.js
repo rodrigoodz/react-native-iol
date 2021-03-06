@@ -50,10 +50,10 @@ const TickerScreen = ({ route, navigation }) => {
       >
         <Text
           style={{
-            color: "green",
+            color: "#0091c8",
             alignSelf: "center",
             fontFamily: "SairaSemiBold",
-            fontSize: 18,
+            fontSize: 22,
             marginTop: 20,
           }}
         >
