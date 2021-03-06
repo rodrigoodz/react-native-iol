@@ -1,5 +1,7 @@
 import React from "react";
+import { Text } from "react-native";
 import { StyleSheet, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import GoBackButton from "../../components/GoBackButton";
 import GradientContainer from "../../components/GradientContainer";
 import Title from "../../components/Title";
@@ -35,6 +37,29 @@ const TickerScreen = ({ route, navigation }) => {
         />
       </GradientContainer>
       <TopPrices ticker={ticker} />
+      <TouchableOpacity
+        style={{
+          alignItems: "center",
+        }}
+        onPress={() =>
+          navigation.navigate("Grafico", {
+            asset: ticker.simbolo,
+            market: ticker.mercado,
+          })
+        }
+      >
+        <Text
+          style={{
+            color: "green",
+            alignSelf: "center",
+            fontFamily: "SairaSemiBold",
+            fontSize: 18,
+            marginTop: 20,
+          }}
+        >
+          Ver Gráfico
+        </Text>
+      </TouchableOpacity>
       <GoBackButton navigation={navigation} />
     </View>
   );
