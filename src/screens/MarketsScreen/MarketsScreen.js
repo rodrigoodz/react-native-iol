@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   TextInput,
   RefreshControl,
+  TouchableOpacity,
 } from "react-native";
 import { ButtonGroup, Icon } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
@@ -24,7 +25,7 @@ import Title from "../../components/Title";
 
 //TODO hacer que cada item sea TouchableOpacity, me lleve a otra pantalla  (le mando algunos params) y muestro toda la info de cierto ticker pero mucho mas detallado, en esa nueva pantalla puedo poner un botton que diga MAS INFO y traer la caja de puntas completa y otro boton, ver grafico, y ahi llamo a getTickerBetweenDates
 
-const MarketsScreen = () => {
+const MarketsScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [doFetch, setDoFetch] = useState(0);
   const {
@@ -319,13 +320,17 @@ const MarketsScreen = () => {
             >
               {data.titulos.map((e) => {
                 return (
-                  <FourColumnItem
-                    firstText={`${e.simbolo}`}
-                    secondText={`$${e.ultimoPrecio.toFixed(2)}`}
-                    thirdText={`${e.variacionPorcentual}%`}
-                    fourthText={`${e.volumen} M`}
+                  <TouchableOpacity
                     key={e.simbolo}
-                  />
+                    onPress={() => navigation.navigate("Ticker", { ticker: e })}
+                  >
+                    <FourColumnItem
+                      firstText={`${e.simbolo}`}
+                      secondText={`$${e.ultimoPrecio.toFixed(2)}`}
+                      thirdText={`${e.variacionPorcentual}%`}
+                      fourthText={`${e.volumen} M`}
+                    />
+                  </TouchableOpacity>
                 );
               })}
             </ScrollView>
