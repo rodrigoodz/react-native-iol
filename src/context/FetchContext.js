@@ -22,9 +22,10 @@ const fetchReducer = (state, action) => {
 const setFetchCounter = (dispatch) => {
   return async () => {
     const fetchCounterData = await AsyncStorage.getItem("counterData");
-    // TODO aca cuando seteo el context, deberia ver si la fecha de currentDate es igual a la de hoy, y si no es igual, reseteo esa parte...
+    // reset the currentCount to 0, before sending the data to the Context
+    const aux = { ...JSON.parse(fetchCounterData), currentCount: 0 };
     if (fetchCounterData !== null) {
-      dispatch({ type: "set", payload: JSON.parse(fetchCounterData) });
+      dispatch({ type: "set", payload: aux });
     }
   };
 };
@@ -56,7 +57,8 @@ const resetFetchCounter = (dispatch) => {
 
 // remove from memory and context
 const hardResetFetchCounter = (dispatch) => {
-  return () => {
+  return async () => {
+    await AsyncStorage.removeItem("counterData");
     dispatch({ type: "hard_reset" });
   };
 };
@@ -66,7 +68,6 @@ export const { Provider, Context } = createDataContext(
   { incrementFetchCounter, setFetchCounter, resetFetchCounter },
   {
     currentCount: 0,
-    currentDate: null,
     MonthCounter: [
       { name: "Enero", count: 0 },
       { name: "Febrero", count: 0 },
