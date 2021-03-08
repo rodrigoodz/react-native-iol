@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { Context as AuthContext } from "../context/AuthContext";
+import { Context as FetchContext } from "../context/FetchContext";
 
 // this hook will be called everytime i change 'url' or the variable 'doFetch'
 export const useFetch = (url, token, method, doFetch) => {
   const isMounted = useRef(true);
   const { logOutWithError } = useContext(AuthContext);
+  const { incrementFetchCounter } = useContext(FetchContext);
 
   const [state, setState] = useState({
     data: null,
@@ -30,6 +32,7 @@ export const useFetch = (url, token, method, doFetch) => {
         });
         let data = await response.json();
         if (!data.message) {
+          incrementFetchCounter();
           if (isMounted.current) {
             setState({ error: null, data });
           }

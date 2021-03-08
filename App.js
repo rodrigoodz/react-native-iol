@@ -25,6 +25,7 @@ import ChartsScreen from "./src/screens/ChartsScreen/ChartsScreen";
 
 import { navigationRef } from "./RootNavigation";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
+import { Provider as FetchProvider } from "./src/context/FetchContext";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -142,15 +143,17 @@ const App = () => {
   }
 
   return (
-    <AuthProvider>
-      <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator screenOptions={navigatorOptions}>
-          <Stack.Screen name="SignIn" component={LoginScreen} />
-          <Stack.Screen name="Home" component={DrawerNavigator} />
-          <Stack.Screen name="Salir" component={LogoutScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AuthProvider>
+    <FetchProvider>
+      <AuthProvider>
+        <NavigationContainer ref={navigationRef}>
+          <Stack.Navigator screenOptions={navigatorOptions}>
+            <Stack.Screen name="SignIn" component={LoginScreen} />
+            <Stack.Screen name="Home" component={DrawerNavigator} />
+            <Stack.Screen name="Salir" component={LogoutScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AuthProvider>
+    </FetchProvider>
   );
 };
 

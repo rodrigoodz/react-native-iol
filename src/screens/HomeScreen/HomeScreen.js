@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -17,6 +17,7 @@ import CollapseItem from "../../components/CollapseItem";
 import GradientContainer from "../../components/GradientContainer";
 import LoadingComponent from "../../components/LoadingComponent";
 import Title from "../../components/Title";
+import { Context as FetchContext } from "../../context/FetchContext";
 
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -24,6 +25,14 @@ const HomeScreen = ({ navigation }) => {
   const {
     state: { access_token },
   } = useContext(AuthContext);
+  const {
+    state: { fetchCounter },
+    setFetchCounter,
+  } = useContext(FetchContext);
+
+  useEffect(() => {
+    setFetchCounter();
+  }, []);
 
   // when 'doFetch' changes, the hook will do a fetch to the url...
   const { data, error } = useFetch(
@@ -38,7 +47,6 @@ const HomeScreen = ({ navigation }) => {
 
     setDoFetch(doFetch + 1);
     setRefreshing(false);
-    
   };
 
   if (!data && doFetch == 0) {
@@ -121,6 +129,9 @@ const HomeScreen = ({ navigation }) => {
         </View>
         {/* <UpdateController /> */}
         <StatusBar />
+        <Text style={{ color: "white", fontSize: 20 }}>
+          Cant. solicitudes a la API: {fetchCounter}
+        </Text>
       </ScrollView>
     );
   } else {
@@ -153,6 +164,7 @@ const HomeScreen = ({ navigation }) => {
           <CollapseItem title="a 72hs" />
           <CollapseItem title="a +72hs" />
         </View>
+
         <StatusBar />
       </ScrollView>
     );
