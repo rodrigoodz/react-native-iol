@@ -4,13 +4,13 @@ import { Context as FetchContext } from "../../context/FetchContext";
 
 const FetchCounterInfo = ({ navigation }) => {
   const {
-    state: { fetchCounter },
+    state: { currentCount },
   } = useContext(FetchContext);
 
   return (
     <View style={styles.fetchCounterContainer}>
       <Text style={styles.title}>
-        Cant. solicitudes a la API: {fetchCounter}
+        Cant. solicitudes a la API: {currentCount}
       </Text>
       <TouchableOpacity onPress={() => navigation.navigate("FetchInfo")}>
         <Text style={styles.subtitle}>Ver Detalle</Text>
