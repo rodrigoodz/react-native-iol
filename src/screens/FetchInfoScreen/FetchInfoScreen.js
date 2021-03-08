@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import GoBackButton from "../../components/GoBackButton";
-import GradientContainer from "../../components/GradientContainer";
-import Title from "../../components/Title";
-import TwoColumnHeader from "../../components/TwoColumnHeader";
-import TwoColumnItem from "../../components/TwoColumnItem";
+import { StyleSheet, View } from "react-native";
+
 import { Context as FetchContext } from "../../context/FetchContext";
+
+import GoBackButton from "../../components/GoBackButton";
+import MonthsInfo from "./MonthsInfo";
+import Title from "../../components/Title";
+import GradientContainer from "../../components/GradientContainer";
 
 const FetchInfoScreen = ({ navigation }) => {
   const {
@@ -23,21 +24,8 @@ const FetchInfoScreen = ({ navigation }) => {
         marginBottom={40}
       >
         <Title textTitle="Detalle Solicitudes" />
-        <GradientContainer
-          firstColor="#132b38"
-          secondColor="#050f17"
-          padding={10}
-          borderRadius={20}
-          marginHorizontal={15}
-        >
-          <TwoColumnHeader firstTitle="Mes" secondTitle="Cant. Solicitudes" />
-          <TwoColumnItem
-            firstText="Enero"
-            secondText={`${MonthCounter.jan}`}
-            alignFirstColumn="center"
-            alignSecondColumn="center"
-          />
-        </GradientContainer>
+
+        <MonthsInfo MonthCounter={MonthCounter} />
       </GradientContainer>
       <GoBackButton navigation={navigation} />
     </View>
