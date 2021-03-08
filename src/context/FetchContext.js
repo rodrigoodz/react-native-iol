@@ -15,7 +15,6 @@ const fetchReducer = (state, action) => {
 };
 const setFetchCounter = (dispatch) => {
   return async () => {
-    console.log("llamo a esta funcion");
     const fetchCounterData = await AsyncStorage.getItem("counterData");
     if (fetchCounterData !== null) {
       dispatch({ type: "set", payload: Number(fetchCounterData) });
@@ -26,21 +25,21 @@ const setFetchCounter = (dispatch) => {
 };
 
 const incrementFetchCounter = (dispatch) => {
-  return () => {
+  return async (currentCount) => {
+    await AsyncStorage.setItem("counterData", JSON.stringify(currentCount + 1));
     dispatch({ type: "increment" });
   };
 };
 
-const saveFetchCounterOnDevice = (dispatch) => {
-  return async (currentCount) => {
-    await AsyncStorage.setItem("counterData", JSON.stringify(currentCount));
+const resetFetchCounter = (dispatch) => {
+  return () => {
     dispatch({ type: "reset" });
   };
 };
 
 export const { Provider, Context } = createDataContext(
   fetchReducer,
-  { incrementFetchCounter, setFetchCounter, saveFetchCounterOnDevice },
+  { incrementFetchCounter, setFetchCounter, resetFetchCounter },
   {
     fetchCounter: 0,
   }

@@ -6,7 +6,10 @@ import { Context as FetchContext } from "../context/FetchContext";
 export const useFetch = (url, token, method, doFetch) => {
   const isMounted = useRef(true);
   const { logOutWithError } = useContext(AuthContext);
-  const { incrementFetchCounter } = useContext(FetchContext);
+  const {
+    state: { fetchCounter },
+    incrementFetchCounter,
+  } = useContext(FetchContext);
 
   const [state, setState] = useState({
     data: null,
@@ -32,7 +35,7 @@ export const useFetch = (url, token, method, doFetch) => {
         });
         let data = await response.json();
         if (!data.message) {
-          incrementFetchCounter();
+          incrementFetchCounter(fetchCounter);
           if (isMounted.current) {
             setState({ error: null, data });
           }

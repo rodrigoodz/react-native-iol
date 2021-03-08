@@ -4,6 +4,7 @@ import { Text, Input, Overlay, Button } from "react-native-elements";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { Context as AuthContext } from "../../context/AuthContext";
+import { Context as FetchContext } from "../../context/FetchContext";
 
 import ButtonComponent from "../../components/ButtonComponent";
 import OverlayText from "./OverlayText";
@@ -14,6 +15,7 @@ const ScreenLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
+  const { setFetchCounter } = useContext(FetchContext);
   const {
     state: { errorMessage },
     startSignIn,
@@ -21,6 +23,7 @@ const ScreenLogin = () => {
   } = useContext(AuthContext);
 
   useEffect(() => {
+    setFetchCounter();
     tryLocalSignIn();
   }, []);
 

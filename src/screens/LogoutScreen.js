@@ -6,14 +6,11 @@ import { Context as FetchContext } from "../context/FetchContext";
 
 const LogoutScreen = () => {
   const { logOut } = useContext(AuthContext);
-  const {
-    state: { fetchCounter },
-    saveFetchCounterOnDevice,
-  } = useContext(FetchContext);
+  const { resetFetchCounter } = useContext(FetchContext);
 
   useEffect(() => {
     logOut();
-    saveFetchCounterOnDevice(fetchCounter);
+    resetFetchCounter();
   }, []);
 
   return (
