@@ -39,7 +39,7 @@ const authReducer = (state, action) => {
 
 const tryLocalSignIn = (dispatch) => {
   return async () => {
-    const deviceData = await AsyncStorage.getItem("data");
+    const deviceData = await AsyncStorage.getItem("IOLdata");
     if (deviceData) {
       const jsonData = JSON.parse(deviceData);
 
@@ -53,7 +53,7 @@ const tryLocalSignIn = (dispatch) => {
           let data = await response.json();
           if (!data.error) {
             console.log("token solicitado con exito");
-            await AsyncStorage.setItem("data", JSON.stringify(data));
+            await AsyncStorage.setItem("IOLdata", JSON.stringify(data));
             dispatch({
               type: "signin",
               payload: data,
@@ -91,7 +91,7 @@ const startSignIn = (dispatch) => {
         dispatch({ type: "setError", payload: data.error_description });
       } else {
         dispatch({ type: "clearError" });
-        await AsyncStorage.setItem("data", JSON.stringify(data));
+        await AsyncStorage.setItem("IOLdata", JSON.stringify(data));
         dispatch({
           type: "signin",
           payload: data,
@@ -107,20 +107,30 @@ const startSignIn = (dispatch) => {
 
 const logOut = (dispatch) => {
   return async () => {
-    await AsyncStorage.clear();
-    dispatch({ type: "logout" });
-    reset(0, "SignIn");
+    try {
+      await AsyncStorage.removeItem("IOLdata");
+      // await AsyncStorage.clear();
+      dispatch({ type: "logout" });
+      reset(0, "SignIn");
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 
 const logOutWithError = (dispatch) => {
   return async ({ error }) => {
-    await AsyncStorage.clear();
-    dispatch({
-      type: "logoutwitherror",
-      payload: error,
-    });
-    reset(0, "SignIn");
+    try {
+      // await AsyncStorage.clear();
+      await AsyncStorage.removeItem("IOLdata");
+      dispatch({
+        type: "logoutwitherror",
+        payload: error,
+      });
+      reset(0, "SignIn");
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 
