@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 import { Context as FetchContext } from "../../context/FetchContext";
 
@@ -7,10 +7,12 @@ import GoBackButton from "../../components/GoBackButton";
 import MonthsInfo from "./MonthsInfo";
 import Title from "../../components/Title";
 import GradientContainer from "../../components/GradientContainer";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const FetchInfoScreen = ({ navigation }) => {
   const {
     state: { MonthCounter },
+    hardResetFetchCounter,
   } = useContext(FetchContext);
 
   return (
@@ -24,8 +26,15 @@ const FetchInfoScreen = ({ navigation }) => {
         marginBottom={40}
       >
         <Title textTitle="Detalle Solicitudes" />
-
         <MonthsInfo MonthCounter={MonthCounter} />
+        <TouchableOpacity
+          style={{ alignSelf: "center" }}
+          onPress={hardResetFetchCounter}
+        >
+          <Text style={{ color: "rgba(255,255,255,.3)", fontSize: 12 }}>
+            Reiniciar
+          </Text>
+        </TouchableOpacity>
       </GradientContainer>
       <GoBackButton navigation={navigation} />
     </View>

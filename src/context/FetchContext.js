@@ -14,7 +14,23 @@ const fetchReducer = (state, action) => {
     case "set":
       return { ...state, ...action.payload };
     case "reset":
-      return {};
+      return {
+        currentCount: 0,
+        MonthCounter: [
+          { name: "Enero", count: 0 },
+          { name: "Febrero", count: 0 },
+          { name: "Marzo", count: 0 },
+          { name: "Abril", count: 0 },
+          { name: "Mayo", count: 0 },
+          { name: "Junio", count: 0 },
+          { name: "Julio", count: 0 },
+          { name: "Agosto", count: 0 },
+          { name: "Septiembre", count: 0 },
+          { name: "Octubre", count: 0 },
+          { name: "Noviembre", count: 0 },
+          { name: "Diciembre", count: 0 },
+        ],
+      };
     default:
       return state;
   }
@@ -59,13 +75,18 @@ const resetFetchCounter = (dispatch) => {
 const hardResetFetchCounter = (dispatch) => {
   return async () => {
     await AsyncStorage.removeItem("counterData");
-    dispatch({ type: "hard_reset" });
+    dispatch({ type: "reset" });
   };
 };
 
 export const { Provider, Context } = createDataContext(
   fetchReducer,
-  { incrementFetchCounter, setFetchCounter, resetFetchCounter },
+  {
+    incrementFetchCounter,
+    setFetchCounter,
+    resetFetchCounter,
+    hardResetFetchCounter,
+  },
   {
     currentCount: 0,
     MonthCounter: [
