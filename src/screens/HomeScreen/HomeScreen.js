@@ -125,7 +125,7 @@ const HomeScreen = ({ navigation }) => {
           {/* <UpdateController /> */}
           <StatusBar />
         </ScrollView>
-        <FetchCounterInfo />
+        <FetchCounterInfo navigation={navigation} />
       </View>
     );
   } else {
@@ -161,7 +161,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
           <StatusBar />
         </ScrollView>
-        <FetchCounterInfo />
+        <FetchCounterInfo navigation={navigation} />
       </View>
     );
   }

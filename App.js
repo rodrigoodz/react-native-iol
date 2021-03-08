@@ -22,6 +22,7 @@ import LogoutScreen from "./src/screens/LogoutScreen";
 import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
 import TickerScreen from "./src/screens/TickerScreen/TickerScreen";
 import ChartsScreen from "./src/screens/ChartsScreen/ChartsScreen";
+import FetchInfoScreen from "./src/screens/FetchInfoScreen/FetchInfoScreen";
 
 import { navigationRef } from "./RootNavigation";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
@@ -55,6 +56,8 @@ const HomeNavigator = () => {
     <Stack.Navigator screenOptions={navigatorOptions}>
       <Stack.Screen name="Inicio" component={HomeScreen} />
       <Stack.Screen name="Estadisticas" component={StatisticsScreen} />
+      <Stack.Screen name="FetchInfo" component={FetchInfoScreen} />
+      
     </Stack.Navigator>
   );
 };
