@@ -24,27 +24,29 @@ export const useFetch = (url, token, method, doFetch) => {
   useEffect(() => {
     setState({ data: null, error: null });
     const getData = async () => {
-      console.log("se hizo una peticion");
-      try {
-        const response = await fetch(url, {
-          method: method,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        let data = await response.json();
-        if (!data.message) {
-          incrementFetchCounter(currentFetchData);
-          if (isMounted.current) {
-            setState({ error: null, data });
+      if (url.length > 0) {
+        console.log("se hizo una peticion");
+        try {
+          const response = await fetch(url, {
+            method: method,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          let data = await response.json();
+          if (!data.message) {
+            incrementFetchCounter(currentFetchData);
+            if (isMounted.current) {
+              setState({ error: null, data });
+            }
+          } else {
+            logOutWithError({ error: data.message });
+            setState({ error: data.message, data: null });
           }
-        } else {
-          logOutWithError({ error: data.message });
-          setState({ error: data.message, data: null });
+        } catch (error) {
+          console.log(error);
+          setState({ error: error.message, data: null });
         }
-      } catch (error) {
-        console.log(error);
-        setState({ error: error.message, data: null });
       }
     };
 
