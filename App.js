@@ -23,6 +23,7 @@ import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
 import TickerScreen from "./src/screens/TickerScreen/TickerScreen";
 import ChartsScreen from "./src/screens/ChartsScreen/ChartsScreen";
 import FetchInfoScreen from "./src/screens/FetchInfoScreen/FetchInfoScreen";
+import BuyScreen from "./src/screens/BuyScreen/BuyScreen";
 
 import { navigationRef } from "./RootNavigation";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
@@ -80,6 +81,15 @@ const MarketNavigator = () => {
   );
 };
 
+const InvestingNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={navigatorOptions}>
+      <Stack.Screen name="Operar" component={InvestingScreen} />
+      <Stack.Screen name="Comprar" component={BuyScreen} />
+    </Stack.Navigator>
+  );
+};
+
 const CustomDrawerContent = (props) => {
   return (
     <DrawerContentScrollView
@@ -125,7 +135,7 @@ const DrawerNavigator = () => {
     >
       <Drawer.Screen name="Inicio" component={HomeNavigator} />
       <Drawer.Screen name="Portafolio" component={PortfolioScreen} />
-      <Drawer.Screen name="Operar" component={InvestingScreen} />
+      <Drawer.Screen name="Operar" component={InvestingNavigator} />
       <Drawer.Screen name="Operaciones" component={OperationNavigator} />
       <Drawer.Screen name="Cotizaciones" component={MarketNavigator} />
     </Drawer.Navigator>
