@@ -1,26 +1,18 @@
-import React, { useContext } from "react";
-import { Icon } from "react-native-elements";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
-
-import { Context as AuthContext } from "../context/AuthContext";
-import { useFetch } from "../hooks/useFetch";
+import React from "react";
+import { StyleSheet, Text } from "react-native";
 
 import GradientContainer from "./GradientContainer";
 import TwoColumnHeader from "./TwoColumnHeader";
 import TwoColumnItem from "./TwoColumnItem";
 
 const TopPrices = ({ ticker }) => {
-  const {
-    state: { access_token },
-  } = useContext(AuthContext);
-
-  //TODO a futuro podria implementar para que al tocar algun icono traiga la info actualizada, pero 'gastaria' una llamada a la API por info que ya traigo por parametros con react navigation
-  //   const { data } = useFetch(
-  //     `https://api.invertironline.com/api/v2/${ticker.mercado}/Titulos/${ticker.simbolo}/Cotizacion`,
-  //     access_token,
-  //     "GET"
-  //   );
-  //   console.log(data);
+  if (ticker.puntas === null) {
+    return (
+      <Text style={{ color: "rgba(255,0,0,.8)", marginHorizontal: 15 }}>
+        Actualmente no hay informacion de las puntas de compra y venta
+      </Text>
+    );
+  }
 
   return (
     <GradientContainer
@@ -41,11 +33,11 @@ const TopPrices = ({ ticker }) => {
         Caja de Puntas
       </Text>
       <TwoColumnHeader firstTitle="Compra" secondTitle="Venta" />
-      {ticker.puntas !== null ? (
+      {!ticker.puntas.length ? (
         <TwoColumnItem
           firstText={`${
             ticker.puntas.cantidadCompra
-          } x $${ticker.puntas.precioVenta.toFixed(2)}`}
+          } x $${ticker.puntas.precioCompra.toFixed(2)}`}
           secondText={`${
             ticker.puntas.cantidadVenta
           } x $${ticker.puntas.precioVenta.toFixed(2)}`}
@@ -53,27 +45,22 @@ const TopPrices = ({ ticker }) => {
           alignSecondColumn="center"
         />
       ) : (
-        <Text style={{ color: "rgba(255,0,0,.8)", marginHorizontal: 15 }}>
-          Actualmente no hay informacion de las puntas de compra y venta
-        </Text>
+        ticker.puntas.map((punta, idx) => {
+          return (
+            <TwoColumnItem
+              firstText={`${
+                punta.cantidadCompra
+              } x $${punta.precioCompra.toFixed(2)}`}
+              secondText={`${
+                punta.cantidadVenta
+              } x $${punta.precioVenta.toFixed(2)}`}
+              alignFirstColumn="center"
+              alignSecondColumn="center"
+              key={idx}
+            />
+          );
+        })
       )}
-
-      {/* {!data ? (
-        <TouchableOpacity
-          style={{
-            alignItems: "center",
-            borderWidth: 1,
-          }}
-        >
-          <Icon
-            name="dots-three-vertical"
-            type="entypo"
-            color="white"
-            size={10}
-          />
-          <Text style={{ color: "rgba(255,255,255,.7)" }}>Ver mas</Text>
-        </TouchableOpacity>
-      ) : null} */}
     </GradientContainer>
   );
 };
