@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-import GradientContainer from "../components/GradientContainer";
-import Title from "../components/Title";
+import GradientContainer from "../../components/GradientContainer";
+import Title from "../../components/Title";
+import Button from "./Button";
 
 const InvestingScreen = () => {
   return (
@@ -17,6 +18,17 @@ const InvestingScreen = () => {
       >
         <Title textTitle="Operar" />
       </GradientContainer>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "flex-start",
+        }}
+      >
+        <Button text="Comprar" />
+        <Button text="Vender" />
+        <Button text="Rescatar" />
+        <Button text="Suscribir" />
+      </View>
     </View>
   );
 };
