@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
@@ -11,6 +11,8 @@ import InfoOperation from "./InfoOperation";
 import LoadingComponent from "../../components/LoadingComponent";
 import Title from "../../components/Title";
 import TransactionStates from "./TransactionStates";
+import { Icon } from "react-native-elements";
+import { cancelOperation } from "../../api";
 
 // const operation = {
 //   numero: 29351319,
@@ -77,6 +79,15 @@ const OperationScreen = ({ route, navigation }) => {
     "GET"
   );
 
+  const handleCancelOperation = async () => {
+    const response = await cancelOperation(numero, access_token);
+    ToastAndroid.showWithGravity(
+      response.message,
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+  };
+
   if (data) {
     return (
       <View style={{ flex: 1, backgroundColor: "#131e31" }}>
@@ -100,6 +111,17 @@ const OperationScreen = ({ route, navigation }) => {
         </GradientContainer>
         <TransactionStates estados={data.estados} />
         <Commisions aranceles={data.aranceles} />
+        {data.estadoActual === "iniciada" ? (
+          <TouchableOpacity
+            style={{ alignItems: "center", marginTop: 10 }}
+            onPress={handleCancelOperation}
+          >
+            <Icon name="cancel" type="material-icons" color="red" size={25} />
+            <Text style={{ color: "red", fontWeight: "bold" }}>
+              Cancelar Operacion
+            </Text>
+          </TouchableOpacity>
+        ) : null}
         <GoBackButton navigation={navigation} />
       </View>
     );

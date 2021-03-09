@@ -29,7 +29,6 @@ export const buy = async (
       }
     );
     let data = await response.json();
-    console.log(("data", data));
     if (!data.ok) {
       if (data.message) {
         return { ok: false, message: data.message };
@@ -46,6 +45,28 @@ export const buy = async (
           message: `Operacion Existosa Nro: ${data.numeroOperacion}`,
         };
       }
+    }
+  } catch (error) {
+    console.log(error);
+    return { ok: false, message: error.message };
+  }
+};
+
+export const cancelOperation = async (operationNumber, token) => {
+  try {
+    const response = await fetch(
+      `https://api.invertironline.com/api/v2/operaciones/${operationNumber}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    let data = await response.json();
+    if (data.ok) {
+      return { ok: true, message: data.messages.map((mes) => mes.description) };
     }
   } catch (error) {
     console.log(error);
