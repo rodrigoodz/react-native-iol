@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "react-native-iol",
+    "name": "IOL Unofficial APP",
     "slug": "react-native-iol",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#646ecb"
+      "backgroundColor": "#131e31"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
