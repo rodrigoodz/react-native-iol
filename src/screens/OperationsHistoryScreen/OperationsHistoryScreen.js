@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   ScrollView,
   RefreshControl,
+  ToastAndroid,
 } from "react-native";
 
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -52,6 +53,11 @@ const OperationsHistoryScreen = ({ navigation }) => {
   );
 
   const onRefresh = () => {
+    ToastAndroid.showWithGravity(
+      "Actualizando datos",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
     setRefreshing(true);
 
     setDoFetch(doFetch + 1);

@@ -26,6 +26,11 @@ const PortfolioScreen = () => {
   );
 
   const onRefresh = () => {
+    ToastAndroid.showWithGravity(
+      "Actualizando datos",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
     setRefreshing(true);
 
     setDoFetch(doFetch + 1);

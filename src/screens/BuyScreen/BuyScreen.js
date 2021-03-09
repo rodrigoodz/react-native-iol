@@ -7,6 +7,7 @@ import {
   ScrollView,
   Keyboard,
   TouchableOpacity,
+  ToastAndroid,
 } from "react-native";
 
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -65,6 +66,11 @@ const BuyScreen = ({ navigation }) => {
   const { data, error } = useFetch(url, access_token, "GET", doFetch);
 
   const onRefresh = () => {
+    ToastAndroid.showWithGravity(
+      "Actualizando datos",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
     setRefreshing(true);
 
     setDoFetch(doFetch + 1);

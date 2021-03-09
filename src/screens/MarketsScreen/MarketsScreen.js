@@ -7,6 +7,7 @@ import {
   TextInput,
   RefreshControl,
   TouchableOpacity,
+  ToastAndroid,
 } from "react-native";
 import { ButtonGroup, Icon } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
@@ -165,6 +166,11 @@ const MarketsScreen = ({ navigation }) => {
   };
 
   const onRefresh = () => {
+    ToastAndroid.showWithGravity(
+      "Actualizando datos",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
     setRefreshing(true);
 
     setDoFetch(doFetch + 1);
