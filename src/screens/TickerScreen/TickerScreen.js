@@ -7,7 +7,7 @@ import GradientContainer from "../../components/GradientContainer";
 import Title from "../../components/Title";
 
 import InfoTicker from "./InfoTicker";
-import TopPrices from "./TopPrices";
+import TopPrices from "../../components/TopPrices";
 
 const TickerScreen = ({ route, navigation }) => {
   const { ticker } = route.params;

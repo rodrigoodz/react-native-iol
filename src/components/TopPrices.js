@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { Icon } from "react-native-elements";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-import { Context as AuthContext } from "../../context/AuthContext";
-import { useFetch } from "../../hooks/useFetch";
+import { Context as AuthContext } from "../context/AuthContext";
+import { useFetch } from "../hooks/useFetch";
 
-import GradientContainer from "../../components/GradientContainer";
-import TwoColumnHeader from "../../components/TwoColumnHeader";
-import TwoColumnItem from "../../components/TwoColumnItem";
+import GradientContainer from "./GradientContainer";
+import TwoColumnHeader from "./TwoColumnHeader";
+import TwoColumnItem from "./TwoColumnItem";
 
 const TopPrices = ({ ticker }) => {
   const {
