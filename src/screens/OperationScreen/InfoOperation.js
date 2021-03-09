@@ -19,7 +19,7 @@ const InfoOperation = ({
         secondColor="#050f17"
         padding={10}
         borderRadius={20}
-        marginHorizontal={15}
+        marginHorizontal={5}
       >
         <TwoColumnItem firstText="Simbolo" secondText={`${simbolo}`} />
         <TwoColumnItem
