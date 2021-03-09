@@ -41,16 +41,23 @@ const TopPrices = ({ ticker }) => {
         Caja de Puntas
       </Text>
       <TwoColumnHeader firstTitle="Compra" secondTitle="Venta" />
-      <TwoColumnItem
-        firstText={`${
-          ticker.puntas.cantidadCompra
-        } x $${ticker.puntas.precioVenta.toFixed(2)}`}
-        secondText={`${
-          ticker.puntas.cantidadVenta
-        } x $${ticker.puntas.precioVenta.toFixed(2)}`}
-        alignFirstColumn="center"
-        alignSecondColumn="center"
-      />
+      {ticker.puntas !== null ? (
+        <TwoColumnItem
+          firstText={`${
+            ticker.puntas.cantidadCompra
+          } x $${ticker.puntas.precioVenta.toFixed(2)}`}
+          secondText={`${
+            ticker.puntas.cantidadVenta
+          } x $${ticker.puntas.precioVenta.toFixed(2)}`}
+          alignFirstColumn="center"
+          alignSecondColumn="center"
+        />
+      ) : (
+        <Text style={{ color: "rgba(255,0,0,.8)", marginHorizontal: 15 }}>
+          Actualmente no hay informacion de las puntas de compra y venta
+        </Text>
+      )}
+
       {/* {!data ? (
         <TouchableOpacity
           style={{
