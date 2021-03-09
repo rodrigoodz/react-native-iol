@@ -4,6 +4,8 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
+  RefreshControl,
 } from "react-native";
 
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -24,6 +26,8 @@ const OperationsHistoryScreen = ({ navigation }) => {
   const {
     state: { access_token },
   } = useContext(AuthContext);
+  const [refreshing, setRefreshing] = useState(false);
+  const [doFetch, setDoFetch] = useState(0);
   const [formValues, setFormValues] = useState({
     operationType: "todas",
     country: "argentina",
@@ -43,8 +47,16 @@ const OperationsHistoryScreen = ({ navigation }) => {
   const { data } = useFetch(
     `https://api.invertironline.com/api/v2/operaciones?estado=${operationType}&fechaDesde=${formattedStartDate}&fechaHasta=${formattedEndDate}&pais=${country}`,
     access_token,
-    "GET"
+    "GET",
+    doFetch
   );
+
+  const onRefresh = () => {
+    setRefreshing(true);
+
+    setDoFetch(doFetch + 1);
+    setRefreshing(false);
+  };
 
   return (
     <View style={styles.container}>
@@ -111,34 +123,41 @@ const OperationsHistoryScreen = ({ navigation }) => {
           fourthTitle="Simbolo"
           fifthTitle="Estado"
         />
-        {data ? (
-          data.map((d) => {
-            return (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("Operacion", { numero: d.numero })
-                }
-                key={d.numero}
-              >
-                <FiveColumnItem
-                  firstText={d.numero}
-                  secondText={d.fechaOrden
-                    .replace(/T.*/, "")
-                    .split("-")
-                    .reverse()
-                    .join("-")}
-                  thirdText={d.tipo}
-                  fourthText={d.simbolo}
-                  fifthText={d.estado}
-                />
-              </TouchableOpacity>
-            );
-          })
-        ) : (
-          <View>
-            <ActivityIndicator size="small" color="#fff" />
-          </View>
-        )}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          {data ? (
+            data.map((d) => {
+              return (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Operacion", { numero: d.numero })
+                  }
+                  key={d.numero}
+                >
+                  <FiveColumnItem
+                    firstText={d.numero}
+                    secondText={d.fechaOrden
+                      .replace(/T.*/, "")
+                      .split("-")
+                      .reverse()
+                      .join("-")}
+                    thirdText={d.tipo}
+                    fourthText={d.simbolo}
+                    fifthText={d.estado}
+                  />
+                </TouchableOpacity>
+              );
+            })
+          ) : (
+            <View>
+              <ActivityIndicator size="small" color="#fff" />
+            </View>
+          )}
+        </ScrollView>
       </GradientContainer>
     </View>
   );
