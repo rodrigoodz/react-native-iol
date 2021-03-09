@@ -1,3 +1,5 @@
+//TODO todas estas operaciones no las estoy contando en el context de cant. de Fetchs... deberia implementar un customHook
+
 export const buy = async (
   market,
   asset,
