@@ -21,6 +21,7 @@ const TopPrices = ({ ticker }) => {
       padding={10}
       borderRadius={20}
       marginHorizontal={15}
+      marginBottom={10}
     >
       <Text
         style={{

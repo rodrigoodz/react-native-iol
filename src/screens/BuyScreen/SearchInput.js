@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 
-const SearchInput = ({ tickerName, setTickerName }) => {
+const SearchInput = ({ tickerName, setTickerName, onSubmitEditing }) => {
   return (
     <TextInput
       placeholder="Ingresar ticker"
@@ -16,6 +16,7 @@ const SearchInput = ({ tickerName, setTickerName }) => {
       }}
       value={tickerName}
       onChangeText={setTickerName}
+      onSubmitEditing={onSubmitEditing}
     />
   );
 };

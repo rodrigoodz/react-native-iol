@@ -1,14 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { ButtonGroup } from "react-native-elements";
 
-const CountrySelection = ({ country, setMarket }) => {
+const MarketSelection = ({ country, setMarket }) => {
   return (
     <ButtonGroup
       onPress={setMarket}
       containerStyle={{ height: 20 }}
       selectedIndex={country}
-      buttons={["BCBA", "NYSE"]}
+      buttons={["BCBA", "NYSE", "NASDAQ"]}
       containerStyle={{
         height: 40,
         backgroundColor: "#131e31",
@@ -25,6 +25,6 @@ const CountrySelection = ({ country, setMarket }) => {
   );
 };
 
-export default CountrySelection;
+export default MarketSelection;
 
 const styles = StyleSheet.create({});
