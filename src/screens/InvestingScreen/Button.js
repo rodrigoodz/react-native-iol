@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { navigate } from "../../../RootNavigation";
 
 const Button = ({ text }) => {
   return (
@@ -13,6 +14,7 @@ const Button = ({ text }) => {
         borderRadius: 8,
         marginHorizontal: 20,
       }}
+      onPress={() => navigate(`${text}`)}
     >
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
