@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 import GradientContainer from "../components/GradientContainer";
 import Title from "../components/Title";
 
-const BuySellScreen = () => {
+const InvestingScreen = () => {
   return (
     <View style={{ flex: 1, backgroundColor: "#131e31" }}>
       <GradientContainer
@@ -21,6 +21,6 @@ const BuySellScreen = () => {
   );
 };
 
-export default BuySellScreen;
+export default InvestingScreen;
 
 const styles = StyleSheet.create({});

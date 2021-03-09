@@ -13,7 +13,7 @@ import {
 
 import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
 import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
-import BuySellScreen from "./src/screens/BuySellScreen";
+import InvestingScreen from "./src/screens/InvestingScreen";
 import OperationsHistoryScreen from "./src/screens/OperationsHistoryScreen/OperationsHistoryScreen";
 import PortfolioScreen from "./src/screens/PortfolioScreen/PortfolioScreen";
 import MarketsScreen from "./src/screens/MarketsScreen/MarketsScreen";
@@ -57,7 +57,6 @@ const HomeNavigator = () => {
       <Stack.Screen name="Inicio" component={HomeScreen} />
       <Stack.Screen name="Estadisticas" component={StatisticsScreen} />
       <Stack.Screen name="FetchInfo" component={FetchInfoScreen} />
-      
     </Stack.Navigator>
   );
 };
@@ -126,7 +125,7 @@ const DrawerNavigator = () => {
     >
       <Drawer.Screen name="Inicio" component={HomeNavigator} />
       <Drawer.Screen name="Portafolio" component={PortfolioScreen} />
-      <Drawer.Screen name="Operar" component={BuySellScreen} />
+      <Drawer.Screen name="Operar" component={InvestingScreen} />
       <Drawer.Screen name="Operaciones" component={OperationNavigator} />
       <Drawer.Screen name="Cotizaciones" component={MarketNavigator} />
     </Drawer.Navigator>
