@@ -64,10 +64,7 @@ const InfoTicker = ({
             .replace(/T.*/, "")
             .split("-")
             .reverse()
-            .join("-")} ${fecha.replace(
-            /^[^:]*([0-2]\d:[0-5]\d:\d\d).*$/,
-            "$1"
-          )}hs`}
+            .join("-")} ${fecha.replace(/^[^:]*([0-2]\d:[0-5]\d).*$/, "$1")}hs`}
         />
       </GradientContainer>
     </View>
