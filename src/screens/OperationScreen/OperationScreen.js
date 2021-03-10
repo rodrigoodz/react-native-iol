@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -22,6 +22,16 @@ const OperationScreen = ({ route, navigation }) => {
   } = useContext(AuthContext);
   const [showAlert, setShowAlert] = useState(false);
   const [fetchResponse, setfetchResponse] = useState({ ok: "", message: "" });
+
+  useEffect(() => {
+    const blurListener = navigation.addListener("blur", () => {
+      navigation.goBack(null);
+    });
+
+    return () => {
+      blurListener();
+    };
+  }, [navigation]);
 
   const { data } = useFetch(
     `https://api.invertironline.com/api/v2/operaciones/1?numero=${numero}`,
