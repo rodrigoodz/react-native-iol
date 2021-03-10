@@ -6,7 +6,7 @@ import { Context as FetchContext } from "../context/FetchContext";
 // this hook will be called everytime i change 'url' or the variable 'doFetch'
 export const useFetch = (url, token, method, doFetch) => {
   const isMounted = useRef(true);
-  const { logOutWithError, getANewToken } = useContext(AuthContext);
+  const { logOutWithError } = useContext(AuthContext);
   const { state: currentFetchData, incrementFetchCounter } = useContext(
     FetchContext
   );
