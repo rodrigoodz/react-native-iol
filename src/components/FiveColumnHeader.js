@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     color: "black",
     fontFamily: "SairaBold",
   },
-  column: { flex: 1, alignItems: "flex-start" },
+  column: { flex: 1, alignItems: "center" },
 });
 
 export default FiveColumnHeader;

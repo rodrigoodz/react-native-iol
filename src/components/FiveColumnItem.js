@@ -41,7 +41,7 @@ const FiveColumnItem = ({
 
 const styles = StyleSheet.create({
   text: { color: "white", fontFamily: "SairaThin", fontSize: 12 },
-  column: { flex: 1, alignItems: "flex-start" },
+  column: { flex: 1, alignItems: "center" },
 });
 
 export default FiveColumnItem;

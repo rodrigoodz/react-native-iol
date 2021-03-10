@@ -154,7 +154,8 @@ const OperationsHistoryScreen = ({ navigation }) => {
                       .replace(/T.*/, "")
                       .split("-")
                       .reverse()
-                      .join("-")}
+                      .join("-")
+                      .slice(0, 5)}
                     thirdText={d.tipo}
                     fourthText={d.simbolo}
                     fifthText={d.estado}
