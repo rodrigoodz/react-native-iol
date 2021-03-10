@@ -5,7 +5,6 @@ import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
 
 import Commisions from "./Commisions";
-import GoBackButton from "../../components/GoBackButton";
 import GradientContainer from "../../components/GradientContainer";
 import InfoOperation from "./InfoOperation";
 import LoadingComponent from "../../components/LoadingComponent";
@@ -14,6 +13,7 @@ import TransactionStates from "./TransactionStates";
 import { Icon } from "react-native-elements";
 import { cancelOperation } from "../../api";
 import AwesomeAlert from "react-native-awesome-alerts";
+import GoBackButton from "../../components/GoBackButton";
 
 const OperationScreen = ({ route, navigation }) => {
   const { numero } = route.params;
@@ -22,16 +22,6 @@ const OperationScreen = ({ route, navigation }) => {
   } = useContext(AuthContext);
   const [showAlert, setShowAlert] = useState(false);
   const [fetchResponse, setfetchResponse] = useState({ ok: "", message: "" });
-
-  useEffect(() => {
-    const blurListener = navigation.addListener("blur", () => {
-      navigation.goBack(null);
-    });
-
-    return () => {
-      blurListener();
-    };
-  }, [navigation]);
 
   const { data } = useFetch(
     `https://api.invertironline.com/api/v2/operaciones/1?numero=${numero}`,
