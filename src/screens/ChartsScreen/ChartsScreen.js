@@ -39,10 +39,6 @@ const ChartsScreen = ({ route, navigation }) => {
     endDate.getMonth() + 1
   }-${endDate.getDate()}`;
 
-  console.log(
-    `https://api.invertironline.com/api/v2/${market}/Titulos/${asset}/Cotizacion/seriehistorica/${formattedStartDate}/${formattedEndDate}/${formattedType}`
-  );
-
   const { data } = useFetch(
     `https://api.invertironline.com/api/v2/${market}/Titulos/${asset}/Cotizacion/seriehistorica/${formattedStartDate}/${formattedEndDate}/${formattedType}`,
     access_token,
