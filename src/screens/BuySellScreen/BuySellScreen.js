@@ -43,26 +43,19 @@ const BuySellScreen = ({ route, navigation }) => {
   const { market, tickerName, showdata } = formValues;
 
   useEffect(() => {
-    const focusListener = navigation.addListener("focus", () => {
-      console.log(assetParam, marketParam);
-      if (assetParam !== null && marketParam !== null) {
-        setFormValues({
-          ...formValues,
-          market: marketParam,
-          tickerName: assetParam,
-          showdata: true,
-        });
-        const formattedMarket = getFormattedMarket(marketParam);
-        setUrl(
-          `https://api.invertironline.com/api/v2/${formattedMarket}/Titulos/${assetParam}/Cotizacion`
-        );
-      }
-    });
-
-    return () => {
-      focusListener();
-    };
-  }, [navigation]);
+    if (assetParam !== null && marketParam !== null) {
+      setFormValues({
+        ...formValues,
+        market: marketParam,
+        tickerName: assetParam,
+        showdata: true,
+      });
+      const formattedMarket = getFormattedMarket(marketParam);
+      setUrl(
+        `https://api.invertironline.com/api/v2/${formattedMarket}/Titulos/${assetParam}/Cotizacion`
+      );
+    }
+  }, []);
 
   const handlePress = () => {
     Keyboard.dismiss();
@@ -156,7 +149,19 @@ const BuySellScreen = ({ route, navigation }) => {
         operationType={text}
       />
       <View style={{ flex: 1 }}>
-        <GoBackButton navigation={navigation} />
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          onPress={() => navigation.navigate("Operar")}
+        >
+          <Icon
+            name="arrow-back-outline"
+            type="ionicon"
+            color="white"
+            size={25}
+            style={styles.iconStyle}
+          />
+          <Text style={styles.textStyle}>Volver</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -183,6 +188,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     alignSelf: "center",
   },
+  buttonStyle: {
+    flexDirection: "row",
+    justifyContent: "center",
+    padding: 15,
+    alignItems: "center",
+    marginTop: 30,
+    alignSelf: "center",
+  },
+  iconStyle: { marginTop: 2 },
+  textStyle: { color: "white", fontSize: 20 },
 });
 
 export default BuySellScreen;
