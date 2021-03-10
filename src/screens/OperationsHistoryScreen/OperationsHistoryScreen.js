@@ -19,6 +19,7 @@ import SelectOperationStatus from "./SelectOperationStatus";
 import Selector from "../../components/Selector";
 import Title from "../../components/Title";
 import DatePicker from "../../components/DatePicker";
+import { LinearGradient } from "expo-linear-gradient";
 
 const OperationsHistoryScreen = ({ navigation }) => {
   const start = new Date();
@@ -115,12 +116,15 @@ const OperationsHistoryScreen = ({ navigation }) => {
           />
         </View>
       </GradientContainer>
-      <GradientContainer
-        firstColor="#132b38"
-        secondColor="#050f17"
-        padding={10}
-        borderRadius={20}
-        marginHorizontal={8}
+      <LinearGradient
+        colors={["#132b38", "#050f17"]}
+        style={{
+          padding: 10,
+          borderRadius: 20,
+          marginHorizontal: 15,
+          marginBottom: 5,
+          flex: 1,
+        }}
       >
         <FiveColumnHeader
           firstTitle="Nro. de Trans"
@@ -164,7 +168,7 @@ const OperationsHistoryScreen = ({ navigation }) => {
             </View>
           )}
         </ScrollView>
-      </GradientContainer>
+      </LinearGradient>
     </View>
   );
 };
