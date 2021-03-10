@@ -108,9 +108,7 @@ const BuySellScreen = ({ route, navigation }) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {error && error.length ? (
-          <Text style={styles.errorStyle}>No hay datos para tu busqueda</Text>
-        ) : showdata && data ? (
+        {showdata && data ? (
           <>
             <TopPrices ticker={data} />
             <TickerInfo ticker={data} />
@@ -125,6 +123,8 @@ const BuySellScreen = ({ route, navigation }) => {
               <Text style={{ color: "white" }}>{text}</Text>
             </TouchableOpacity>
           </>
+        ) : error !== null ? (
+          <Text style={styles.errorStyle}>No hay datos para tu busqueda</Text>
         ) : null}
       </ScrollView>
       <BuySellOverlay
