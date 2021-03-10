@@ -26,8 +26,8 @@ const InvestingScreen = () => {
       >
         <Button text="Comprar" navigateTo="ComprarVender" />
         <Button text="Vender" navigateTo="ComprarVender" />
-        <Button text="Rescatar" />
-        <Button text="Suscribir" />
+        {/* <Button text="Rescatar" />
+        <Button text="Suscribir" /> */}
       </View>
     </View>
   );
