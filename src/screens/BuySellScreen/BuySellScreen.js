@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -22,7 +22,6 @@ import MarketSelection from "./MarketSelection";
 import SearchButton from "./SearchButton";
 import SearchInput from "./SearchInput";
 import TickerInfo from "./TickerInfo";
-import { Icon } from "react-native-elements";
 import GoBackButton from "../../components/GoBackButton";
 
 const BuySellScreen = ({ route, navigation }) => {
@@ -41,6 +40,11 @@ const BuySellScreen = ({ route, navigation }) => {
   const [url, setUrl] = useState("");
 
   const { market, tickerName, showdata } = formValues;
+
+  const handleSearchInput = (value) => {
+    setFormValues({ ...formValues, tickerName: value, showdata: false });
+    setUrl("");
+  };
 
   const handlePress = () => {
     Keyboard.dismiss();
@@ -92,9 +96,7 @@ const BuySellScreen = ({ route, navigation }) => {
         <View style={styles.formContainer}>
           <SearchInput
             tickerName={tickerName}
-            setTickerName={(value) =>
-              setFormValues({ ...formValues, tickerName: value })
-            }
+            setTickerName={handleSearchInput}
             onSubmitEditing={handlePress}
           />
 
