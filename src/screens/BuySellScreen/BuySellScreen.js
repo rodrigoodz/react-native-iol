@@ -58,13 +58,8 @@ const BuySellScreen = ({ route, navigation }) => {
       }
     });
 
-    const blurListener = navigation.addListener("blur", () => {
-      navigation.goBack(null);
-    });
-
     return () => {
       focusListener();
-      blurListener();
     };
   }, [navigation]);
 
@@ -203,7 +198,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 15,
     alignItems: "center",
-    marginTop: 30,
+    marginVertical: 30,
     alignSelf: "center",
   },
   iconStyle: { marginTop: 2 },
