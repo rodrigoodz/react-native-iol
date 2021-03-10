@@ -24,6 +24,7 @@ import TickerScreen from "./src/screens/TickerScreen/TickerScreen";
 import ChartsScreen from "./src/screens/ChartsScreen/ChartsScreen";
 import FetchInfoScreen from "./src/screens/FetchInfoScreen/FetchInfoScreen";
 import BuySellScreen from "./src/screens/BuySellScreen/BuySellScreen";
+import TokenRequestScreen from "./src/screens/TokenRequestScreen";
 
 import { navigationRef } from "./RootNavigation";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
@@ -162,6 +163,7 @@ const App = () => {
             <Stack.Screen name="SignIn" component={LoginScreen} />
             <Stack.Screen name="Home" component={DrawerNavigator} />
             <Stack.Screen name="Salir" component={LogoutScreen} />
+            <Stack.Screen name="Solicitar" component={TokenRequestScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </AuthProvider>
