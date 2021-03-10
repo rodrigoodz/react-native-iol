@@ -23,6 +23,7 @@ import SearchButton from "./SearchButton";
 import SearchInput from "./SearchInput";
 import TickerInfo from "./TickerInfo";
 import { Icon } from "react-native-elements";
+import GoBackButton from "../../components/GoBackButton";
 
 const BuySellScreen = ({ route, navigation }) => {
   const { text, assetParam, marketParam } = route.params;
@@ -154,20 +155,9 @@ const BuySellScreen = ({ route, navigation }) => {
         access_token={access_token}
         operationType={text}
       />
-
-      <TouchableOpacity
-        style={styles.buttonStyle}
-        onPress={() => navigation.navigate("Operar")}
-      >
-        <Icon
-          name="arrow-back-outline"
-          type="ionicon"
-          color="white"
-          size={25}
-          style={styles.iconStyle}
-        />
-        <Text style={styles.textStyle}>Volver</Text>
-      </TouchableOpacity>
+      <View style={{ flex: 1 }}>
+        <GoBackButton navigation={navigation} />
+      </View>
     </View>
   );
 };
@@ -193,16 +183,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     alignSelf: "center",
   },
-  buttonStyle: {
-    flexDirection: "row",
-    justifyContent: "center",
-    padding: 15,
-    alignItems: "center",
-    marginVertical: 30,
-    alignSelf: "center",
-  },
-  iconStyle: { marginTop: 2 },
-  textStyle: { color: "white", fontSize: 20 },
 });
 
 export default BuySellScreen;
