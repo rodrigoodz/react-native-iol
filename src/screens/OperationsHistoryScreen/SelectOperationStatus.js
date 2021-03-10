@@ -24,13 +24,13 @@ const SelectOperationStatus = ({ selection, setSelection }) => {
         onPress={() => setSelection("pendientes")}
       />
       <CheckBox
-        title="Finalizadas"
-        checked={selection === "finalizadas"}
-        key={"finalizadas"}
+        title="Canceladas"
+        checked={selection === "canceladas"}
+        key={"canceladas"}
         textStyle={styles.textStyle}
         checkedColor="rgba(255,255,255,0.5)"
         containerStyle={styles.checkboxContainer}
-        onPress={() => setSelection("finalizadas")}
+        onPress={() => setSelection("canceladas")}
       />
     </View>
   );
