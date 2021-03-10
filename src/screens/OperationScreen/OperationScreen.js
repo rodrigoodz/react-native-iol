@@ -88,7 +88,7 @@ const OperationScreen = ({ route, navigation }) => {
   const handleCancelOperation = async () => {
     const response = await cancelOperation(numero, access_token);
     ToastAndroid.showWithGravity(
-      response.message,
+      response.message[0],
       ToastAndroid.SHORT,
       ToastAndroid.CENTER
     );
