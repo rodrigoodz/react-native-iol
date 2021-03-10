@@ -74,7 +74,8 @@ const OperationScreen = ({ route, navigation }) => {
         </GradientContainer>
         <TransactionStates estados={data.estados} />
         <Commisions aranceles={data.aranceles} />
-        {data.estadoActual === "iniciada" ? (
+        {data.estadoActual === "iniciada" ||
+        data.estadoActual === "en_Proceso" ? (
           !fetchResponse.ok ? (
             <TouchableOpacity
               style={{ alignItems: "center", marginTop: 10 }}
