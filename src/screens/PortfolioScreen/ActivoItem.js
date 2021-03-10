@@ -24,6 +24,7 @@ const ActivoItem = ({
               : "rgba(106,176,76,0.7)",
           borderRadius: 10,
           alignItems: "center",
+          marginVertical: 2,
         }}
       >
         <View
