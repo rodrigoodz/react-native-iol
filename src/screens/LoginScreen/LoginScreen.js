@@ -17,10 +17,11 @@ const ScreenLogin = () => {
 
   const { setFetchCounter } = useContext(FetchContext);
   const {
-    state: { errorMessage },
+    state: { expires, errorMessage },
     startSignIn,
     tryLocalSignIn,
   } = useContext(AuthContext);
+  console.log(expires);
 
   useEffect(() => {
     setFetchCounter();

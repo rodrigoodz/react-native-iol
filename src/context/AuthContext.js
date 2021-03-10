@@ -133,9 +133,48 @@ const logOutWithError = (dispatch) => {
   };
 };
 
+const getANewToken = (dispatch) => {
+  return async () => {
+    // const deviceData = await AsyncStorage.getItem("IOLdata");
+    // if (deviceData) {
+    //   const jsonData = JSON.parse(deviceData);
+    //   if (new Date(jsonData[".expires"]) < new Date()) {
+    //     try {
+    //       console.log("va a solicitar otro token");
+    //       const response = await fetch("https://api.invertironline.com/token", {
+    //         method: "POST",
+    //         body: `refresh_token=${jsonData.refresh_token}&grant_type=refresh_token`,
+    //       });
+    //       let data = await response.json();
+    //       if (!data.error) {
+    //         console.log("token solicitado con exito");
+    //         await AsyncStorage.setItem("IOLdata", JSON.stringify(data));
+    //         dispatch({
+    //           type: "signin",
+    //           payload: data,
+    //         });
+    //         reset(0, "Home");
+    //       }
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   } else {
+    //     console.log("el token sigue siendo valido");
+    //     dispatch({
+    //       type: "signin",
+    //       payload: jsonData,
+    //     });
+    //     reset(0, "Home");
+    //   }
+    // } else {
+    //   reset(0, "SignIn");
+    // }
+  };
+};
+
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { startSignIn, tryLocalSignIn, logOut, logOutWithError },
+  { startSignIn, tryLocalSignIn, logOut, logOutWithError, getANewToken },
   {
     access_token: null,
     refresh_token: null,
