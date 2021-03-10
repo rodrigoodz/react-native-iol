@@ -1,11 +1,5 @@
-import React, { useContext } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  ToastAndroid,
-} from "react-native";
+import React, { useContext, useState } from "react";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
@@ -19,65 +13,15 @@ import Title from "../../components/Title";
 import TransactionStates from "./TransactionStates";
 import { Icon } from "react-native-elements";
 import { cancelOperation } from "../../api";
-
-// const operation = {
-//   numero: 29351319,
-//   mercado: "bcba",
-//   simbolo: "GGAL",
-//   moneda: "peso_Argentino",
-//   tipo: "compra",
-//   fechaAlta: "2020-12-17T12:07:12.147",
-//   validez: "2020-12-17T17:00:00",
-//   fechaOperado: "2020-12-17T12:08:23",
-//   estadoActual: "terminada",
-//   estados: [
-//     {
-//       detalle: "Iniciada",
-//       fecha: "2020-12-17T12:07:12.147",
-//     },
-//     {
-//       detalle: "En Proceso",
-//       fecha: "2020-12-17T12:07:14.117",
-//     },
-//     {
-//       detalle: "Operación de 3 Título/s",
-//       fecha: "2020-12-17T12:08:23",
-//     },
-//     {
-//       detalle: "Terminada",
-//       fecha: "2020-12-17T12:08:23.16",
-//     },
-//   ],
-//   aranceles: [
-//     {
-//       tipo: "Derechos De Mercado",
-//       neto: 0.31,
-//       iva: 0.06,
-//     },
-//     {
-//       tipo: "Comisión",
-//       neto: 1.92,
-//       iva: 0.4,
-//     },
-//   ],
-//   operaciones: [
-//     {
-//       fecha: "2020-12-17T12:08:23",
-//       cantidad: 3.0,
-//       precio: 128.0,
-//     },
-//   ],
-//   precio: 128.0,
-//   cantidad: 3.0,
-//   monto: 384.0,
-//   modalidad: "precio_Limite",
-// };
+import AwesomeAlert from "react-native-awesome-alerts";
 
 const OperationScreen = ({ route, navigation }) => {
   const { numero } = route.params;
   const {
     state: { access_token },
   } = useContext(AuthContext);
+  const [showAlert, setShowAlert] = useState(false);
+  const [fetchResponse, setfetchResponse] = useState({ ok: "", message: "" });
 
   const { data } = useFetch(
     `https://api.invertironline.com/api/v2/operaciones/1?numero=${numero}`,
@@ -87,16 +31,29 @@ const OperationScreen = ({ route, navigation }) => {
 
   const handleCancelOperation = async () => {
     const response = await cancelOperation(numero, access_token);
-    ToastAndroid.showWithGravity(
-      response.message[0],
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER
-    );
+    setfetchResponse({ ok: response.ok, message: response.message.join("\n") });
+    setShowAlert(true);
   };
 
   if (data) {
     return (
       <View style={{ flex: 1, backgroundColor: "#131e31" }}>
+        <>
+          <AwesomeAlert
+            show={showAlert}
+            showProgress={false}
+            title={!fetchResponse.ok ? "Error" : "Confirmado"}
+            message={fetchResponse.message}
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={false}
+            showConfirmButton={true}
+            confirmText="Aceptar"
+            confirmButtonColor={!fetchResponse.ok ? "#DD6B55" : "#55dd6b"}
+            onConfirmPressed={() => {
+              setShowAlert(false);
+            }}
+          />
+        </>
         <GradientContainer
           firstColor="#2b5a7f"
           secondColor="#193952"
@@ -118,15 +75,17 @@ const OperationScreen = ({ route, navigation }) => {
         <TransactionStates estados={data.estados} />
         <Commisions aranceles={data.aranceles} />
         {data.estadoActual === "iniciada" ? (
-          <TouchableOpacity
-            style={{ alignItems: "center", marginTop: 10 }}
-            onPress={handleCancelOperation}
-          >
-            <Icon name="cancel" type="material-icons" color="red" size={25} />
-            <Text style={{ color: "red", fontWeight: "bold" }}>
-              Cancelar Operacion
-            </Text>
-          </TouchableOpacity>
+          !fetchResponse.ok ? (
+            <TouchableOpacity
+              style={{ alignItems: "center", marginTop: 10 }}
+              onPress={handleCancelOperation}
+            >
+              <Icon name="cancel" type="material-icons" color="red" size={25} />
+              <Text style={{ color: "red", fontWeight: "bold" }}>
+                Cancelar Operacion
+              </Text>
+            </TouchableOpacity>
+          ) : null
         ) : null}
         <GoBackButton navigation={navigation} />
       </View>
