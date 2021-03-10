@@ -121,8 +121,7 @@ const logOut = (dispatch) => {
 const logOutWithError = (dispatch) => {
   return async ({ error }) => {
     try {
-      // si no remuevo el storage, va a refrescar el token luego cuando vaya a "SignIn"
-      // await AsyncStorage.removeItem("IOLdata");
+      await AsyncStorage.removeItem("IOLdata");
       dispatch({
         type: "logoutwitherror",
         payload: error,
