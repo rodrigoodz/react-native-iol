@@ -55,6 +55,9 @@ export const buysellfetch = async (
           message: [`Nro. de Operacion: ${data.numeroOperacion}`],
         };
       }
+      if (!data.ok) {
+        return { ok: false, message: [data.message] };
+      }
     }
   } catch (error) {
     return {
