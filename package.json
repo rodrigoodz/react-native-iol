@@ -8,7 +8,6 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@expo/metro-config": "^0.1.56",
     "@react-native-async-storage/async-storage": "^1.14.1",
     "@react-native-community/datetimepicker": "3.0.4",
     "@react-native-community/masked-view": "0.1.10",
