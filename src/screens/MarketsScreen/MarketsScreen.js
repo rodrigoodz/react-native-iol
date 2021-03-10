@@ -24,7 +24,21 @@ import GradientContainer from "../../components/GradientContainer";
 import Selector from "../../components/Selector";
 import Title from "../../components/Title";
 
-//TODO hacer que cada item sea TouchableOpacity, me lleve a otra pantalla  (le mando algunos params) y muestro toda la info de cierto ticker pero mucho mas detallado, en esa nueva pantalla puedo poner un botton que diga MAS INFO y traer la caja de puntas completa y otro boton, ver grafico, y ahi llamo a getTickerBetweenDates
+/*
+Argentina:
+-acciones :ok
+-bonos: ok
+-opciones: ok
+-cauciones:!ok
+-futuros:!ok
+-fci:!ok
+EEUU:
+acciones:ok
+bonos:=argentina
+adr:!ok
+etfs:!ok
+monedas:!ok
+*/
 
 const MarketsScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -51,18 +65,6 @@ const MarketsScreen = ({ navigation }) => {
       {
         label: "Opciones",
         value: "Opciones",
-      },
-      {
-        label: "Cauciones",
-        value: "Cauciones",
-      },
-      {
-        label: "Futuros",
-        value: "Futuros",
-      },
-      {
-        label: "FCI",
-        value: "FCI",
       },
     ],
     allPanels: [
