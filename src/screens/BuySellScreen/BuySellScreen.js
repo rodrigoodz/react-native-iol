@@ -18,13 +18,14 @@ import GradientContainer from "../../components/GradientContainer";
 import Title from "../../components/Title";
 import TopPrices from "../../components/TopPrices";
 import getFormattedMarket from "../../helpers/getFormattedMarket";
-import BuyOverlay from "./BuyOverlay";
+import BuySellOverlay from "./BuySellOverlay";
 import MarketSelection from "./MarketSelection";
 import SearchButton from "./SearchButton";
 import SearchInput from "./SearchInput";
 import TickerInfo from "./TickerInfo";
 
-const BuyScreen = ({ navigation }) => {
+const BuySellScreen = ({ route, navigation }) => {
+  const { text } = route.params;
   const [visibleOverlay, setVisibleOverlay] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [doFetch, setDoFetch] = useState(0);
@@ -87,7 +88,7 @@ const BuyScreen = ({ navigation }) => {
         borderBottomRightRadius={30}
         marginBottom={20}
       >
-        <Title textTitle="Comprar" />
+        <Title textTitle={text} />
         <MarketSelection country={market} setMarket={handleMarketChange} />
         <View style={styles.formContainer}>
           <SearchInput
@@ -115,19 +116,23 @@ const BuyScreen = ({ navigation }) => {
             <TouchableOpacity
               title="Open Overlay"
               onPress={() => setVisibleOverlay(!visibleOverlay)}
-              style={styles.buyButton}
+              style={[
+                styles.buysellButton,
+                { backgroundColor: text === "Comprar" ? "green" : "red" },
+              ]}
             >
-              <Text style={{ color: "white" }}>Comprar</Text>
+              <Text style={{ color: "white" }}>{text}</Text>
             </TouchableOpacity>
           </>
         ) : null}
       </ScrollView>
-      <BuyOverlay
+      <BuySellOverlay
         visible={visibleOverlay}
         setVisible={() => setVisibleOverlay(!visibleOverlay)}
         market={market}
         tickerName={tickerName}
         access_token={access_token}
+        operationType={text}
       />
 
       <GoBackButton navigation={navigation} />
@@ -143,8 +148,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 10,
   },
-  buyButton: {
-    backgroundColor: "green",
+  buysellButton: {
     height: 40,
     alignSelf: "center",
     justifyContent: "center",
@@ -159,4 +163,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BuyScreen;
+export default BuySellScreen;

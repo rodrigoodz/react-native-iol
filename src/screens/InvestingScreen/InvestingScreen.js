@@ -24,8 +24,8 @@ const InvestingScreen = () => {
           justifyContent: "flex-start",
         }}
       >
-        <Button text="Comprar" />
-        <Button text="Vender" />
+        <Button text="Comprar" navigateTo="ComprarVender" />
+        <Button text="Vender" navigateTo="ComprarVender" />
         <Button text="Rescatar" />
         <Button text="Suscribir" />
       </View>

@@ -11,7 +11,7 @@ import {
   ToastAndroid,
 } from "react-native";
 
-import { buy } from "../../api";
+import { buysellfetch } from "../../api";
 
 import Selector from "../../components/Selector";
 import DatePicker from "../../components/DatePicker";
@@ -20,12 +20,13 @@ import getFormattedMarket from "../../helpers/getFormattedMarket";
 
 const windowWidth = Dimensions.get("window").width;
 
-const BuyOverlay = ({
+const BuySellOverlay = ({
   visible,
   setVisible,
   market,
   tickerName,
   access_token,
+  operationType,
 }) => {
   const currentDate = new Date();
   const endDate = new Date();
@@ -50,8 +51,8 @@ const BuyOverlay = ({
     setErrorMessage(null);
 
     Alert.alert(
-      "CONFIRMAR COMPRA",
-      `Vas a comprar ${quantity} unidad/es de ${tickerName.toUpperCase()}(${formattedMarket}) por un monto de $${price} c/u con un plazo ${term} y validez hasta el ${validity.getDate()}/${
+      `CONFIRMAR ${operationType.toUpperCase()}`,
+      `Vas a ${operationType.toLowerCase()} ${quantity} unidad/es de ${tickerName.toUpperCase()}(${formattedMarket}) por un monto de $${price} c/u con un plazo ${term} y validez hasta el ${validity.getDate()}/${
         validity.getMonth() + 1
       }/${validity.getFullYear()}`,
       [
@@ -70,18 +71,20 @@ const BuyOverlay = ({
   const handleFetch = async () => {
     setVisible();
     const formattedMarket = getFormattedMarket(market);
-    const response = await buy(
+    const response = await buysellfetch(
       formattedMarket,
       tickerName,
       quantity,
       price,
       term,
       validity,
-      access_token
+      access_token,
+      operationType
     );
+    console.log("response ", response);
     ToastAndroid.showWithGravity(
-      response.message,
-      ToastAndroid.SHORT,
+      response.message.join("\n"),
+      ToastAndroid.LONG,
       ToastAndroid.CENTER
     );
   };
@@ -176,7 +179,7 @@ const BuyOverlay = ({
   );
 };
 
-export default BuyOverlay;
+export default BuySellOverlay;
 
 const styles = StyleSheet.create({
   overlayStyle: {

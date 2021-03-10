@@ -1,54 +1,66 @@
 //TODO todas estas operaciones no las estoy contando en el context de cant. de Fetchs... deberia implementar un customHook
 
-export const buy = async (
+export const buysellfetch = async (
   market,
   asset,
   quantity,
   price,
   term,
   validity,
-  token
+  token,
+  operationType
 ) => {
   try {
-    const response = await fetch(
-      "https://api.invertironline.com/api/v2/operar/Comprar",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          mercado: market,
-          simbolo: asset,
-          cantidad: quantity,
-          precio: price,
-          plazo: term,
-          validez: validity,
-        }),
-      }
-    );
+    const url =
+      operationType === "Comprar"
+        ? "https://api.invertironline.com/api/v2/operar/Comprar"
+        : "https://api.invertironline.com/api/v2/operar/Vender";
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        mercado: market,
+        simbolo: asset,
+        cantidad: quantity,
+        precio: price,
+        plazo: term,
+        validez: validity,
+      }),
+    });
     let data = await response.json();
-    if (!data.ok) {
-      if (data.message) {
-        return { ok: false, message: data.message };
-      }
-      if (data.messages) {
+    console.log(data);
+    // dependiendo del tipo, diferente respuesta tiene la API..
+    if (operationType === "Vender") {
+      if (data.numeroOperacion) {
         return {
-          ok: false,
-          message: data.messages.map((mes) => mes.description),
+          ok: true,
+          message: [`Nro. de Operacion: ${data.numeroOperacion}`],
         };
+      }
+      if (!data.ok) {
+        return { ok: false, message: data.map((m) => m.description) };
+      }
+    }
+    if (operationType === "Comprar") {
+      if (data.ok === false) {
+        return { ok: false, message: data.messages.map((m) => m.description) };
       }
       if (data.numeroOperacion) {
         return {
           ok: true,
-          message: `Operacion Existosa Nro: ${data.numeroOperacion}`,
+          message: [`Nro. de Operacion: ${data.numeroOperacion}`],
         };
       }
     }
   } catch (error) {
-    console.log(error);
-    return { ok: false, message: error.message };
+    return {
+      ok: false,
+      message: ["Hubo un error en el servidor con la solicitud"],
+    };
   }
 };
 
