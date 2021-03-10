@@ -85,6 +85,6 @@ export const cancelOperation = async (operationNumber, token) => {
     }
   } catch (error) {
     console.log(error);
-    return { ok: false, message: error.message };
+    return { ok: false, message: [error.message] };
   }
 };
