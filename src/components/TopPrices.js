@@ -6,7 +6,7 @@ import TwoColumnHeader from "./TwoColumnHeader";
 import TwoColumnItem from "./TwoColumnItem";
 
 const TopPrices = ({ ticker }) => {
-  if (ticker.puntas === null) {
+  if (ticker.puntas === null || ticker.puntas.length == 0) {
     return (
       <Text style={{ color: "rgba(255,0,0,.8)", marginHorizontal: 15 }}>
         Actualmente no hay informacion de las puntas de compra y venta
