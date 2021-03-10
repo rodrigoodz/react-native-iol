@@ -61,7 +61,7 @@ const TickerScreen = ({ route, navigation }) => {
           Ver Gráfico
         </Text>
       </TouchableOpacity>
-      <BuySellButtons />
+      <BuySellButtons asset={ticker.simbolo} market={ticker.mercado} />
       <GoBackButton navigation={navigation} />
     </View>
   );

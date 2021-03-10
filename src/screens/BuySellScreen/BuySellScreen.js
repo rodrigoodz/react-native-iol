@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -13,7 +13,6 @@ import {
 import { Context as AuthContext } from "../../context/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
 
-import GoBackButton from "../../components/GoBackButton";
 import GradientContainer from "../../components/GradientContainer";
 import Title from "../../components/Title";
 import TopPrices from "../../components/TopPrices";
@@ -23,9 +22,10 @@ import MarketSelection from "./MarketSelection";
 import SearchButton from "./SearchButton";
 import SearchInput from "./SearchInput";
 import TickerInfo from "./TickerInfo";
+import { Icon } from "react-native-elements";
 
 const BuySellScreen = ({ route, navigation }) => {
-  const { text } = route.params;
+  const { text, assetParam, marketParam } = route.params;
   const [visibleOverlay, setVisibleOverlay] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [doFetch, setDoFetch] = useState(0);
@@ -41,7 +41,32 @@ const BuySellScreen = ({ route, navigation }) => {
 
   const { market, tickerName, showdata } = formValues;
 
-  // console.log(market, tickerName, showdata);
+  useEffect(() => {
+    const focusListener = navigation.addListener("focus", () => {
+      console.log(assetParam, marketParam);
+      if (assetParam !== null && marketParam !== null) {
+        setFormValues({
+          ...formValues,
+          market: marketParam,
+          tickerName: assetParam,
+          showdata: true,
+        });
+        const formattedMarket = getFormattedMarket(marketParam);
+        setUrl(
+          `https://api.invertironline.com/api/v2/${formattedMarket}/Titulos/${assetParam}/Cotizacion`
+        );
+      }
+    });
+
+    const blurListener = navigation.addListener("blur", () => {
+      navigation.goBack(null);
+    });
+
+    return () => {
+      focusListener();
+      blurListener();
+    };
+  }, [navigation]);
 
   const handlePress = () => {
     Keyboard.dismiss();
@@ -135,7 +160,19 @@ const BuySellScreen = ({ route, navigation }) => {
         operationType={text}
       />
 
-      <GoBackButton navigation={navigation} />
+      <TouchableOpacity
+        style={styles.buttonStyle}
+        onPress={() => navigation.navigate("Operar")}
+      >
+        <Icon
+          name="arrow-back-outline"
+          type="ionicon"
+          color="white"
+          size={25}
+          style={styles.iconStyle}
+        />
+        <Text style={styles.textStyle}>Volver</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -161,6 +198,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     alignSelf: "center",
   },
+  buttonStyle: {
+    flexDirection: "row",
+    justifyContent: "center",
+    padding: 15,
+    alignItems: "center",
+    marginTop: 30,
+    alignSelf: "center",
+  },
+  iconStyle: { marginTop: 2 },
+  textStyle: { color: "white", fontSize: 20 },
 });
 
 export default BuySellScreen;

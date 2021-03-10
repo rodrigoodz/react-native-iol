@@ -1,8 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { navigate } from "../../../RootNavigation";
+import marketToIndex from "../../helpers/marketToIndex";
 
-const BuySellButtons = () => {
+const BuySellButtons = ({ asset, market }) => {
+  const formattedMarket = marketToIndex(market);
+  console.log("market", market);
+  console.log("aaset", asset);
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -10,7 +14,11 @@ const BuySellButtons = () => {
         onPress={() =>
           navigate("Operar", {
             screen: "ComprarVender",
-            params: { text: "Comprar" },
+            params: {
+              text: "Comprar",
+              assetParam: asset,
+              marketParam: formattedMarket,
+            },
           })
         }
       >
@@ -25,7 +33,11 @@ const BuySellButtons = () => {
         onPress={() =>
           navigate("Operar", {
             screen: "ComprarVender",
-            params: { text: "Vender" },
+            params: {
+              text: "Vender",
+              assetParam: asset,
+              marketParam: formattedMarket,
+            },
           })
         }
       >
