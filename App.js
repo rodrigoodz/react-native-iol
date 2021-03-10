@@ -23,7 +23,7 @@ import OperationScreen from "./src/screens/OperationScreen/OperationScreen";
 import TickerScreen from "./src/screens/TickerScreen/TickerScreen";
 import ChartsScreen from "./src/screens/ChartsScreen/ChartsScreen";
 import FetchInfoScreen from "./src/screens/FetchInfoScreen/FetchInfoScreen";
-import BuyScreen from "./src/screens/BuyScreen/BuyScreen";
+import BuySellScreen from "./src/screens/BuySellScreen/BuySellScreen";
 
 import { navigationRef } from "./RootNavigation";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
@@ -85,7 +85,7 @@ const InvestingNavigator = () => {
   return (
     <Stack.Navigator screenOptions={navigatorOptions}>
       <Stack.Screen name="Operar" component={InvestingScreen} />
-      <Stack.Screen name="Comprar" component={BuyScreen} />
+      <Stack.Screen name="ComprarVender" component={BuySellScreen} />
     </Stack.Navigator>
   );
 };
