@@ -8,7 +8,6 @@ import Title from "../../components/Title";
 
 import InfoTicker from "./InfoTicker";
 import TopPrices from "../../components/TopPrices";
-import BuySellButtons from "./BuySellButtons";
 
 const TickerScreen = ({ route, navigation }) => {
   const { ticker } = route.params;
@@ -61,7 +60,6 @@ const TickerScreen = ({ route, navigation }) => {
           Ver Gráfico
         </Text>
       </TouchableOpacity>
-      <BuySellButtons asset={ticker.simbolo} market={ticker.mercado} />
       <GoBackButton navigation={navigation} />
     </View>
   );

@@ -26,7 +26,7 @@ import { Icon } from "react-native-elements";
 import GoBackButton from "../../components/GoBackButton";
 
 const BuySellScreen = ({ route, navigation }) => {
-  const { text, assetParam, marketParam } = route.params;
+  const { text } = route.params;
   const [visibleOverlay, setVisibleOverlay] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [doFetch, setDoFetch] = useState(0);
@@ -41,21 +41,6 @@ const BuySellScreen = ({ route, navigation }) => {
   const [url, setUrl] = useState("");
 
   const { market, tickerName, showdata } = formValues;
-
-  useEffect(() => {
-    if (assetParam !== null && marketParam !== null) {
-      setFormValues({
-        ...formValues,
-        market: marketParam,
-        tickerName: assetParam,
-        showdata: true,
-      });
-      const formattedMarket = getFormattedMarket(marketParam);
-      setUrl(
-        `https://api.invertironline.com/api/v2/${formattedMarket}/Titulos/${assetParam}/Cotizacion`
-      );
-    }
-  }, []);
 
   const handlePress = () => {
     Keyboard.dismiss();
@@ -149,19 +134,7 @@ const BuySellScreen = ({ route, navigation }) => {
         operationType={text}
       />
       <View style={{ flex: 1 }}>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={() => navigation.navigate("Operar")}
-        >
-          <Icon
-            name="arrow-back-outline"
-            type="ionicon"
-            color="white"
-            size={25}
-            style={styles.iconStyle}
-          />
-          <Text style={styles.textStyle}>Volver</Text>
-        </TouchableOpacity>
+        <GoBackButton navigation={navigation} />
       </View>
     </View>
   );

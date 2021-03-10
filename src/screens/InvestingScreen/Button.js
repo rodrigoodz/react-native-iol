@@ -14,9 +14,7 @@ const Button = ({ text, navigateTo }) => {
         borderRadius: 8,
         marginHorizontal: 20,
       }}
-      onPress={() =>
-        navigate(`${navigateTo}`, { text, assetParam: null, marketParam: null })
-      }
+      onPress={() => navigate(`${navigateTo}`, { text })}
     >
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
