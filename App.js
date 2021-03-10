@@ -134,11 +134,31 @@ const DrawerNavigator = () => {
       }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name="Inicio" component={HomeNavigator} />
-      <Drawer.Screen name="Portafolio" component={PortfolioScreen} />
-      <Drawer.Screen name="Operar" component={InvestingNavigator} />
-      <Drawer.Screen name="Operaciones" component={OperationNavigator} />
-      <Drawer.Screen name="Cotizaciones" component={MarketNavigator} />
+      <Drawer.Screen
+        name="Inicio"
+        component={HomeNavigator}
+        options={{ unmountOnBlur: true }}
+      />
+      <Drawer.Screen
+        name="Portafolio"
+        component={PortfolioScreen}
+        options={{ unmountOnBlur: true }}
+      />
+      <Drawer.Screen
+        name="Operar"
+        component={InvestingNavigator}
+        options={{ unmountOnBlur: true }}
+      />
+      <Drawer.Screen
+        name="Operaciones"
+        component={OperationNavigator}
+        options={{ unmountOnBlur: true }}
+      />
+      <Drawer.Screen
+        name="Cotizaciones"
+        component={MarketNavigator}
+        options={{ unmountOnBlur: true }}
+      />
     </Drawer.Navigator>
   );
 };
