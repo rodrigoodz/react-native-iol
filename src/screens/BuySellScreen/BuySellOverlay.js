@@ -16,6 +16,7 @@ import Selector from "../../components/Selector";
 import DatePicker from "../../components/DatePicker";
 
 import getFormattedMarket from "../../helpers/getFormattedMarket";
+import AwesomeAlert from "react-native-awesome-alerts";
 
 const windowWidth = Dimensions.get("window").width;
 
@@ -26,12 +27,13 @@ const BuySellOverlay = ({
   tickerName,
   access_token,
   operationType,
-  setShowAlert,
 }) => {
   const currentDate = new Date();
   const endDate = new Date();
   endDate.setDate(endDate.getDate() + 7);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
+  const [fetchResponse, setfetchResponse] = useState({ ok: "", message: "" });
   const [formValues, setFormValues] = useState({
     term: "t0",
     validity: currentDate,
@@ -81,96 +83,114 @@ const BuySellOverlay = ({
       access_token,
       operationType
     );
-    console.log("response ", response);
+    setfetchResponse({ ok: response.ok, message: response.message.join("\n") });
+    setShowAlert(true);
   };
-
   return (
-    <Overlay
-      isVisible={visible}
-      onBackdropPress={setVisibleOverlay}
-      overlayStyle={styles.overlayStyle}
-    >
-      <View style={{}}>
-        <View style={{}}>
-          <Text style={[styles.label, { marginVertical: 5 }]}>Plazo</Text>
-          <Selector
-            options={[
-              { label: "T0 = Inmediato", value: "t0" },
-              { label: "T+1 = 24 Horas", value: "t1" },
-              { label: "T+2 = 72 Horas", value: "t2" },
-            ]}
-            selected={term}
-            setSelected={(value) =>
-              setFormValues({ ...formValues, term: value })
-            }
-          />
-          <Text style={[styles.label, { marginTop: 5 }]}>Validez</Text>
-          <DatePicker
-            date={validity}
-            setDate={(value) =>
-              setFormValues({ ...formValues, validity: value })
-            }
-            minDate={currentDate}
-            maxDate={endDate}
-          />
-          <Text style={[styles.label, { marginVertical: 5 }]}>Precio</Text>
-          <TextInput
-            placeholder="0.00"
-            autoCompleteType="cc-number"
-            keyboardType="numeric"
-            style={styles.textInputStyle}
-            placeholderTextColor="rgba(255,255,255,0.5)"
-            value={price}
-            onChangeText={(value) =>
-              setFormValues({ ...formValues, price: value })
-            }
-          />
-          <Text style={[styles.label, { marginVertical: 5 }]}>Cantidad</Text>
-          <TextInput
-            placeholder="0"
-            autoCompleteType="cc-number"
-            keyboardType="numeric"
-            style={styles.textInputStyle}
-            placeholderTextColor="rgba(255,255,255,0.5)"
-            value={quantity}
-            onChangeText={(value) =>
-              setFormValues({ ...formValues, quantity: value })
-            }
-          />
-        </View>
-
-        <View style={{ justifyContent: "flex-end", marginTop: 10 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Button
-              title="Cancelar"
-              buttonStyle={{ backgroundColor: "grey" }}
-              onPress={setVisibleOverlay}
+    <View>
+      <>
+        <AwesomeAlert
+          show={showAlert}
+          showProgress={false}
+          title={!fetchResponse.ok ? "Error" : "Confirmado"}
+          message={fetchResponse.message}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="Aceptar"
+          confirmButtonColor={!fetchResponse.ok ? "#DD6B55" : "#55dd6b"}
+          onConfirmPressed={() => {
+            setShowAlert(false);
+          }}
+        />
+      </>
+      <Overlay
+        isVisible={visible}
+        onBackdropPress={setVisibleOverlay}
+        overlayStyle={styles.overlayStyle}
+      >
+        <View>
+          <View>
+            <Text style={[styles.label, { marginVertical: 5 }]}>Plazo</Text>
+            <Selector
+              options={[
+                { label: "T0 = Inmediato", value: "t0" },
+                { label: "T+1 = 24 Horas", value: "t1" },
+                { label: "T+2 = 72 Horas", value: "t2" },
+              ]}
+              selected={term}
+              setSelected={(value) =>
+                setFormValues({ ...formValues, term: value })
+              }
             />
-            <Button
-              title="Aceptar"
-              buttonStyle={{ backgroundColor: "green" }}
-              onPress={handleSubmit}
+            <Text style={[styles.label, { marginTop: 5 }]}>Validez</Text>
+            <DatePicker
+              date={validity}
+              setDate={(value) =>
+                setFormValues({ ...formValues, validity: value })
+              }
+              minDate={currentDate}
+              maxDate={endDate}
+            />
+            <Text style={[styles.label, { marginVertical: 5 }]}>Precio</Text>
+            <TextInput
+              placeholder="0.00"
+              autoCompleteType="cc-number"
+              keyboardType="numeric"
+              style={styles.textInputStyle}
+              placeholderTextColor="rgba(255,255,255,0.5)"
+              value={price}
+              onChangeText={(value) =>
+                setFormValues({ ...formValues, price: value })
+              }
+            />
+            <Text style={[styles.label, { marginVertical: 5 }]}>Cantidad</Text>
+            <TextInput
+              placeholder="0"
+              autoCompleteType="cc-number"
+              keyboardType="numeric"
+              style={styles.textInputStyle}
+              placeholderTextColor="rgba(255,255,255,0.5)"
+              value={quantity}
+              onChangeText={(value) =>
+                setFormValues({ ...formValues, quantity: value })
+              }
             />
           </View>
-          {errorMessage !== null ? (
+
+          <View style={{ justifyContent: "flex-end", marginTop: 10 }}>
             <View
               style={{
-                height: 60,
-                justifyContent: "center",
-                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "space-between",
               }}
             >
-              <Text style={styles.errorStyle}>{errorMessage}</Text>
+              <Button
+                title="Cancelar"
+                buttonStyle={{ backgroundColor: "grey" }}
+                onPress={setVisibleOverlay}
+              />
+              <Button
+                title="Aceptar"
+                buttonStyle={{ backgroundColor: "green" }}
+                onPress={handleSubmit}
+              />
             </View>
-          ) : null}
+            {errorMessage !== null ? (
+              <View
+                style={{
+                  height: 60,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={styles.errorStyle}>{errorMessage}</Text>
+              </View>
+            ) : null}
+          </View>
         </View>
-      </View>
-    </Overlay>
+      </Overlay>
+    </View>
   );
 };
 
