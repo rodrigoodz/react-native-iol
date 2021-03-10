@@ -8,7 +8,6 @@ import {
   TextInput,
   Keyboard,
   Alert,
-  ToastAndroid,
 } from "react-native";
 
 import { buysellfetch } from "../../api";
@@ -22,11 +21,12 @@ const windowWidth = Dimensions.get("window").width;
 
 const BuySellOverlay = ({
   visible,
-  setVisible,
+  setVisibleOverlay,
   market,
   tickerName,
   access_token,
   operationType,
+  setShowAlert,
 }) => {
   const currentDate = new Date();
   const endDate = new Date();
@@ -69,7 +69,7 @@ const BuySellOverlay = ({
   };
 
   const handleFetch = async () => {
-    setVisible();
+    setVisibleOverlay();
     const formattedMarket = getFormattedMarket(market);
     const response = await buysellfetch(
       formattedMarket,
@@ -82,17 +82,12 @@ const BuySellOverlay = ({
       operationType
     );
     console.log("response ", response);
-    ToastAndroid.showWithGravity(
-      response.message.join("\n"),
-      ToastAndroid.LONG,
-      ToastAndroid.CENTER
-    );
   };
 
   return (
     <Overlay
       isVisible={visible}
-      onBackdropPress={setVisible}
+      onBackdropPress={setVisibleOverlay}
       overlayStyle={styles.overlayStyle}
     >
       <View style={{}}>
@@ -154,7 +149,7 @@ const BuySellOverlay = ({
             <Button
               title="Cancelar"
               buttonStyle={{ backgroundColor: "grey" }}
-              onPress={setVisible}
+              onPress={setVisibleOverlay}
             />
             <Button
               title="Aceptar"

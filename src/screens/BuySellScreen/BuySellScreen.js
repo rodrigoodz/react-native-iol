@@ -128,7 +128,7 @@ const BuySellScreen = ({ route, navigation }) => {
       </ScrollView>
       <BuySellOverlay
         visible={visibleOverlay}
-        setVisible={() => setVisibleOverlay(!visibleOverlay)}
+        setVisibleOverlay={() => setVisibleOverlay(!visibleOverlay)}
         market={market}
         tickerName={tickerName}
         access_token={access_token}
