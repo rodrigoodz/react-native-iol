@@ -10,6 +10,8 @@ import ActivoItem from "./ActivoItem";
 import GradientContainer from "../../components/GradientContainer";
 import LoadingComponent from "../../components/LoadingComponent";
 import Title from "../../components/Title";
+import PieChart from "../../components/PieChart";
+import { ActivityIndicator } from "react-native";
 
 const PortfolioScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -43,7 +45,12 @@ const PortfolioScreen = () => {
 
   if (data) {
     return (
-      <View style={{ flex: 1, backgroundColor: "#131e31" }}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "#131e31",
+        }}
+      >
         <GradientContainer
           firstColor="#2b5a7f"
           secondColor="#193952"
@@ -107,6 +114,21 @@ const PortfolioScreen = () => {
             })}
           </ScrollView>
         </LinearGradient>
+        <View
+          style={{
+            flex: 1,
+            padding: 20,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <PieChart
+            activos={data.activos.map((d) => ({
+              x: d.titulo.simbolo,
+              y: Number(d.valorizado),
+            }))}
+          />
+        </View>
       </View>
     );
   } else {
@@ -141,7 +163,19 @@ const PortfolioScreen = () => {
             marginBottom: 5,
             flex: 1,
           }}
-        ></LinearGradient>
+        >
+          <ActivityIndicator size="large" color="white" />
+        </LinearGradient>
+        <View
+          style={{
+            flex: 1,
+            padding: 20,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <ActivityIndicator size="large" color="white" />
+        </View>
       </View>
     );
   }
