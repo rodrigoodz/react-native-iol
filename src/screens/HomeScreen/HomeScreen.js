@@ -20,6 +20,8 @@ import LoadingComponent from "../../components/LoadingComponent";
 import Title from "../../components/Title";
 import FetchCounterInfo from "./FetchCounterInfo";
 
+import { AdMobBanner } from "expo-ads-admob";
+
 const HomeScreen = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [doFetch, setDoFetch] = useState(0);
@@ -64,6 +66,7 @@ const HomeScreen = ({ navigation }) => {
         },
       ],
     } = data;
+
     return (
       <View style={styles.viewContainer}>
         <ScrollView
@@ -131,6 +134,14 @@ const HomeScreen = ({ navigation }) => {
           <StatusBar />
         </ScrollView>
         <FetchCounterInfo navigation={navigation} />
+        <View style={{ alignItems: "center" }}>
+          <AdMobBanner
+            bannerSize="banner"
+            adUnitID="ca-app-pub-2009970378712355/2274816498"
+            servePersonalizedAds
+            onDidFailToReceiveAdWithError={(e) => console.log(e)}
+          />
+        </View>
       </View>
     );
   } else {
