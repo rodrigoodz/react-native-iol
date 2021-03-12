@@ -24,6 +24,9 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-2009970378712355~6673226503" 
+      },
       "package": "com.rodrigoodz.reactnativeiol"
     },
     "web": {
