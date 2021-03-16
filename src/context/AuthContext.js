@@ -44,25 +44,34 @@ const tryLocalSignIn = (dispatch) => {
       const jsonData = JSON.parse(deviceData);
 
       if (new Date(jsonData[".expires"]) < new Date()) {
-        try {
-          console.log("va a solicitar otro token");
-          const response = await fetch("https://api.invertironline.com/token", {
-            method: "POST",
-            body: `refresh_token=${jsonData.refresh_token}&grant_type=refresh_token`,
-          });
-          let data = await response.json();
-          if (!data.error) {
-            console.log("token solicitado con exito");
-            await AsyncStorage.setItem("IOLdata", JSON.stringify(data));
-            dispatch({
-              type: "signin",
-              payload: data,
-            });
+        if (new Date(jsonData[".refreshexpires"]) < new Date()) {
+          try {
+            console.log("va a solicitar otro token");
+            const response = await fetch(
+              "https://api.invertironline.com/token",
+              {
+                method: "POST",
+                body: `refresh_token=${jsonData.refresh_token}&grant_type=refresh_token`,
+              }
+            );
+            let data = await response.json();
+            if (!data.error) {
+              console.log("token solicitado con exito");
+              await AsyncStorage.setItem("IOLdata", JSON.stringify(data));
+              dispatch({
+                type: "signin",
+                payload: data,
+              });
 
-            reset(0, "Home");
+              reset(0, "Home");
+            }
+          } catch (error) {
+            console.log(error);
           }
-        } catch (error) {
-          console.log(error);
+        } else {
+          await AsyncStorage.removeItem("IOLdata");
+          dispatch({ type: "logout" });
+          reset(0, "SignIn");
         }
       } else {
         console.log("el token sigue siendo valido");
