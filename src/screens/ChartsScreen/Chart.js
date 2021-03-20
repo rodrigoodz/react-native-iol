@@ -31,9 +31,10 @@ const Chart = ({ data, asset }) => {
               t.getMonth() + 1
             }/${t.getFullYear().toString().substr(-2)}`
           }
+          fixLabelOverlap
           style={{
             axis: { stroke: "#ccc" },
-            tickLabels: { angle: 0, padding: 2, margin: 1 },
+            tickLabels: { angle: 0, padding: 10 },
             grid: { stroke: "rgba(255,255,255,.1)" },
           }}
         />
@@ -61,5 +62,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginHorizontal: 5,
     borderWidth: 1,
+    flex: 1,
   },
 });
