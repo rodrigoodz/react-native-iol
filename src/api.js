@@ -32,7 +32,6 @@ export const buysellfetch = async (
       }),
     });
     let data = await response.json();
-    console.log(data);
     // dependiendo del tipo, diferente respuesta tiene la API..
     if (operationType === "Vender") {
       if (data.numeroOperacion) {
@@ -84,7 +83,6 @@ export const cancelOperation = async (operationNumber, token) => {
       return { ok: true, message: data.messages.map((mes) => mes.description) };
     }
   } catch (error) {
-    console.log(error);
     return { ok: false, message: [error.message] };
   }
 };
