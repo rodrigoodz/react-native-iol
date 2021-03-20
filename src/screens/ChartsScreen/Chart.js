@@ -26,10 +26,14 @@ const Chart = ({ data, asset }) => {
           label="Precio"
         />
         <VictoryAxis
-          tickFormat={(t) => `${t.getDate()}/${t.getMonth() + 1}`}
+          tickFormat={(t) =>
+            `${t.getDate()}/${
+              t.getMonth() + 1
+            }/${t.getFullYear().toString().substr(-2)}`
+          }
           style={{
             axis: { stroke: "#ccc" },
-            tickLabels: { angle: 0, padding: 2 },
+            tickLabels: { angle: 0, padding: 2, margin: 1 },
             grid: { stroke: "rgba(255,255,255,.1)" },
           }}
         />
