@@ -55,7 +55,7 @@ const InfoTicker = ({
         />
         <TwoColumnItem
           firstText="Variacion Porcentual"
-          secondText={`${variacionPorcentual} %`}
+          secondText={`${variacionPorcentual.toFixed(2)} %`}
         />
         <TwoColumnItem firstText="Volumen" secondText={`${volumen} M`} />
         <TwoColumnItem

@@ -26,7 +26,7 @@ const TickerInfo = ({ ticker }) => {
       />
       <TwoColumnItem
         firstText="Variacion"
-        secondText={`${ticker.variacion} %`}
+        secondText={`${ticker.variacion.toFixed(2)} %`}
       />
       <TwoColumnItem firstText="Apertura" secondText={`${ticker.apertura} $`} />
       <TwoColumnItem

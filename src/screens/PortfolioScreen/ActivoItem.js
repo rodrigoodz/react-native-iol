@@ -72,8 +72,8 @@ const ActivoItem = ({
           }}
         >
           <Text style={styles.boldTitle}>{`$${valorizado.toFixed(2)}`}</Text>
-          <Text style={styles.text}>{`${variacionDiaria}%`}</Text>
-          <Text style={styles.text}>{`${gananciaPorcentaje}%`}</Text>
+          <Text style={styles.text}>{`${variacionDiaria.toFixed(2)}%`}</Text>
+          <Text style={styles.text}>{`${gananciaPorcentaje.toFixed(2)}%`}</Text>
         </View>
       </View>
     </TouchableOpacity>
