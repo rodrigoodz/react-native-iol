@@ -59,9 +59,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     height: 300,
-    borderRadius: 5,
     marginHorizontal: 5,
-    borderWidth: 1,
-    flex: 1,
   },
 });
