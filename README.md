@@ -4,7 +4,7 @@ Una aplicacion movil construida usando React Native para consumir los servicios 
 
 [![Youtube_video](https://img.youtube.com/vi/mVwU6_sfsSk/0.jpg)](https://www.youtube.com/watch?v=mVwU6_sfsSk)
 
-[Descargar APK (Android)](https://drive.google.com/file/d/17utCHMRX-Bq-5fN-_yZ-w6D0bhClLJU6/view?usp=sharing)
+[Descargar APK (Android)](https://drive.google.com/file/d/1Wf-gtGRWxjjTrWyc9ooqfZsAiC6FMUHj/view?usp=sharing)
 
 ### ¿Qué se puede hacer con la API?
 
