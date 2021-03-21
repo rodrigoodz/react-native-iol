@@ -110,10 +110,6 @@ const MarketsScreen = ({ navigation }) => {
 
   const formattedPanel = encodeURI(selectedPanel);
 
-  // console.log(
-  //   `https://api.invertironline.com/api/v2/Cotizaciones/${selectedInstrument}/${formattedPanel}/${formattedCountry}`
-  // );
-
   // TODO mejorar el manejo de errores visuales para el usuario
   const { data, error } = useFetch(
     `https://api.invertironline.com/api/v2/Cotizaciones/${selectedInstrument}/${formattedPanel}/${formattedCountry}`,
