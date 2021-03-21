@@ -22,7 +22,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#131e31"
       },
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-2009970378712355~6673226503" 
